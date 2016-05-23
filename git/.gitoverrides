@@ -1,0 +1,15 @@
+####################################
+# Overrides settings in .gitconfig #
+####################################
+
+[user]
+  name = ptrevinor
+  email = patricio.trevino@gmail.com
+
+[credential]
+  helper = osxkeychain 
+  
+# To set Github username and token
+# [github]
+#   user = <username>
+#   token = <token>

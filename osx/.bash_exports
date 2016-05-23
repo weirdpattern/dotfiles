@@ -1,0 +1,8 @@
+# Vim as default editor
+export EDITOR="vim"
+
+# Remove consecutive duplicates
+export HISTCONTROL="ignoredups"
+
+# Defines homebrew cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications" 

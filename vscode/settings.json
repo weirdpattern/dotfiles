@@ -1,0 +1,134 @@
+{
+    //-------- Editor configuration --------
+    
+    // Controls visibility of the glyph margin
+    "editor.glyphMargin": true,
+    
+    // Controls if selections have rounded corners
+    "editor.roundedSelection": false,
+    
+    // Controls whether the editor should highlight similar matches to the selection
+    "editor.selectionHighlight": false,
+    
+    // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping
+    "editor.wrappingColumn": 125,
+    
+    //-------- Window configuration --------
+
+    // When enabled, will open files in a new window instead of reusing an existing instance.
+    "window.openFilesInNewWindow": false,
+    
+    // Controls how folders are being reopened after a restart. Select 'none' to never reopen a folder, 'one' to reopen the last folder you worked on or 'all' to reopen all folders of your last session.
+    "window.reopenFolders": "none",
+    
+    //-------- Files configuration --------
+
+    // Configure glob patterns for excluding files and folders.
+    "files.exclude": {
+        "**/logs": true,
+        "**/.git": true,
+        "**/.idea": true,
+        "**/.DS_Store": true,
+        ".AppleDouble": true,
+        ".LSOverride": true,
+        ".DocumentRevisions-V100": true,
+        ".fseventsd": true,
+        ".Spotlight-V100": true,
+        ".TemporaryItems": true,
+        ".Trashes": true,
+        ".VolumeIcon.icns": true,
+        ".AppleDB": true,
+        ".AppleDesktop": true,
+        "Network Trash Folder": true,
+        "Temporary Items": true,
+        ".apdisk": true,
+        "._*": true
+    },
+    
+    //-------- File Explorer configuration --------
+
+    // Maximum number of working files to show before scrollbars appear.
+    "explorer.workingFiles.maxVisible": 1,
+
+    // Controls if the height of the working files section should adapt dynamically to the number of elements or not.
+    "explorer.workingFiles.dynamicHeight": false,
+    
+    //-------- Update configuration --------
+
+    // Configure the update channel to receive updates from. Requires a restart after change.
+    // In general, auto-update is disable to allow brew cask to control the update process
+    "update.channel": "none",
+    
+    //-------- Git configuration --------
+
+    // Path to the git executable
+    "git.path": "/usr/local/bing/git",
+    
+    //-------- Search configuration --------
+
+    // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the file.exclude setting.
+    "search.exclude": {
+        "**/logs": true,
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    
+    //-------- JavaScript configuration --------
+    
+    // Don't spare curly brackets.
+    "javascript.validate.lint.curlyBracketsMustNotBeOmitted": "warning",
+
+    // Missing semicolon.
+    "javascript.validate.lint.missingSemicolon": "warning",
+    
+    // Semicolon instead of block.
+    "javascript.validate.lint.semicolonsInsteadOfBlocks": "warning",
+
+    // Function inside loop.
+    "javascript.validate.lint.functionsInsideLoops": "warning",
+    
+    // Unused local function.
+    "javascript.validate.lint.unusedFunctions": "warning",
+    
+    //-------- CSS configuration --------
+    
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "css.lint.compatibleVendorPrefixes": "warning",
+    
+    // Do not use duplicate style definitions
+    "css.lint.duplicateProperties": "warning",
+    
+    // IE hacks are only necessary when supporting IE7 and older
+    "css.lint.ieHack": "warning",
+    
+    // Unknown vendor specific property.
+    "css.lint.unknownVendorSpecificProperties": "warning",
+    
+    //-------- LESS configuration --------
+    
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "less.lint.compatibleVendorPrefixes": "warning",
+    
+    // Do not use duplicate style definitions
+    "less.lint.duplicateProperties": "warning",
+    
+    // IE hacks are only necessary when supporting IE7 and older
+    "less.lint.ieHack": "warning",
+
+    // Unknown vendor specific property.
+    "less.lint.unknownVendorSpecificProperties": "warning",
+    
+    //-------- Sass configuration --------
+   
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "sass.lint.compatibleVendorPrefixes": "warning",
+    
+    // Do not use duplicate style definitions
+    "sass.lint.duplicateProperties": "warning",
+    
+    // IE hacks are only necessary when supporting IE7 and older
+    "sass.lint.ieHack": "warning",
+
+    // Unknown vendor specific property.
+    "sass.lint.unknownVendorSpecificProperties": "warning"
+}

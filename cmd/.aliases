@@ -1,0 +1,123 @@
+;= :::::::::::::
+;= :: General ::
+;= :::::::::::::
+;= ::
+;= Doskey alias
+   alias=doskey $*
+;= ::
+;= :::::::::::::
+
+;= :::::::::::::::::
+;= :: File System ::
+;= :::::::::::::::::
+;= ::
+;= Kills a task
+   kill=taskkill /PID $*
+
+;= Lists all the current tasks
+   ps=tasklist $*
+
+;= Show/hide hidden files in Finder
+   show-files=attrib -s -h -r /s /d
+   hide-files=attrib +s +h +r /s /d
+;= ::
+;= :::::::::::::::::
+
+;= ::::::::::::::::
+;= :: Networking ::
+;= ::::::::::::::::
+;= ::
+;= ipconfig shortcut
+   ip=ipconfig $*
+
+;= Flush DNS cache
+   flush-dns=ipconfig /flushdns
+
+;= Performs a trace
+   trace=tracert $*
+
+;= Performs a netstat
+   stats=netstat /a /n    
+;= ::
+;= ::::::::::::::::
+
+;= :::::::::::::::::::::::::
+;= :: Terminal navigation ::
+;= :::::::::::::::::::::::::
+;= ::
+;= Display current directory
+   pwd=cd
+
+;= Go back one level in windows format
+   ..=cd ..\$*
+
+;= Go back two levels
+   ..2=cd ..\..\$*
+
+;= Go back three levels
+   ..3=cd ..\..\..\$*
+
+;= Go back four levels
+   ..4=cd ..\..\..\..\$*
+
+;= Go back five levels
+   ..5=cd ..\..\..\..\..\$*
+
+;= Go back to home
+   ~=cd %USERPROFILE%\$*
+
+;= Go back to root folder
+   /=cd /
+;= ::
+;= :::::::::::::::::::::::::
+
+;= :::::::::::::::::::::::::
+;= :: Terminal operations ::
+;= :::::::::::::::::::::::::
+;= ::
+;= move files or directories
+   mv=move $*
+
+;= mkdir/md to create directories 
+   mk=md $*
+
+;= remove files
+   rm=del $*
+
+;= remove directories
+   rmd=rmdir $*
+
+;= copy files or directories
+   cp=copy $*
+
+;= List all files in long format using color.
+   ls=dir /A $*
+
+;= List all directories in long format using color.
+   lsd=dir /A:D $*
+
+;= Clear shorcuts
+   clr=cls
+
+;= Clear shorcuts
+   clear=cls
+
+;= Open explorer in current folder
+   gui=explorer .
+
+;= Open explorer in current folder
+   open=explorer .
+
+;= Open explorer in current folder
+   explore=explorer .   
+;= ::
+;= :::::::::::::::::::::::::
+
+;= ::::::::::::::::::
+;= :: Applications ::
+;= ::::::::::::::::::
+;= ::
+;= Git shortcut
+   g=git
+;= ::
+;= ::::::::::::::::::
