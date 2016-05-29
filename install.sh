@@ -75,7 +75,12 @@ echo ""
 casks=(
   alfred
   google-chrome
+  intellij-idea
   webstorm
+  pycharm
+  rubymine
+  appcode
+  datagrip  
   visual-studio-code
   dash
   1password
