@@ -45,7 +45,9 @@ brews=(
   bash-completion
   coreutils
   findutils
-  ruby
+  python
+  ruby  
+  perl
   vim
   wget
   node
