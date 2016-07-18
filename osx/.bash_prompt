@@ -56,7 +56,6 @@ function prompt {
   local cyan=""
   local gray=""
   local green=""
-  local red=""
   local reset=""
   local white=""
   
@@ -67,26 +66,22 @@ function prompt {
     cyan=$(tput setaf 37)
     gray=$(tput setaf 7)
     green=$(tput setaf 64)
-    red=$(tput setaf 124)
     white=$(tput setaf 15)
   else
     reset="\e[0m"
     cyan="\e[1;36m"
     gray="\e[1;30m"
     green="\e[1;32m"
-    red="\e[1;31m"
     white="\e[1;37m"
   fi
 
   # Set the terminal title to the current working directory
   PS1="\[\033]0;\w\007\]"
   PS1+="\n" 
-  PS1+="\[$red\]\u" #username
-  PS1+="\[$gray\] @ "
   PS1+="\[$green\]\w" #directory
   PS1+="\$(git-prompt \"$gray on $cyan\")" #repository 
   PS1+="\n"
-  PS1+="\[$red\]\$ \[$reset\]"
+  PS1+="\[$white\]\$(echo -e '\xE2\x9E\x9C') \[$reset\]"
   export PS1
 }
 
