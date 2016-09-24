@@ -3,13 +3,8 @@
 ####################################
 
 [user]
-  name = ptrevinor
-  email = patricio.trevino@gmail.com
+  name = weirdpattern
+  email = patricio@weirdpattern.com
 
 [credential]
-  helper = osxkeychain 
-  
-# To set Github username and token
-# [github]
-#   user = <username>
-#   token = <token>
+  helper = osxkeychain
