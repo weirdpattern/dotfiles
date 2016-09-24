@@ -97,6 +97,9 @@
   alias cls='clear'
   alias clr='clear'
   alias clrsrc='clear'  
+
+  # Exit and quit
+  alias quit='/usr/bin/osascript -e "tell application \"$TERMINAL\" to quit";exit'
 #
 ###
 

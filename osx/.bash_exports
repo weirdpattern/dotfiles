@@ -6,3 +6,6 @@ export HISTCONTROL="ignoredups"
 
 # Defines homebrew cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications" 
+
+# Defines the terminal application to be used
+export TERMINAL="HyperTerm"
