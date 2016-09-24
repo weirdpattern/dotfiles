@@ -85,6 +85,7 @@ casks=(
   dash
   1password
   hyperterm
+  jing
 )
 
 # Install brew cask software    
