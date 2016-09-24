@@ -84,6 +84,7 @@ casks=(
   visual-studio-code
   dash
   1password
+  hyperterm
 )
 
 # Install brew cask software    
@@ -135,7 +136,6 @@ if [[ $result = 0 ]]; then
   git clone "https://github.com/ptrevinor/dotfiles.git"
 
   cd ~/Repositories/dotfiles
-
   bash setup.sh
 fi
 

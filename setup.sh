@@ -14,9 +14,9 @@ set +e
 setups=(
   $PWD/git/setup.sh
   $PWD/npm/setup.sh
-  $PWD/osx/setup.sh
   $PWD/vim/setup.sh
   $PWD/vscode/setup.sh
+  $PWD/osx/setup.sh
 )
 
 # Run setup files

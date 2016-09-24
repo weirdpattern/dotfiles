@@ -19,26 +19,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
   defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
   
   echo "    defaults write com.apple.Terminal 'Startup Window Settings' -string 'Pro'"
-  defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
-  
-  # Make the window a bit larger
-  count=$(/usr/libexec/PlistBuddy -c "Print ::Window\ Settings:Pro:columnCount" "$HOME/Library/Preferences/com.apple.Terminal.plist" | wc -l)
-  if [[ $count == 0 ]]; then 
-    echo "    /usr/libexec/PlistBuddy -c 'Add :Window\ Settings:Pro:columnCount integer 280' '$HOME/Library/Preferences/com.apple.Terminal.plist' 2>/dev/null"
-    /usr/libexec/PlistBuddy -c "Add :Window\ Settings:Pro:columnCount integer 280" "$HOME/Library/Preferences/com.apple.Terminal.plist" 2>/dev/null
-  else
-    echo "    /usr/libexec/PlistBuddy -c 'Set :Window\ Settings:Pro:columnCount 280' '$HOME/Library/Preferences/com.apple.Terminal.plist' 2>/dev/null" 
-    /usr/libexec/PlistBuddy -c "Set :Window\ Settings:Pro:columnCount 280" "$HOME/Library/Preferences/com.apple.Terminal.plist" 2>/dev/null
-  fi 
-  
-  count=$(/usr/libexec/PlistBuddy -c "Print ::Window\ Settings:Pro:rowCount" "$HOME/Library/Preferences/com.apple.Terminal.plist" | wc -l)
-  if [[ $count == 0 ]]; then
-    echo "    /usr/libexec/PlistBuddy -c 'Add :Window\ Settings:Pro:rowCount integer 280' '$HOME/Library/Preferences/com.apple.Terminal.plist' 2>/dev/null"
-    /usr/libexec/PlistBuddy -c "Add :Window\ Settings:Pro:rowCount integer 280" "$HOME/Library/Preferences/com.apple.Terminal.plist" 2>/dev/null
-  else
-    echo "    /usr/libexec/PlistBuddy -c 'Set :Window\ Settings:Pro:rowCount 280' '$HOME/Library/Preferences/com.apple.Terminal.plist' 2>/dev/null"
-    /usr/libexec/PlistBuddy -c "Set :Window\ Settings:Pro:rowCount 280" "$HOME/Library/Preferences/com.apple.Terminal.plist" 2>/dev/null
-  fi
+  defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"  
 #
 ###
 
@@ -203,6 +184,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
   # Resets the launch pad
   echo "    defaults write com.apple.dock ResetLaunchPad -bool TRUE"
   defaults write com.apple.dock ResetLaunchPad -bool TRUE  
+
+  # Remove applications
+  sqlite3 $(sudo find /private/var/folders -name com.apple.dock.launchpad)/db/db "DELETE FROM apps"
 #
 ###
 
