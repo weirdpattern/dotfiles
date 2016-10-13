@@ -1,4 +1,19 @@
 ##
+# Install PsGet
+##
+function Install-PsGet {
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]$ModulesPath
+    )
+
+    $oldPSModulePath = $env:PSModulePath
+    $env:PSModulePath = $ModulesPath
+    (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
+    $env:PSModulePath = $oldPSModulePath
+}
+
+##
 # Setups the requested profile.
 ##
 function Setup-Profile {
@@ -9,7 +24,15 @@ function Setup-Profile {
         [Parameter(Mandatory=$True)]
         [string]$ProfilePath
     )
-        
+
+    $modulesPath = Join-Path -Path (Split-Path $ProfilePath -Parent) -ChildPath "Modules"
+
+    Set-ExecutionPolicy RemoteSigned
+    Install-PsGet $modulesPath | Out-Null
+    Install-Module posh-git -Destination $modulesPath | Out-Null
+
+    Remove-Item $Profile -Force
+
     $process = $True
     if (Test-Path $ProfilePath) {
         $title = "Profile already exists!"
