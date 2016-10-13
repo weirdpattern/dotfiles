@@ -4,7 +4,7 @@
 function Test-GitRepository {
     return (Get-Command "git" 2>$Null) `
       -and ((git rev-parse --is-inside-work-tree) 2>$Null) `
-      -and (-not (git rev-parse --is-inside-git-dir) 2>$Null)
+      -and ((git rev-parse --is-inside-git-dir) -eq $False 2>$Null)
 }
 
 ##
