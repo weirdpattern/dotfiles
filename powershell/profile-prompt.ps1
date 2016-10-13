@@ -40,9 +40,6 @@ function Prompt {
     $host.UI.RawUi.WindowTitle = $pwd.Path
     
     Write-Host -backgroundColor $Host.UI.RawUI.BackgroundColor
-    
-    Write-Host([Environment]::Username) -NoNewLine -ForegroundColor Red
-    Write-Host(" @ ") -NoNewLine -ForegroundColor DarkGray
     Write-Host($path) -NoNewLine -ForegroundColor DarkGreen
     
     if (Test-GitRepository) {
