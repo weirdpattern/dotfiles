@@ -2,6 +2,10 @@
 # General #
 ###########
 #
+  # Enable vim
+  Set-Alias vi "C:\Program Files (x86)\Vim\vim80\vim.exe"
+  Set-Alias vim "C:\Program Files (x86)\Vim\vim80\vim.exe"
+  
   # Enable sudo shortcut
   Set-Alias sudo ( %{'{0}\{1}\{2}' -f (Split-Path $profile.CurrentUserAllHosts), ".ps", "sudo.ps1"} )  
 #
@@ -50,10 +54,7 @@
 # 
   # Go back one level and list content
   function .. { 
-	Param(
-		[Parameter(Mandatory=$True, Position=0)]
-		[Int]$Number
-	)
+	Param([Int]$Number = 1)
 	$private:path = ""
     while ($Number -gt 0) {
 	    $private:path += "../"
@@ -62,6 +63,12 @@
   
     Set-Location $private:path
     Get-ChildItem .    
+  }
+  
+  # Go back home
+  function ~ { 
+    Set-Location $env:UserProfile
+    Get-ChildItem .
   }
 #
 ###
