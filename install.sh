@@ -105,6 +105,7 @@ echo ""
 fonts=(
   font-source-code-pro
   font-roboto
+  font-roboto-mono
 )
 
 # Install fonts    
