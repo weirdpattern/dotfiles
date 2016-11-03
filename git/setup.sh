@@ -14,6 +14,6 @@ if [[ $(which "git") ]] ; then
   cp -fi "${0%/*}/.gitconfig" "$HOME/.gitconfig"
   
   echo "Copying ${0%/*}/.gitoverrides -> $HOME/.gitoverrides"
-  cp -fi "${0%/*}/.gitoverrides" "$HOME/.gitoverrides"
+  cp -fi "${0%/*}/.gitoverrides_nix" "$HOME/.gitoverrides"
   
 fi
