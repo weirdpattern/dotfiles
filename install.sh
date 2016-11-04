@@ -84,7 +84,7 @@ casks=(
   visual-studio-code
   dash
   1password
-  hyperterm
+  hyper
   jing
 )
 
