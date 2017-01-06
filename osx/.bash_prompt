@@ -14,4 +14,4 @@ else
   white="\e[1;37m"
 fi
 
-PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$green\]\w" "\n\[$white\]\$ \[$reset\]";'$PROMPT_COMMAND
+PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$green\]\w" "\n\[$white\]\$ \[$reset\]";'
