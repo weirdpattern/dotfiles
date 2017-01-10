@@ -2,9 +2,9 @@
 # Overrides settings in .gitconfig #
 ####################################
 
+[core]
+  autocrlf = true
+
 [user]
   name = weirdpattern
   email = patricio@weirdpattern.com
-
-[credential]
-  helper = osxkeychain

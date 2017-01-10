@@ -176,6 +176,5 @@
   wp = show -p
   wr = show -p --no-color
  
- # Supported by Git 1.7.10+ 
- [include]
-   path = ~/.gitoverrides
+[include]
+  path = ~/.gitoverrides

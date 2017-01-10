@@ -11,7 +11,7 @@ if %errorLevel% EQU 0 (
 
 :setup
   REM Setups to be run after installation
-  set setups=("%~dp0cmd\setup.cmd" "%~dp0vscode\setup.cmd" "%~dp0powershell\setup.cmd")
+  set setups=("%~dp0cmd\setup.cmd" "%~dp0vscode\setup.cmd" "%~dp0powershell\setup.cmd" "%~dp0git\setup.cmd")
 
   REM Run setup files
   for %%i in %setups% do call "%%~i"

@@ -1,0 +1,13 @@
+####################################
+# Overrides settings in .gitconfig #
+####################################
+
+[core]
+  autocrlf = input
+
+[user]
+  name = weirdpattern
+  email = patricio@weirdpattern.com
+
+[credential]
+  helper = osxkeychain
