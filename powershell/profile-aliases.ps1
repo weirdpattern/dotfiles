@@ -7,7 +7,7 @@
   Set-Alias vim "C:\Program Files (x86)\Vim\vim80\vim.exe"
   
   # Enable sudo shortcut
-  Set-Alias sudo ( %{'{0}\{1}\{2}' -f (Split-Path $profile.CurrentUserAllHosts), ".ps", "sudo.ps1"} )  
+  Set-Alias sudo ( %{'{0}\{1}' -f $PSScriptRoot, "sudo.ps1"} )  
 #
 ###
 
