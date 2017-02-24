@@ -79,7 +79,7 @@
 #
   # Clear shorcuts
   Set-Alias clr Clear-Host
-  Set-Alias clrsrc Clear-Host
+  Set-Alias clrsrc Clear-Host  
 #
 ###
 
@@ -94,3 +94,29 @@
   function status { git status }
 #
 ###
+
+############
+# Sessions #
+############
+#
+  # Adds Visual Studio folder to PATH
+  function add-sdk {
+	Param([String]$Version = "4.6.1")
+	switch ($Version) {
+	  "4.0" {
+		$env:Path += ";$env:SDK40"  
+	  }
+	  "4.5.1" {
+		$env:Path += ";$env:SDK451"  
+	  }
+	  "4.6" {
+		$env:Path += ";$env:SDK46"  
+	  }
+	  default {
+		$env:Path += ";$env:SDK461"  
+	  }
+	}
+  }
+#
+###
+
