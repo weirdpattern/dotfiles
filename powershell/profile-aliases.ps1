@@ -32,16 +32,16 @@
 	  )
 	  
 	  if ($Operation -imatch "restart") {
-          Write-Host Restarting IIS...
-	      sudo iisreset /Restart
-          Write-Host IIS Restarted
+      Write-Host Restarting IIS...
+	    sudo iisreset /Restart
+      Write-Host IIS Restarted
 	  } elseif ($Operation -imatch "start") {
-          Write-Host Starting IIS...
-	      sudo iisreset /Start
-          Write-Host IIS Started
+      Write-Host Starting IIS...
+	    sudo iisreset /Start
+      Write-Host IIS Started
 	  } elseif ($Operation -imatch "stop") {
-          Write-Host Stopping IIS...
-	      sudo iisreset /Stop
+      Write-Host Stopping IIS...
+	    sudo iisreset /Stop
 		  Write-Host IIS Stopped
 	  }
   }
@@ -101,21 +101,21 @@
 #
   # Adds Visual Studio folder to PATH
   function add-sdk {
-	Param([String]$Version = "4.6.1")
-	switch ($Version) {
-	  "4.0" {
-		$env:Path += ";$env:SDK40"  
+	  Param([String]$Version = "4.6.1")
+	  switch ($Version) {
+	    "4.0" {
+		    $env:Path += ";$env:SDK40"  
+	    }
+	    "4.5.1" {
+	      $env:Path += ";$env:SDK451"  
+	    }
+	    "4.6" {
+		    $env:Path += ";$env:SDK46"  
+	    }
+	    default {
+		    $env:Path += ";$env:SDK461"  
+	    }
 	  }
-	  "4.5.1" {
-		$env:Path += ";$env:SDK451"  
-	  }
-	  "4.6" {
-		$env:Path += ";$env:SDK46"  
-	  }
-	  default {
-		$env:Path += ";$env:SDK461"  
-	  }
-	}
   }
 #
 ###
