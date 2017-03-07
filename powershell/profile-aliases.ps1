@@ -3,8 +3,8 @@
 ###########
 #
   # Enable vim
-  Set-Alias vi "C:\Program Files (x86)\Vim\vim80\vim.exe"
-  Set-Alias vim "C:\Program Files (x86)\Vim\vim80\vim.exe"
+  Set-Alias vi "${env:EDITOR}"
+  Set-Alias vim "${env:EDITOR}"
   
   # Enable sudo shortcut
   Set-Alias sudo ( %{'{0}\{1}' -f $PSScriptRoot, "sudo.ps1"} )  
@@ -22,7 +22,7 @@
   function flush-dns { sudo ipconfig /FlushDns }
   
   # Opens hosts file
-  function hosts { Start-Process "$env:EDITOR" "$env:windir\System32\Drivers\Etc\Hosts" -Verb runAs }
+  function hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
   
   # Operates IIS
   function iis {
@@ -54,8 +54,20 @@
 # 
   # Go back one level and list content
   function .. { 
-	Param([Int]$Number = 1)
-	$private:path = ""
+	  Param([Int]$Number = 1)
+	  $private:path = ""
+    while ($Number -gt 0) {
+	    $private:path += "../"
+	    $Number -= 1
+    }
+  
+    Set-Location $private:path
+    Get-ChildItem .    
+  }
+
+  function back {
+	  Param([Int]$Number = 1)
+	  $private:path = ""
     while ($Number -gt 0) {
 	    $private:path += "../"
 	    $Number -= 1
@@ -70,6 +82,24 @@
     Set-Location $env:UserProfile
     Get-ChildItem .
   }
+
+  # Open up the repositories
+  function repo {
+    Set-Location $env:UserRepositories
+    Get-ChildItem .
+  }
+
+  function mkcd {
+    Param([String]$Name)
+    New-Item $Name -ItemType Directory
+    Set-Location $Name
+  }
+
+  function mkdircd {
+    Param([String]$Name)
+    New-Item $Name -ItemType Directory
+    Set-Location $Name
+  }
 #
 ###
 
@@ -80,6 +110,10 @@
   # Clear shorcuts
   Set-Alias clr Clear-Host
   Set-Alias clrsrc Clear-Host  
+
+  # Create directories
+  Set-Alias mk mkdir
+  Set-Alias mkcd mkdircd  
 #
 ###
 
