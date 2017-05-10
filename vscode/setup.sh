@@ -11,6 +11,6 @@ if [[ -d "$HOME/Library/Application Support/Code/User/" ]]; then
 
   # Create the symlink
   echo "Copying settings ${0%/*}/settings.json -> $HOME/Library/Application Support/Code/User/settings.json"
-  cp -fi "${0%/*}/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+  cp -fi "${0%/*}/settings-nix.json" "$HOME/Library/Application Support/Code/User/settings.json"
         
 fi

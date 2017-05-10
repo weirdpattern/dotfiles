@@ -1,6 +1,9 @@
 {
     //-------- Editor configuration --------
     
+    // Controls the font family.
+    "editor.fontFamily": "Roboto Mono, 'Courier New', monospace",
+
     // Controls visibility of the glyph margin
     "editor.glyphMargin": true,
     
@@ -9,17 +12,29 @@
     
     // Controls whether the editor should highlight similar matches to the selection
     "editor.selectionHighlight": false,
-    
-    // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping
-    "editor.wrappingColumn": 125,
+
+    // Remove trailing auto inserted whitespace
+    "editor.trimAutoWhitespace": true,
+
+    // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping (word wrapping). Setting this to -1 forces the editor to never wrap.
+    "editor.wordWrapColumn": 600,
+
+    // Controls if lines should wrap. The lines will wrap at min(editor.wrappingColumn, viewportWidthInColumns).
+    "editor.wordWrap": "off",
+
+    // Columns at which to show vertical rulers
+    "editor.rulers": [120],
     
     //-------- Window configuration --------
 
     // When enabled, will open files in a new window instead of reusing an existing instance.
-    "window.openFilesInNewWindow": false,
+    "window.openFilesInNewWindow": "off",
     
     // Controls how folders are being reopened after a restart. Select 'none' to never reopen a folder, 'one' to reopen the last folder you worked on or 'all' to reopen all folders of your last session.
     "window.reopenFolders": "none",
+
+    // The zoom level
+    "window.zoomLevel": 0,
     
     //-------- Files configuration --------
 
@@ -44,25 +59,36 @@
         ".apdisk": true,
         "._*": true
     },
+
+    // The default end of line character.
+    "files.eol": "\n",
     
     //-------- File Explorer configuration --------
 
     // Maximum number of working files to show before scrollbars appear.
-    "explorer.workingFiles.maxVisible": 1,
+    "explorer.openEditors.visible": 0,
 
     // Controls if the height of the working files section should adapt dynamically to the number of elements or not.
-    "explorer.workingFiles.dynamicHeight": false,
-    
+    "explorer.openEditors.dynamicHeight": false,
+
+    //-------- Workbench --------
+
+    // The theme to be used
+    "workbench.colorTheme": "Ayu Dark",
+
+    // The icon set to be used
+    "workbench.iconTheme": "ayu",
+
     //-------- Update configuration --------
 
     // Configure the update channel to receive updates from. Requires a restart after change.
     // In general, auto-update is disable to allow brew cask to control the update process
-    "update.channel": "none",
+    "update.channel": "default",
     
     //-------- Git configuration --------
 
     // Path to the git executable
-    "git.path": "/usr/local/bing/git",
+    "git.path": "C:\\Program Files\\Git\\bin",
     
     //-------- Search configuration --------
 
@@ -76,19 +102,7 @@
     //-------- JavaScript configuration --------
     
     // Don't spare curly brackets.
-    "javascript.validate.lint.curlyBracketsMustNotBeOmitted": "warning",
-
-    // Missing semicolon.
-    "javascript.validate.lint.missingSemicolon": "warning",
-    
-    // Semicolon instead of block.
-    "javascript.validate.lint.semicolonsInsteadOfBlocks": "warning",
-
-    // Function inside loop.
-    "javascript.validate.lint.functionsInsideLoops": "warning",
-    
-    // Unused local function.
-    "javascript.validate.lint.unusedFunctions": "warning",
+    "javascript.validate.enable": true,    
     
     //-------- CSS configuration --------
     
@@ -121,14 +135,19 @@
     //-------- Sass configuration --------
    
     // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
-    "sass.lint.compatibleVendorPrefixes": "warning",
+    "scss.lint.compatibleVendorPrefixes": "warning",
     
     // Do not use duplicate style definitions
-    "sass.lint.duplicateProperties": "warning",
+    "scss.lint.duplicateProperties": "warning",
     
     // IE hacks are only necessary when supporting IE7 and older
-    "sass.lint.ieHack": "warning",
+    "scss.lint.ieHack": "warning",
 
     // Unknown vendor specific property.
-    "sass.lint.unknownVendorSpecificProperties": "warning"
+    "scss.lint.unknownVendorSpecificProperties": "warning",
+
+    //-------- Typescript configuration --------
+
+    // Check if a global install TypeScript compiler (e.g. tsc) differs from the used TypeScript language service.
+    "typescript.check.tscVersion": false    
 }
