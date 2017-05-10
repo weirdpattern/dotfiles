@@ -27,23 +27,23 @@
   # Operates IIS
   function iis {
       Param(
-	      [Parameter(Mandatory=$True)]
-		  [string]$Operation		  
-	  )
-	  
-	  if ($Operation -imatch "restart") {
+      [Parameter(Mandatory=$True)]
+      [string]$Operation      
+    )
+    
+    if ($Operation -imatch "restart") {
       Write-Host Restarting IIS...
-	    sudo iisreset /Restart
+      sudo iisreset /Restart
       Write-Host IIS Restarted
-	  } elseif ($Operation -imatch "start") {
+    } elseif ($Operation -imatch "start") {
       Write-Host Starting IIS...
-	    sudo iisreset /Start
+      sudo iisreset /Start
       Write-Host IIS Started
-	  } elseif ($Operation -imatch "stop") {
+    } elseif ($Operation -imatch "stop") {
       Write-Host Stopping IIS...
-	    sudo iisreset /Stop
-		  Write-Host IIS Stopped
-	  }
+      sudo iisreset /Stop
+      Write-Host IIS Stopped
+    }
   }
 #
 ###
@@ -54,11 +54,11 @@
 # 
   # Go back one level and list content
   function .. { 
-	  Param([Int]$Number = 1)
-	  $private:path = ""
+    Param([Int]$Number = 1)
+    $private:path = ""
     while ($Number -gt 0) {
-	    $private:path += "../"
-	    $Number -= 1
+      $private:path += "../"
+      $Number -= 1
     }
   
     Set-Location $private:path
@@ -66,11 +66,11 @@
   }
 
   function back {
-	  Param([Int]$Number = 1)
-	  $private:path = ""
+    Param([Int]$Number = 1)
+    $private:path = ""
     while ($Number -gt 0) {
-	    $private:path += "../"
-	    $Number -= 1
+      $private:path += "../"
+      $Number -= 1
     }
   
     Set-Location $private:path
@@ -135,21 +135,21 @@
 #
   # Adds Visual Studio folder to PATH
   function add-sdk {
-	  Param([String]$Version = "4.6.1")
-	  switch ($Version) {
-	    "4.0" {
-		    $env:Path += ";$env:SDK40"  
-	    }
-	    "4.5.1" {
-	      $env:Path += ";$env:SDK451"  
-	    }
-	    "4.6" {
-		    $env:Path += ";$env:SDK46"  
-	    }
-	    default {
-		    $env:Path += ";$env:SDK461"  
-	    }
-	  }
+    Param([String]$Version = "4.6.1")
+    switch ($Version) {
+      "4.0" {
+        $env:Path += ";$env:SDK40"  
+      }
+      "4.5.1" {
+        $env:Path += ";$env:SDK451"  
+      }
+      "4.6" {
+        $env:Path += ";$env:SDK46"  
+      }
+      default {
+        $env:Path += ";$env:SDK461"  
+      }
+    }
   }
 #
 ###
