@@ -117,15 +117,29 @@
 #
 ###
 
-################
-# Applications #
-################
-#
-  # Set git alias
-  Set-Alias g git
-  
+#######
+# Git #
+#######
+#  
   # Gets the status of a git repository
   function status { git status }
+  
+  # Pulls data into the repository
+  function pull { git pull }
+
+  # Loops through all the repositories pulling in new data
+  function pull-all {
+    Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse `
+      | ForEach-Object { 
+        Write-Host Updating (Split-Path $_ -Parent)
+
+        Push-Location -Path (Split-Path $_ -Parent)
+        git pull 
+        Pop-Location
+
+        Write-Host
+      }
+  } 
 #
 ###
 
