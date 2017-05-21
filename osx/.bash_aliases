@@ -120,3 +120,15 @@
   alias cask='brew cask'  
 #
 ###
+
+##########
+# Jekyll #
+##########
+#
+  # Update jekyll
+  alias jekyll-update='bundle update'
+
+  # Run jekyll server
+  alias jekyll-start='bundle exec jekyll serve'
+#
+###
