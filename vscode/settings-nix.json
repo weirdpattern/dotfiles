@@ -24,6 +24,9 @@
 
     // Columns at which to show vertical rulers
     "editor.rulers": [120],
+
+    // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
+    "editor.tabSize": 2,
     
     //-------- Window configuration --------
 
@@ -149,5 +152,5 @@
     //-------- Typescript configuration --------
 
     // Check if a global install TypeScript compiler (e.g. tsc) differs from the used TypeScript language service.
-    "typescript.check.tscVersion": false    
+    "typescript.check.tscVersion": false
 }
