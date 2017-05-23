@@ -9,9 +9,9 @@ function Prompt {
   $host.UI.RawUi.WindowTitle = $pwd.Path
   
   Write-Host -backgroundColor $Host.UI.RawUI.BackgroundColor
-  Write-Host($path) -NoNewLine -ForegroundColor DarkGreen
+  Write-Host($path) -NoNewLine -ForegroundColor DarkYellowk
   Write-VcsStatus
   Write-Host(' ') 
-  Write-Host('$') -NoNewLine -ForegroundColor Red
+  Write-Host('$') -NoNewLine -ForegroundColor DarkYellow
   return " "
 }
