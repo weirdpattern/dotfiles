@@ -6,12 +6,11 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
   tput sgr0
 
   reset=$(tput sgr0)
-  green=$(tput setaf 64)
-  white=$(tput setaf 15)
+  orange=$(tput setaf 172)
+  bold=$(tput bold)
 else
   reset="\e[0m"
-  green="\e[1;32m"
-  white="\e[1;37m"
+  orange="\e[1;33m"
 fi
 
-PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$green\]\w" "\n\[$white\]\$ \[$reset\]";'
+PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$bold\]\[$orange\]\w" "\n\[$bold\]\[$orange\]\$ \[$reset\]";'
