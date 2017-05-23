@@ -13,4 +13,4 @@ else
   orange="\e[1;33m"
 fi
 
-PROMPT_COMMAND='__posh_git_ps1 "\n\[$bold\]\[$orange\]\w" "\n\[$bold\]\[$orange\]\$ \[$reset\]";'
+PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$bold\]\[$orange\]\w" "\n\[$bold\]\[$orange\]\$ \[$reset\]";'
