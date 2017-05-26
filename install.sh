@@ -15,7 +15,7 @@ if [[ ! $(which "brew") ]]; then
 
   echo "Installing XCode Command Line Developer Tools..."
   xcode-select --install
-  
+
   echo "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -23,14 +23,14 @@ if [[ ! $(which "brew") ]]; then
   brew install "brew-cask"
 
   echo "Installing Java…"
-  brew cask install "java"  
+  brew cask install "java"
 
 else
 
   echo "Updating Homebrew..."
   brew update
   brew upgrade
-  
+
 fi
 
 # Check for any problem
@@ -46,7 +46,7 @@ brews=(
   coreutils
   findutils
   python
-  ruby  
+  ruby
   perl
   vim
   wget
@@ -62,7 +62,7 @@ brews=(
 result=$(confirm "Do you want to install brew components?")
 if [[ $result = 0 ]]; then
   echo ""
-  echo "Installing brew software..." 
+  echo "Installing brew software..."
   foreach "brew install" ${brews[@]}
   echo "Brew components installation completed"
 fi
@@ -80,7 +80,7 @@ casks=(
   pycharm
   rubymine
   appcode
-  datagrip  
+  datagrip
   visual-studio-code
   dash
   1password
@@ -88,11 +88,11 @@ casks=(
   jing
 )
 
-# Install brew cask software    
+# Install brew cask software
 result=$(confirm "Do you want to install brew cask components?")
 if [[ $result = 0 ]]; then
   echo ""
-  echo "Installing brew cask software..." 
+  echo "Installing brew cask software..."
   foreach "brew cask install --appdir='/Applications'" ${casks[@]}
   echo "Brew cask components installation completed"
 fi
@@ -108,14 +108,14 @@ fonts=(
   font-roboto-mono
 )
 
-# Install fonts    
+# Install fonts
 result=$(confirm "Do you want to install fonts?")
 if [[ $result = 0 ]]; then
   # Tabs the required repositories
   brew tap caskroom/fonts
 
   echo ""
-  echo "Installing fonts..." 
+  echo "Installing fonts..."
   foreach "brew cask install" ${fonts[@]}
   echo "Fonts installation completed"
 fi
@@ -123,7 +123,7 @@ fi
 echo ""
 
 ####################################################################################
-       
+
 result=$(confirm "Would you like to setup your environment?")
 if [[ $result = 0 ]]; then
   echo ""
@@ -131,10 +131,10 @@ if [[ $result = 0 ]]; then
   if [ ! -d ~/Repositories ]; then
     mkdir ~/Repositories
   fi
-  
+
   cd ~/Repositories
-	
-  echo "Getting dotfiles from repository"  
+
+  echo "Getting dotfiles from repository"
   git clone "https://github.com/ptrevinor/dotfiles.git"
 
   cd ~/Repositories/dotfiles

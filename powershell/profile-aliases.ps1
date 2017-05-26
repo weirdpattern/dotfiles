@@ -1,3 +1,5 @@
+Import-Module posh-git
+
 ###########
 # General #
 ###########
@@ -5,9 +7,9 @@
   # Enable vim
   Set-Alias vi "${env:EDITOR}"
   Set-Alias vim "${env:EDITOR}"
-  
+
   # Enable sudo shortcut
-  Set-Alias sudo ( %{'{0}\{1}' -f $PSScriptRoot, "sudo.ps1"} )  
+  Set-Alias sudo ( %{'{0}\{1}' -f $PSScriptRoot, "sudo.ps1"} )
 #
 ###
 
@@ -17,20 +19,20 @@
 #
   # Gets the computer ip address
   Set-Alias ip ipconfig
-  
+
   # Flush DNS cache
   function flush-dns { sudo ipconfig /FlushDns }
-  
+
   # Opens hosts file
   function hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
-  
+
   # Operates IIS
   function iis {
       Param(
       [Parameter(Mandatory=$True)]
-      [string]$Operation      
+      [string]$Operation
     )
-    
+
     if ($Operation -imatch "restart") {
       Write-Host Restarting IIS...
       sudo iisreset /Restart
@@ -51,18 +53,18 @@
 #############################
 # Command Prompt navigation #
 #############################
-# 
+#
   # Go back one level and list content
-  function .. { 
+  function .. {
     Param([Int]$Number = 1)
     $private:path = ""
     while ($Number -gt 0) {
       $private:path += "../"
       $Number -= 1
     }
-  
+
     Set-Location $private:path
-    Get-ChildItem .    
+    Get-ChildItem .
   }
 
   function back {
@@ -72,13 +74,13 @@
       $private:path += "../"
       $Number -= 1
     }
-  
+
     Set-Location $private:path
-    Get-ChildItem .    
+    Get-ChildItem .
   }
-  
+
   # Go back home
-  function ~ { 
+  function ~ {
     Set-Location $env:UserProfile
     Get-ChildItem .
   }
@@ -109,37 +111,74 @@
 #
   # Clear shorcuts
   Set-Alias clr Clear-Host
-  Set-Alias clrsrc Clear-Host  
+  Set-Alias clrsrc Clear-Host
 
   # Create directories
   Set-Alias mk mkdir
-  Set-Alias mkcd mkdircd  
+  Set-Alias mkcd mkdircd
 #
 ###
 
-#######
+################
 # Git #
-#######
-#  
-  # Gets the status of a git repository
-  function status { git status }
-  
-  # Pulls data into the repository
-  function pull { git pull }
-
+################
+#
   # Loops through all the repositories pulling in new data
-  function pull-all {
-    Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse `
-      | ForEach-Object { 
-        Write-Host Updating (Split-Path $_ -Parent)
+  function repo-update {
+    Param([Switch]$all)
 
-        Push-Location -Path (Split-Path $_ -Parent)
-        git pull 
+    if ($all) {
+      $items = Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
+      $maxLength = ($items `
+        | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
+        | Measure-Object -Maximum -Property Length).Maximum
+
+      $items | ForEach-Object {
+        $parent = (Split-Path $_ -Parent)
+		    $repo = (Split-Path $parent -Leaf)
+
+		    Push-Location -Path $parent
+
+		    Write-Host $repo.PadRight($maxLength, ' ') -NoNewLine
+		    Write-Host ' ' -NoNewLine
+        git pull
+
         Pop-Location
-
-        Write-Host
       }
-  } 
+    } else {
+      Write-Host Updating $pwd
+
+      git pull
+
+      Write-Host
+    }
+  }
+
+  # Loops through all the repositories getting the status
+  function repo-status {
+    Param([Switch]$all)
+
+    if ($all) {
+	    $items = Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
+	    $maxLength = ($items `
+        | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
+        | Measure-Object -Maximum -Property Length).Maximum
+
+	    $items | ForEach-Object {
+	      $parent = (Split-Path $_ -Parent)
+        $repo = (Split-Path $parent -Leaf)
+
+        Push-Location -Path $parent
+
+        Write-Host $repo.PadRight($maxLength, ' ') -NoNewLine
+		    Write-Host (Write-VcsStatus)
+
+		    Pop-Location
+	    }
+    } else {
+      Write-Host (Split-Path(Split-Path $pwd) -Leaf) $(Write-VcsStatus)
+    }
+  }
 #
 ###
 
@@ -152,16 +191,16 @@
     Param([String]$Version = "4.6.1")
     switch ($Version) {
       "4.0" {
-        $env:Path += ";$env:SDK40"  
+        $env:Path += ";$env:SDK40"
       }
       "4.5.1" {
-        $env:Path += ";$env:SDK451"  
+        $env:Path += ";$env:SDK451"
       }
       "4.6" {
-        $env:Path += ";$env:SDK46"  
+        $env:Path += ";$env:SDK46"
       }
       default {
-        $env:Path += ";$env:SDK461"  
+        $env:Path += ";$env:SDK461"
       }
     }
   }
