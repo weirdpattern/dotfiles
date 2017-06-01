@@ -395,6 +395,9 @@ cp -fi "${0%/*}/.bash_functions" "$HOME/.bash_functions"
 echo "Copying settings ${0%/*}/.bash_prompt -> $HOME/.bash_prompt"
 cp -fi "${0%/*}/.bash_prompt" "$HOME/.bash_prompt"
 
+echo "Copying settings ${0%/*}/.git_prompt -> $HOME/.git_prompt"
+cp -fi "${0%/*}/.git_prompt" "$HOME/.git_prompt"
+
 echo "Copying settings ${0%/*}/.bash_profile -> $HOME/.bash_profile"
 cp -fi "${0%/*}/.bash_profile" "$HOME/.bash_profile"
 
