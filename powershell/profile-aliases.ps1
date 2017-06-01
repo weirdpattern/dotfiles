@@ -90,32 +90,26 @@ Import-Module posh-git
     Set-Location $env:UserRepositories
     Get-ChildItem .
   }
+  
+  # Enable explorer integration
+  function finder {
+    Invoke-Item $pwd 
+  } 
 
-  function mkcd {
-    Param([String]$Name)
-    New-Item $Name -ItemType Directory
-    Set-Location $Name
-  }
-
-  function mkdircd {
-    Param([String]$Name)
-    New-Item $Name -ItemType Directory
-    Set-Location $Name
-  }
-#
-###
-
-#############################
-# Command Prompt operations #
-#############################
-#
   # Clear shorcuts
   Set-Alias clr Clear-Host
   Set-Alias clrsrc Clear-Host
 
   # Create directories
   Set-Alias mk mkdir
-  Set-Alias mkcd mkdircd
+  Set-Alias mkcd mkdircd  
+
+  # Creates a new folder and navigates to it
+  function mkdircd {
+    Param([String]$Name)
+    New-Item $Name -ItemType Directory
+    Set-Location $Name
+  }
 #
 ###
 
