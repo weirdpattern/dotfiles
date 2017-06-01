@@ -113,9 +113,9 @@ Import-Module posh-git
 #
 ###
 
-################
+#######
 # Git #
-################
+#######
 #
   # Loops through all the repositories pulling in new data
   function repo-update {
