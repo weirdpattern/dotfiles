@@ -51,6 +51,7 @@ brews=(
   vim
   wget
   node
+  insomnia
   git
   git-extras
   ant
