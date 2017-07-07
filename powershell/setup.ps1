@@ -1,4 +1,11 @@
 ##
+# Install Chocolatey
+##
+function Install-Chocolatey {
+  (New-Object Net.WebClient).DownloadString("https://chocolatey.org/install.ps1") | iex
+}
+
+##
 # Install PsGet
 ##
 function Install-PsGet {
@@ -9,8 +16,27 @@ function Install-PsGet {
 
   $oldPSModulePath = $env:PSModulePath
   $env:PSModulePath = $ModulesPath
-  (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
+  (New-Object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
   $env:PSModulePath = $oldPSModulePath
+}
+
+##
+# Gets profile information based on the type of profile.
+##
+function Get-ProfileInfo {
+  Param(
+    [Parameter(Mandatory=$True)]
+    [string]$ProfileType
+  )
+
+  switch ($ProfileType) {
+    "CurrentUserAllHosts"    { return @( $Profile.CurrentUserAllHosts, "" ) }
+    "CurrentUserCurrentHost" { return @( $Profile.CurrentUserCurrentHost, "Microsoft.PowerShell_" ) }
+    "AllUsersAllHosts"       { return @( $Profile.AllUsersAllHosts, "" ) }
+    "AllUsersCurrentHost"    { return @( $Profile.AllUsersCurrentHost, "Microsoft.PowerShell_" ) }
+  }
+
+  throw "No profile has been specified!"
 }
 
 ##
@@ -20,21 +46,21 @@ function Setup-Profile {
   Param(
     [Parameter(Mandatory=$True)]
     [string]$CurrentPath,
-    
+
     [Parameter(Mandatory=$True)]
-    [string]$ProfilePath
+    [string]$ProfileType
   )
 
-  $modulesPath = Join-Path -Path (Split-Path $ProfilePath -Parent) -ChildPath "Modules"
+  $profilePath, $filePrefix = Get-ProfileInfo $ProfileType
+  $modulesPath = Join-Path -Path (Split-Path $profilePath -Parent) -ChildPath "Modules"
 
   Set-ExecutionPolicy RemoteSigned
+  Install-Chocolatey
   Install-PsGet $modulesPath | Out-Null
   Install-Module posh-git -Destination $modulesPath | Out-Null
 
-  Remove-Item $Profile -Force
-
   $process = $True
-  if (Test-Path $ProfilePath) {
+  if (Test-Path $profilePath) {
     $title = "Profile already exists!"
     $message = "Would you like to replace it?"
 
@@ -46,24 +72,23 @@ function Setup-Profile {
 
     $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
     $result = $host.ui.PromptForChoice($title, $message, $options, 0)
-    if ($result -eq 1) { 
+    if ($result -eq 1) {
       $process = $False
     }
   }
-  
+
   if ($process) {
-    $profileLocation = Split-Path $ProfilePath -Parent
+    $profileLocation = Split-Path $profilePath -Parent
     $psScriptLocation = Join-Path -Path $profileLocation -ChildPath ".ps"
     if (-Not (Test-Path $psScriptLocation)) {
       New-Item $psScriptLocation -Type Directory | %{$_.Attributes = "hidden"}
     }
-    
+
     Get-ChildItem $CurrentPath -Exclude @("profile.ps1", "setup.cmd", "setup.ps1") | Copy-Item -Destination $psScriptLocation -Force
-    Copy-Item (Join-Path $CurrentPath "profile.ps1") -Destination $profileLocation -Force
-    
+    Copy-Item (Join-Path $CurrentPath "profile.ps1") -Destination (Join-Path $profileLocation ($filePrefix + "profile.ps1")) -Force
+
     Write-Host ""
     Write-Host "Profile updated!"
-    Write-Host "Press enter to continue"
   }
 }
 
@@ -73,10 +98,10 @@ function Setup-Profile {
 function Assert-AdminAccess {
   $user = [Security.Principal.WindowsIdentity]::GetCurrent();
   $principal = New-Object Security.Principal.WindowsPrincipal $user
-  
+
   $hasAdminClaim = $user.UserClaims | ? { $_.Value -eq 'S-1-5-32-544'}
   $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-   
+
   if ((-Not $isAdmin) -Or (-Not $hasAdminClaim)) {
     Write-Host ""
     Write-Host "To setup All Users profile you need to run the command in admin mode" -ForegroundColor Red
@@ -89,26 +114,45 @@ $currentLocation = Split-Path $MyInvocation.MyCommand.Definition -Parent
 $title = "PowerShell Profile Setup"
 $message = "Setup profile for:"
 
-$currentUser= New-Object System.Management.Automation.Host.ChoiceDescription "&Current User", `
-  "Setup Current User's PowerShell Profile."
+$currentUserAllHosts= New-Object System.Management.Automation.Host.ChoiceDescription "&Current User All Hosts", `
+  "Setup Current User's PowerShell Profile for all Hosts."
 
-$allUsers = New-Object System.Management.Automation.Host.ChoiceDescription "&All Users", `
-  "Setup All User's PowerShell Profile."
-  
+$currentUserCurrentHost= New-Object System.Management.Automation.Host.ChoiceDescription "Current &User Current Host", `
+  "Setup Current User's PowerShell Profile for the Current Host."
+
+$allUsersAllHosts = New-Object System.Management.Automation.Host.ChoiceDescription "&All Users All Hosts", `
+  "Setup All User's PowerShell Profile for all Hosts."
+
+$allUsersCurrentHost = New-Object System.Management.Automation.Host.ChoiceDescription "All Users All &Hosts", `
+  "Setup All User's PowerShell Profile for all Hosts."
+
 $cancel = New-Object System.Management.Automation.Host.ChoiceDescription "Ca&ncel", `
   "Cancel the setup."
 
-$options = [System.Management.Automation.Host.ChoiceDescription[]]($currentUser, $allUsers, $cancel)
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+$options = [System.Management.Automation.Host.ChoiceDescription[]]($currentUserAllHosts, $currentUserCurrentHost, $allUsersAllHosts, $allUsersCurrentHost, $cancel)
+$result = $host.ui.PromptForChoice($title, $message, $options, 1)
 switch ($result) {
-  0 { 
-    Write-Host "Setting up Current User" 
-    Setup-Profile $currentLocation $Profile.CurrentUserAllHosts
+  0 {
+    Write-Host "Setting up Current User All Hosts"
+    Setup-Profile $currentLocation "CurrentUserAllHosts"
   }
-  1 { 
+
+  1 {
+    Write-Host "Setting up Current User Current Host"
+    Setup-Profile $currentLocation "CurrentUserCurrentHost"
+  }
+
+  2 {
     Assert-AdminAccess
-    
-    Write-Host "Setting up All User"
-    Setup-Profile $currentLocation $Profile.AllUsersAllHosts
+
+    Write-Host "Setting up All User All Hosts"
+    Setup-Profile $currentLocation "AllUsersAllHosts"
+  }
+
+  3 {
+    Assert-AdminAccess
+
+    Write-Host "Setting up All User Current Host"
+    Setup-Profile $currentLocation "AllUsersCurrentHost"
   }
 }

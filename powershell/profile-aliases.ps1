@@ -90,11 +90,11 @@ Import-Module posh-git
     Set-Location $env:UserRepositories
     Get-ChildItem .
   }
-  
+
   # Enable explorer integration
   function finder {
-    Invoke-Item $pwd 
-  } 
+    Invoke-Item $pwd
+  }
 
   # Clear shorcuts
   Set-Alias clr Clear-Host
@@ -102,7 +102,7 @@ Import-Module posh-git
 
   # Create directories
   Set-Alias mk mkdir
-  Set-Alias mkcd mkdircd  
+  Set-Alias mkcd mkdircd
 
   # Creates a new folder and navigates to it
   function mkdircd {
@@ -175,29 +175,3 @@ Import-Module posh-git
   }
 #
 ###
-
-############
-# Sessions #
-############
-#
-  # Adds Visual Studio folder to PATH
-  function add-sdk {
-    Param([String]$Version = "4.6.1")
-    switch ($Version) {
-      "4.0" {
-        $env:Path += ";$env:SDK40"
-      }
-      "4.5.1" {
-        $env:Path += ";$env:SDK451"
-      }
-      "4.6" {
-        $env:Path += ";$env:SDK46"
-      }
-      default {
-        $env:Path += ";$env:SDK461"
-      }
-    }
-  }
-#
-###
-
