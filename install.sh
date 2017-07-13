@@ -128,17 +128,17 @@ echo ""
 result=$(confirm "Would you like to setup your environment?")
 if [[ $result = 0 ]]; then
   echo ""
-  echo "Creating repository folder"
-  if [ ! -d ~/Repositories ]; then
-    mkdir ~/Repositories
+  echo "Creating sandbox folder"
+  if [ ! -d ~/Sandbox ]; then
+    mkdir ~/Sandbox
   fi
 
-  cd ~/Repositories
+  cd ~/Sandbox
 
   echo "Getting dotfiles from repository"
-  git clone "https://github.com/ptrevinor/dotfiles.git"
+  git clone "https://github.com/weirdpattern/dotfiles.git"
 
-  cd ~/Repositories/dotfiles
+  cd ~/Sandbox/dotfiles
   bash setup.sh
 fi
 
