@@ -16,4 +16,4 @@ if (Test-Path "${env:programfiles}\Vim\vim80\vim.exe") {
 }
 
 # user repositories
-[Environment]::SetEnvironmentVariable("UserRepositories", "${env:UserProfile}");
+[Environment]::SetEnvironmentVariable("Sandbox", "C:\Sandbox");

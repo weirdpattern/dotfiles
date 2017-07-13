@@ -5,8 +5,5 @@
 # Defines the java home
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-# Defines the homebrew github token
-# export HOMEBREW_GITHUB_API_TOKEN=<Your token here>
-
 # Defines the path to the git repositories
-export REPO_HOME="$HOME/Repositories/"
+export SANDBOX_HOME="$HOME/Sandbox/"

@@ -21,13 +21,13 @@ Import-Module posh-git
   Set-Alias ip ipconfig
 
   # Flush DNS cache
-  function flush-dns { sudo ipconfig /FlushDns }
+  function Flush-DNS { sudo ipconfig /FlushDns }
 
   # Opens hosts file
-  function hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
+  function Hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
 
   # Operates IIS
-  function iis {
+  function IIS {
       Param(
       [Parameter(Mandatory=$True)]
       [string]$Operation
@@ -67,7 +67,7 @@ Import-Module posh-git
     Get-ChildItem .
   }
 
-  function back {
+  function Back {
     Param([Int]$Number = 1)
     $private:path = ""
     while ($Number -gt 0) {
@@ -85,14 +85,8 @@ Import-Module posh-git
     Get-ChildItem .
   }
 
-  # Open up the repositories
-  function repo {
-    Set-Location $env:UserRepositories
-    Get-ChildItem .
-  }
-
   # Enable explorer integration
-  function finder {
+  function Finder {
     Invoke-Item $pwd
   }
 
@@ -105,7 +99,7 @@ Import-Module posh-git
   Set-Alias mkcd mkdircd
 
   # Creates a new folder and navigates to it
-  function mkdircd {
+  function MKDirCD {
     Param([String]$Name)
     New-Item $Name -ItemType Directory
     Set-Location $Name
@@ -116,13 +110,19 @@ Import-Module posh-git
 #######
 # Git #
 #######
-#
+
+  # Open up the repositories
+  function Sandbox {
+    Set-Location $env:Sandbox
+    Get-ChildItem .
+  }
+
   # Loops through all the repositories pulling in new data
-  function repo-update {
+  function Update-Sandbox {
     Param([Switch]$all)
 
     if ($all) {
-      $items = Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
+      $items = Get-ChildItem -Path $env:Sandbox -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
       $maxLength = ($items `
         | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
         | Measure-Object -Maximum -Property Length).Maximum
@@ -149,11 +149,11 @@ Import-Module posh-git
   }
 
   # Loops through all the repositories getting the status
-  function repo-status {
+  function Show-Status-Sandbox {
     Param([Switch]$all)
 
     if ($all) {
-	    $items = Get-ChildItem -Path $env:UserRepositories -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
+	    $items = Get-ChildItem -Path $env:Sandbox -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
 	    $maxLength = ($items `
         | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
         | Measure-Object -Maximum -Property Length).Maximum
