@@ -1,15 +1,15 @@
 {
     //-------- Editor configuration --------
-    
+
     // Controls the font family.
-    "editor.fontFamily": "Roboto Mono, 'Courier New', monospace",
+    "editor.fontFamily": "'Fira Code', 'Roboto Mono', 'Courier New', monospace",
 
     // Controls visibility of the glyph margin
     "editor.glyphMargin": true,
-    
+
     // Controls if selections have rounded corners
     "editor.roundedSelection": false,
-    
+
     // Controls whether the editor should highlight similar matches to the selection
     "editor.selectionHighlight": false,
 
@@ -27,18 +27,18 @@
 
     // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
     "editor.tabSize": 2,
-    
+
     //-------- Window configuration --------
 
     // When enabled, will open files in a new window instead of reusing an existing instance.
     "window.openFilesInNewWindow": "off",
-    
+
     // Controls how folders are being reopened after a restart. Select 'none' to never reopen a folder, 'one' to reopen the last folder you worked on or 'all' to reopen all folders of your last session.
     "window.reopenFolders": "none",
 
     // The zoom level
     "window.zoomLevel": 0,
-    
+
     //-------- Files configuration --------
 
     // Configure glob patterns for excluding files and folders.
@@ -65,7 +65,7 @@
 
     // The default end of line character.
     "files.eol": "\n",
-    
+
     //-------- File Explorer configuration --------
 
     // Maximum number of working files to show before scrollbars appear.
@@ -87,12 +87,12 @@
     // Configure the update channel to receive updates from. Requires a restart after change.
     // In general, auto-update is disable to allow brew cask to control the update process
     "update.channel": "default",
-    
+
     //-------- Git configuration --------
 
     // Path to the git executable
     "git.path": "/usr/local/bing/git",
-    
+
     //-------- Search configuration --------
 
     // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the file.exclude setting.
@@ -101,48 +101,48 @@
         "**/node_modules": true,
         "**/bower_components": true
     },
-    
+
     //-------- JavaScript configuration --------
-    
+
     // Don't spare curly brackets.
-    "javascript.validate.enable": true,    
-    
+    "javascript.validate.enable": true,
+
     //-------- CSS configuration --------
-    
+
     // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
     "css.lint.compatibleVendorPrefixes": "warning",
-    
+
     // Do not use duplicate style definitions
     "css.lint.duplicateProperties": "warning",
-    
+
     // IE hacks are only necessary when supporting IE7 and older
     "css.lint.ieHack": "warning",
-    
+
     // Unknown vendor specific property.
     "css.lint.unknownVendorSpecificProperties": "warning",
-    
+
     //-------- LESS configuration --------
-    
+
     // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
     "less.lint.compatibleVendorPrefixes": "warning",
-    
+
     // Do not use duplicate style definitions
     "less.lint.duplicateProperties": "warning",
-    
+
     // IE hacks are only necessary when supporting IE7 and older
     "less.lint.ieHack": "warning",
 
     // Unknown vendor specific property.
     "less.lint.unknownVendorSpecificProperties": "warning",
-    
+
     //-------- Sass configuration --------
-   
+
     // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
     "scss.lint.compatibleVendorPrefixes": "warning",
-    
+
     // Do not use duplicate style definitions
     "scss.lint.duplicateProperties": "warning",
-    
+
     // IE hacks are only necessary when supporting IE7 and older
     "scss.lint.ieHack": "warning",
 

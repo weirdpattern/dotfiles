@@ -107,6 +107,7 @@ fonts=(
   font-source-code-pro
   font-roboto
   font-roboto-mono
+  font-fira-code
 )
 
 # Install fonts
