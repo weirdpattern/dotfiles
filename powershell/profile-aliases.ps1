@@ -119,9 +119,9 @@ Import-Module posh-git
 
   # Loops through all the repositories pulling in new data
   function Update-Sandbox {
-    Param([Switch]$all)
+    Param([Switch]$All)
 
-    if ($all) {
+    if ($All) {
       $items = Get-ChildItem -Path $env:Sandbox -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
       $maxLength = ($items `
         | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
@@ -150,9 +150,9 @@ Import-Module posh-git
 
   # Loops through all the repositories getting the status
   function Show-Status-Sandbox {
-    Param([Switch]$all)
+    Param([Switch]$All)
 
-    if ($all) {
+    if ($All) {
 	    $items = Get-ChildItem -Path $env:Sandbox -Attributes Directory,Directory+Hidden -Include '.git' -Recurse
 	    $maxLength = ($items `
         | Select-Object -Property @{Name="Length";Expression={((Split-Path(Split-Path $_ -Parent) -Leaf)).Length}} `
@@ -171,6 +171,27 @@ Import-Module posh-git
 	    }
     } else {
       Write-Host (Split-Path(Split-Path $pwd) -Leaf) $(Write-VcsStatus)
+    }
+  }
+
+  function Clone-Repository {
+    Param(
+      [string]$Repository,
+      [switch]$OpenCode
+    )
+
+    git clone $Repository
+
+    Set-Location (Get-childItem . `
+      | Where-Object { $_.PSIsContainer } `
+      | Sort-Object CreationTime -Descending `
+      | Select-Object -First 1)
+
+    git config user.name $Env:GitUserName
+    git config user.email $Env:GitUserEmail
+
+    if ($OpenCode) {
+      code .
     }
   }
 #

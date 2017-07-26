@@ -17,3 +17,7 @@ if (Test-Path "${env:programfiles}\Vim\vim80\vim.exe") {
 
 # user repositories
 [Environment]::SetEnvironmentVariable("Sandbox", "C:\Sandbox");
+
+# user information
+[Environment]::SetEnvironmentVariable("GitUserName", "weirdpattern");
+[Environment]::SetEnvironmentVariable("GitUserEmail", "patricio@weirdpattern.com");
