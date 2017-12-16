@@ -57,6 +57,7 @@ brews=(
   ant
   gradle
   maven
+  yarn
 )
 
 # Install brew software
