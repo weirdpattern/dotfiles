@@ -1,156 +1,174 @@
 {
-    //-------- Editor configuration --------
+  //-------- Editor configuration --------
 
-    // Controls the font family.
-    "editor.fontFamily": "'Fira Code', 'Roboto Mono', 'Courier New', monospace",
+  // Controls the font family.
+  "editor.fontFamily": "'Fira Code', 'Roboto Mono', 'Courier New', monospace",
 
-    // Controls visibility of the glyph margin
-    "editor.glyphMargin": true,
+  // Controls visibility of the glyph margin
+  "editor.glyphMargin": true,
 
-    // Controls if selections have rounded corners
-    "editor.roundedSelection": false,
+  // Controls if selections have rounded corners
+  "editor.roundedSelection": false,
 
-    // Controls whether the editor should highlight similar matches to the selection
-    "editor.selectionHighlight": false,
+  // Controls whether the editor should highlight similar matches to the selection
+  "editor.selectionHighlight": false,
 
-    // Remove trailing auto inserted whitespace
-    "editor.trimAutoWhitespace": true,
+  // Remove trailing auto inserted whitespace
+  "editor.trimAutoWhitespace": true,
 
-    // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping (word wrapping). Setting this to -1 forces the editor to never wrap.
-    "editor.wordWrapColumn": 600,
+  // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping (word wrapping). Setting this to -1 forces the editor to never wrap.
+  "editor.wordWrapColumn": 600,
 
-    // Controls if lines should wrap. The lines will wrap at min(editor.wrappingColumn, viewportWidthInColumns).
-    "editor.wordWrap": "off",
+  // Controls if lines should wrap. The lines will wrap at min(editor.wrappingColumn, viewportWidthInColumns).
+  "editor.wordWrap": "off",
 
-    // Columns at which to show vertical rulers
-    "editor.rulers": [120],
+  // Columns at which to show vertical rulers
+  "editor.rulers": [80],
 
-    // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
-    "editor.tabSize": 2,
+  // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
+  "editor.tabSize": 2,
 
-    //-------- Window configuration --------
+  // Controls if the minimap is shown
+  "editor.minimap.enabled": false,
 
-    // When enabled, will open files in a new window instead of reusing an existing instance.
-    "window.openFilesInNewWindow": "off",
+  //-------- Window configuration --------
 
-    // Controls how folders are being reopened after a restart. Select 'none' to never reopen a folder, 'one' to reopen the last folder you worked on or 'all' to reopen all folders of your last session.
-    "window.reopenFolders": "none",
+  // When enabled, will open files in a new window instead of reusing an existing instance.
+  "window.openFilesInNewWindow": "off",
 
-    // The zoom level
-    "window.zoomLevel": 0,
+  // The zoom level
+  "window.zoomLevel": 0,
 
-    //-------- Files configuration --------
+  //-------- Files configuration --------
 
-    // Configure glob patterns for excluding files and folders.
-    "files.exclude": {
-        "**/logs": true,
-        "**/.git": true,
-        "**/.idea": true,
-        "**/.DS_Store": true,
-        ".AppleDouble": true,
-        ".LSOverride": true,
-        ".DocumentRevisions-V100": true,
-        ".fseventsd": true,
-        ".Spotlight-V100": true,
-        ".TemporaryItems": true,
-        ".Trashes": true,
-        ".VolumeIcon.icns": true,
-        ".AppleDB": true,
-        ".AppleDesktop": true,
-        "Network Trash Folder": true,
-        "Temporary Items": true,
-        ".apdisk": true,
-        "._*": true
-    },
+  // Configure glob patterns for excluding files and folders.
+  "files.exclude": {
+      "**/logs": true,
+      "**/.git": true,
+      "**/.idea": true,
+      "**/.DS_Store": true,
+      ".AppleDouble": true,
+      ".LSOverride": true,
+      ".DocumentRevisions-V100": true,
+      ".fseventsd": true,
+      ".Spotlight-V100": true,
+      ".TemporaryItems": true,
+      ".Trashes": true,
+      ".VolumeIcon.icns": true,
+      ".AppleDB": true,
+      ".AppleDesktop": true,
+      "Network Trash Folder": true,
+      "Temporary Items": true,
+      ".apdisk": true,
+      "._*": true
+  },
 
-    // The default end of line character.
-    "files.eol": "\n",
+  // The default end of line character.
+  "files.eol": "\n",
 
-    //-------- File Explorer configuration --------
+  //-------- File Explorer configuration --------
 
-    // Maximum number of working files to show before scrollbars appear.
-    "explorer.openEditors.visible": 0,
+  // Maximum number of working files to show before scrollbars appear.
+  "explorer.openEditors.visible": 0,
 
-    // Controls if the height of the working files section should adapt dynamically to the number of elements or not.
-    "explorer.openEditors.dynamicHeight": false,
+  // Controls if the height of the working files section should adapt dynamically to the number of elements or not.
+  "explorer.openEditors.dynamicHeight": false,
 
-    //-------- Workbench --------
+  //-------- Workbench --------
 
-    // The theme to be used
-    "workbench.colorTheme": "Ayu Dark",
+  // The theme to be used
+  "workbench.colorTheme": "Ayu Mirage",
 
-    // The icon set to be used
-    "workbench.iconTheme": "ayu",
+  // The icon set to be used
+  "workbench.iconTheme": "ayu",
 
-    //-------- Update configuration --------
+  //-------- Update configuration --------
 
-    // Configure the update channel to receive updates from. Requires a restart after change.
-    // In general, auto-update is disable to allow brew cask to control the update process
-    "update.channel": "default",
+  // Configure the update channel to receive updates from. Requires a restart after change.
+  // In general, auto-update is disable to allow brew cask to control the update process
+  "update.channel": "default",
 
-    //-------- Git configuration --------
+  //-------- Git configuration --------
 
-    // Path to the git executable
-    "git.path": "/usr/local/bing/git",
+  // Path to the git executable
+  "git.path": "/usr/local/bing/git",
 
-    //-------- Search configuration --------
+  //-------- Search configuration --------
 
-    // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the file.exclude setting.
-    "search.exclude": {
-        "**/logs": true,
-        "**/node_modules": true,
-        "**/bower_components": true
-    },
+  // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the file.exclude setting.
+  "search.exclude": {
+      "**/logs": true,
+      "**/node_modules": true,
+      "**/bower_components": true
+  },
 
-    //-------- JavaScript configuration --------
+  //-------- JavaScript configuration --------
 
-    // Don't spare curly brackets.
-    "javascript.validate.enable": true,
+  // Don't spare curly brackets.
+  "javascript.validate.enable": false,
 
-    //-------- CSS configuration --------
+  //-------- CSS configuration --------
 
-    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
-    "css.lint.compatibleVendorPrefixes": "warning",
+  // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+  "css.lint.compatibleVendorPrefixes": "warning",
 
-    // Do not use duplicate style definitions
-    "css.lint.duplicateProperties": "warning",
+  // Do not use duplicate style definitions
+  "css.lint.duplicateProperties": "warning",
 
-    // IE hacks are only necessary when supporting IE7 and older
-    "css.lint.ieHack": "warning",
+  // IE hacks are only necessary when supporting IE7 and older
+  "css.lint.ieHack": "warning",
 
-    // Unknown vendor specific property.
-    "css.lint.unknownVendorSpecificProperties": "warning",
+  // Unknown vendor specific property.
+  "css.lint.unknownVendorSpecificProperties": "warning",
 
-    //-------- LESS configuration --------
+  //-------- LESS configuration --------
 
-    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
-    "less.lint.compatibleVendorPrefixes": "warning",
+  // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+  "less.lint.compatibleVendorPrefixes": "warning",
 
-    // Do not use duplicate style definitions
-    "less.lint.duplicateProperties": "warning",
+  // Do not use duplicate style definitions
+  "less.lint.duplicateProperties": "warning",
 
-    // IE hacks are only necessary when supporting IE7 and older
-    "less.lint.ieHack": "warning",
+  // IE hacks are only necessary when supporting IE7 and older
+  "less.lint.ieHack": "warning",
 
-    // Unknown vendor specific property.
-    "less.lint.unknownVendorSpecificProperties": "warning",
+  // Unknown vendor specific property.
+  "less.lint.unknownVendorSpecificProperties": "warning",
 
-    //-------- Sass configuration --------
+  //-------- Sass configuration --------
 
-    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
-    "scss.lint.compatibleVendorPrefixes": "warning",
+  // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+  "scss.lint.compatibleVendorPrefixes": "warning",
 
-    // Do not use duplicate style definitions
-    "scss.lint.duplicateProperties": "warning",
+  // Do not use duplicate style definitions
+  "scss.lint.duplicateProperties": "warning",
 
-    // IE hacks are only necessary when supporting IE7 and older
-    "scss.lint.ieHack": "warning",
+  // IE hacks are only necessary when supporting IE7 and older
+  "scss.lint.ieHack": "warning",
 
-    // Unknown vendor specific property.
-    "scss.lint.unknownVendorSpecificProperties": "warning",
+  // Unknown vendor specific property.
+  "scss.lint.unknownVendorSpecificProperties": "warning",
 
-    //-------- Typescript configuration --------
+  // Commit all changes when there are no staged changes.
+  "git.enableSmartCommit": true,
 
-    // Check if a global install TypeScript compiler (e.g. tsc) differs from the used TypeScript language service.
-    "typescript.check.tscVersion": false
+  // An array of language ids which should be validated by ESLint
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+  ],
+
+  // Controls which editor is shown at startup, if none is restored from the previous session. Select 'none' to start without an editor, 'welcomePage' to open the Welcome page (default), 'newUntitledFile' to open a new untitled file (only opening an empty workspace).
+  "workbench.startupEditor": "newUntitledFile",
+
+  // Use 'prettier-eslint' instead of 'prettier'. Other settings will only be fallbacks in case they could not be inferred from eslint rules.
+  "prettier.eslintIntegration": true,
+
+  // If set to true, the notifications for extension recommendations will stop showing up.
+  "extensions.ignoreRecommendations": true,
+
+  // Whether auto fetching is enabled
+  "git.autofetch": true
 }
