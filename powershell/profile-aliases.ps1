@@ -110,11 +110,17 @@ Import-Module posh-git
 #######
 # Git #
 #######
-
+#
   # Open up the repositories
   function Sandbox {
     Set-Location $env:Sandbox
     Get-ChildItem .
+  }
+  
+  # Open up the deployment folder
+  function Deployment {
+	Set-Location $env:Deployment
+	Get-ChildItem .
   }
 
   # Loops through all the repositories pulling in new data
@@ -193,6 +199,46 @@ Import-Module posh-git
     if ($OpenCode) {
       code .
     }
+  }
+#
+###
+
+##############
+# SQL Server #
+##############
+#
+  function Start-SQLDatabase {
+	Param(
+	  [string]$ComputerName = $env:ComputerName,
+	  [string]$Instance = "MSSQLSERVER"
+	)	
+	
+	Import-Module "sqlps" -DisableNameChecking
+	
+	cd "SQLSERVER:\SQL\$ComputerName"
+	$Wmi = (get-item .).ManagedComputer
+	$DatabaseInstance = $Wmi.Services[$Instance]
+	$DatabaseInstance.Start()
+	$DatabaseInstance.Refresh()
+	
+	Write-Host "Database started"
+  }
+  
+  function Stop-SQLDatabase {
+	Param(
+	  [string]$ComputerName = $env:ComputerName,
+	  [string]$Instance = "MSSQLSERVER"
+	)
+	
+	Import-Module "sqlps" -DisableNameChecking
+	
+	cd "SQLSERVER:\SQL\$ComputerName"
+	$Wmi = (get-item .).ManagedComputer
+	$DatabaseInstance = $Wmi.Services[$Instance]
+	$DatabaseInstance.Stop()
+	$DatabaseInstance.Refresh()
+	
+	Write-Host "Database stopped"
   }
 #
 ###

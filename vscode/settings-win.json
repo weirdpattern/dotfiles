@@ -30,9 +30,6 @@
   // When enabled, will open files in a new window instead of reusing an existing instance.
   "window.openFilesInNewWindow": "off",
 
-  // Controls how folders are being reopened after a restart. Select 'none' to never reopen a folder, 'one' to reopen the last folder you worked on or 'all' to reopen all folders of your last session.
-  "window.reopenFolders": "none",
-
   // The zoom level
   "window.zoomLevel": 0,
 
@@ -66,15 +63,12 @@
   //-------- File Explorer configuration --------
 
   // Maximum number of working files to show before scrollbars appear.
-  "explorer.openEditors.visible": 0,
-
-  // Controls if the height of the working files section should adapt dynamically to the number of elements or not.
-  "explorer.openEditors.dynamicHeight": false,
+  "explorer.openEditors.visible": 0,  
 
   //-------- Workbench --------
 
   // The theme to be used
-  "workbench.colorTheme": "Ayu Dark",
+  "workbench.colorTheme": "Ayu Mirage",
 
   // The icon set to be used
   "workbench.iconTheme": "ayu",
