@@ -4,6 +4,9 @@
   // Controls the font family.
   "editor.fontFamily": "'Fira Code', 'Roboto Mono', 'Courier New', monospace",
 
+  // enable ligatures
+  "editor.fontLigatures": true,
+
   // Controls visibility of the glyph margin
   "editor.glyphMargin": true,
 
@@ -63,7 +66,7 @@
   //-------- File Explorer configuration --------
 
   // Maximum number of working files to show before scrollbars appear.
-  "explorer.openEditors.visible": 0,  
+  "explorer.openEditors.visible": 0,
 
   //-------- Workbench --------
 

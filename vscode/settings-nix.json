@@ -4,6 +4,9 @@
   // Controls the font family.
   "editor.fontFamily": "'Fira Code', 'Roboto Mono', 'Courier New', monospace",
 
+  // enable ligatures
+  "editor.fontLigatures": true,
+
   // Controls visibility of the glyph margin
   "editor.glyphMargin": true,
 
