@@ -26,26 +26,25 @@ Import-Module posh-git
   # Opens hosts file
   function Hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
 
-  # Operates IIS
-  function IIS {
-      Param(
-      [Parameter(Mandatory=$True)]
-      [string]$Operation
-    )
+  # Starts IIS
+  Start-IIS {
+    Write-Host Starting IIS...
+    sudo iisreset /Start
+    Write-Host IIS Started
+  }
 
-    if ($Operation -imatch "restart") {
-      Write-Host Restarting IIS...
-      sudo iisreset /Restart
-      Write-Host IIS Restarted
-    } elseif ($Operation -imatch "start") {
-      Write-Host Starting IIS...
-      sudo iisreset /Start
-      Write-Host IIS Started
-    } elseif ($Operation -imatch "stop") {
-      Write-Host Stopping IIS...
-      sudo iisreset /Stop
-      Write-Host IIS Stopped
-    }
+  # Stops IIS
+  Stop-IIS {
+    Write-Host Stopping IIS...
+    sudo iisreset /Stop
+    Write-Host IIS Stopped
+  }
+
+  # Restarts IIS
+  Restart-IIS {
+    Write-Host Restarting IIS...
+    sudo iisreset /Restart
+    Write-Host IIS Restarted
   }
 #
 ###
@@ -116,12 +115,6 @@ Import-Module posh-git
     Set-Location $env:Sandbox
     Get-ChildItem .
   }
-  
-  # Open up the deployment folder
-  function Deployment {
-	Set-Location $env:Deployment
-	Get-ChildItem .
-  }
 
   # Loops through all the repositories pulling in new data
   function Update-Sandbox {
@@ -180,6 +173,7 @@ Import-Module posh-git
     }
   }
 
+  # Clones a repository
   function Clone-Repository {
     Param(
       [string]$Repository,
@@ -207,38 +201,87 @@ Import-Module posh-git
 # SQL Server #
 ##############
 #
+  # Starts a sql express database
+  function Start-SQLExpress {
+    NET START "SQL Server (SQLEXPRESS)" 1>$Null
+    Write-Host "Database started"
+  }
+
+  # Stops a sql express database
+  function Stop-SQLExpress {
+    NET STOP "SQL Server (SQLEXPRESS)" 1>$Null
+    Write-Host "Database stopped"
+  }
+
+  # Starts a sql database
   function Start-SQLDatabase {
-	Param(
-	  [string]$ComputerName = $env:ComputerName,
-	  [string]$Instance = "MSSQLSERVER"
-	)	
-	
-	Import-Module "sqlps" -DisableNameChecking
-	
-	cd "SQLSERVER:\SQL\$ComputerName"
-	$Wmi = (get-item .).ManagedComputer
-	$DatabaseInstance = $Wmi.Services[$Instance]
-	$DatabaseInstance.Start()
-	$DatabaseInstance.Refresh()
-	
-	Write-Host "Database started"
+	  Param(
+	    [string]$ComputerName = $env:ComputerName,
+	    [string]$Instance = "MSSQLSERVER"
+	  )
+
+    $temp = Get-Location
+
+	  Import-Module "sqlps" -DisableNameChecking
+
+	  Set-Location "SQLSERVER:\SQL\$ComputerName"
+	  $Wmi = (get-item .).ManagedComputer
+	  $DatabaseInstance = $Wmi.Services[$Instance]
+	  $DatabaseInstance.Start()
+    $DatabaseInstance.Refresh()
+
+    Set-Location $temp
+
+	  Write-Host "Database started"
   }
-  
+
+  # Stops a sql database
   function Stop-SQLDatabase {
-	Param(
-	  [string]$ComputerName = $env:ComputerName,
-	  [string]$Instance = "MSSQLSERVER"
-	)
-	
-	Import-Module "sqlps" -DisableNameChecking
-	
-	cd "SQLSERVER:\SQL\$ComputerName"
-	$Wmi = (get-item .).ManagedComputer
-	$DatabaseInstance = $Wmi.Services[$Instance]
-	$DatabaseInstance.Stop()
-	$DatabaseInstance.Refresh()
-	
-	Write-Host "Database stopped"
+	  Param(
+	    [string]$ComputerName = $env:ComputerName,
+  	  [string]$Instance = "MSSQLSERVER"
+  	)
+
+    $temp = Get-Location
+
+	  Import-Module "sqlps" -DisableNameChecking
+
+	  Set-Location "SQLSERVER:\SQL\$ComputerName"
+	  $Wmi = (get-item .).ManagedComputer
+	  $DatabaseInstance = $Wmi.Services[$Instance]
+	  $DatabaseInstance.Stop()
+	  $DatabaseInstance.Refresh()
+
+    Set-Location $temp
+
+	  Write-Host "Database stopped"
   }
+#
+###
+
+###########
+# ASP NET #
+#
+  # Encrypts config files
+  function Protect-Config {
+    Param(
+      [string]$Path,
+      [string]$Provider,
+	    [string]$Section = "connectionStrings"
+	  )
+
+    aspnet_regiis -pef $Section $Path -Prov $Provider
+  }
+
+  # Decrypt config files
+  function Unprotect-Config {
+    Param(
+	    [string]$Path,
+	    [string]$Section = "connectionStrings"
+	  )
+
+    aspnet_regiis -pdf $Section $Path
+  }
+
 #
 ###
