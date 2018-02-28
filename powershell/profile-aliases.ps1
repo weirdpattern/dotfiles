@@ -27,21 +27,21 @@ Import-Module posh-git
   function Hosts { Start-Process "$env:EDITOR" "${env:windir}\System32\Drivers\Etc\Hosts" -Verb runAs }
 
   # Starts IIS
-  Start-IIS {
+  function Start-IIS {
     Write-Host Starting IIS...
     sudo iisreset /Start
     Write-Host IIS Started
   }
 
   # Stops IIS
-  Stop-IIS {
+  function Stop-IIS {
     Write-Host Stopping IIS...
     sudo iisreset /Stop
     Write-Host IIS Stopped
   }
 
   # Restarts IIS
-  Restart-IIS {
+  function Restart-IIS {
     Write-Host Restarting IIS...
     sudo iisreset /Restart
     Write-Host IIS Restarted
