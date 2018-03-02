@@ -103,6 +103,12 @@ Import-Module posh-git
     New-Item $Name -ItemType Directory
     Set-Location $Name
   }
+
+  # Removes a folder
+  function Remove {
+    Param([String]$Name)
+    RemoveItem -Recurse -Force $Name
+  }
 #
 ###
 
