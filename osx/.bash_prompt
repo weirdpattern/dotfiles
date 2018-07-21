@@ -7,10 +7,9 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 
   reset=$(tput sgr0)
   orange=$(tput setaf 172)
-  bold=$(tput bold)
 else
   reset="\e[0m"
   orange="\e[1;33m"
 fi
 
-PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\[$bold\]\[$orange\]\w" "\n\[$bold\]\[$orange\]\$ \[$reset\]";'
+PROMPT_COMMAND='__posh_git_ps1 "\[\033]0;\w\007\]\n\\[$orange\]\w" "\n\\[$orange\]\$ \[$reset\]";'
