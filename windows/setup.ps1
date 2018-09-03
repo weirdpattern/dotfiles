@@ -26,8 +26,15 @@ $BLOATWARE = @{
     "Microsoft.WindowsAlarms" = "Uninstalling Alarms";
     "microsoft.windowscommunicationsapps" = "Uninstalling Mail";
     "Microsoft.Windows.Photos" = "Uninstalling Photos";
-    "Microsoft.Office.Desktop" = "Uninstalling Office";
-    "Microsoft.Office.OneNote" = "Uninstalling OneNote";  
+    "Microsoft.Office.Desktop" = "Uninstalling Office";  
+    "Microsoft.XboxSpeechToTextOverlay" = "Uninstalling Xbox Speech to Text Overlay";
+    "Microsoft.XboxGameOverlay" = "Uninstalling Xbox Game Overlay";
+    "Microsoft.XboxGamingOverlay" = "Uninstalling Xbox Gaming Overlay";
+    "Microsoft.XboxIdentityProvider" = "Uninstalling Xbox Identity Provider";
+    "Microsoft.Xbox.TCUI" = "Uninstalling Xbox TCUI";
+    "Microsoft.Advertising.Xaml" = "Uninstalling Advertising Xaml";
+    "Microsoft.Wallet" = "Uninstalling Wallet";
+    "Microsoft.Print3D" = "Uninstalling Print3D";
 }
 
 $FRAMEWORKS = @{
@@ -48,7 +55,6 @@ $APPLICATIONS = @{
     "vscode" = "Installing VSCode";
     "jetbrains-rider" = "Installing Rider";
     "insomnia-rest-api-client" = "Installing Insomnia";
-    "onenote" = "Installing OneNote";
     "1password" = "Installing 1Password";
     "keypirinha" = "Installing Keypirinha";
     "googlechrome" = "Installing Chrome";
@@ -69,7 +75,7 @@ Function Write-Section {
         [ScriptBlock] $block
     ) 
 
-    Write-Host $message -ForegroundColor DarkBlue;
+    Write-Host $message -ForegroundColor Yellow;
     $block.Invoke();
     Write-Host; 
 }
@@ -78,8 +84,8 @@ Function Write-SectionMessage {
     Param(
         [String] $message
     )
-
-    Write-Host "`t$message" -ForegroundColor Cyan;
+Write-Host
+    Write-Host "-> $message" -ForegroundColor Cyan;
 }
 
 Function Add-RegistryKey {
@@ -98,9 +104,11 @@ Function Update-RegistryKey {
         [object] $Value
     )
 
-    If (Test-Path -LiteralPath $Path) {
-        Set-ItemProperty -LiteralPath $Path -Name $Name -Value $Value -ErrorAction SilentlyContinue | Out-Null;
+    If (-Not (Test-Path $Path)) {
+        New-Item -Path $Path -ErrorAction SilentlyContinue | Out-Null;
     }
+
+    Set-ItemProperty -LiteralPath $Path -Name $Name -Value $Value -ErrorAction SilentlyContinue | Out-Null;
 }
 
 Function Remove-RegistryKey {
@@ -108,8 +116,8 @@ Function Remove-RegistryKey {
         [string] $Path
     )
 
-    If (Test-Path -LiteralPath $Path) {
-        Remove-Item -LiteralPath $Path -Confirm $False -ErrorAction SilentlyContinue;
+    If (Test-Path $Path) {
+        Remove-Item -LiteralPath $Path -Confirm -ErrorAction SilentlyContinue | Out-Null;
     }
 }
 
@@ -118,7 +126,6 @@ Function Remove-RegistryKey {
 #############################
 
 Write-Section "Initializing" {
-    Set-ExecutionPolicy Bypass -Scope Process -Force;
     New-PSDrive -Name "HKU" -PSProvider "Registry" -Root "HKEY_USERS";
     New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT";
 }
@@ -128,7 +135,7 @@ Write-Section "Installing package managers" {
     (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1') | Invoke-Expression;
 
     Write-SectionMessage "Installing PackageManagement";
-    Install-Module PowerShellGet;
+    Install-Module PowerShellGet -Confirm;
 }
 
 Write-Section "Installing frameworks and devtools" {
@@ -137,21 +144,21 @@ Write-Section "Installing frameworks and devtools" {
         Invoke-Expression "choco install $($_.Name) -y";
     };
 
-    $DEVTOOLS.Keys | ForEach-Object {
+    $DEVTOOLS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
         Invoke-Expression "choco install $($_.Name) -y";
     };
 }
 
 Write-Section "Installing applications" {
-    $APPLICATIONS.Keys | ForEach-Object {
+    $APPLICATIONS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
         Invoke-Expression "choco install $($_.Name) -y";
     };
 }
 
 Write-Section "Installing fonts" {
-    $FONTS.Keys | ForEach-Object {
+    $FONTS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
         Invoke-Expression "choco install $($_.Name) -y";
     };
@@ -275,8 +282,15 @@ Write-Section "Updating taskbar settings" {
     Write-SectionMessage "Remove Touch Keyboard";
     Update-RegistryKey -Path "HKCU:\Software\Microsoft\TabletTip\1.7" -Name "TipbandDesiredVisibility" -Value 0;
 
-    Write-SectionMessage "Remove Volumne"
+    Write-SectionMessage "Remove Volumne";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAVolume" -Value 1;
+
+    Write-SectionMessage "Remove Pin Apps";
+    Remove-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband";
+    Remove-Item -Path "$env:APPDATA\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar *";
+
+    Write-SectionMessage "Remove Bluetooth Icon";
+    Update-RegistryKey -Path "HKCU:\Control Panel\Bluetooth" -Name "Notification Area Icon" -Value 0;
 }
 
 Write-Section "Updating touchpad settings" {
@@ -301,7 +315,6 @@ Write-Section "Updating start menu" {
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoStartMenuMorePrograms" -Value 2;
 
     Write-SectionMessage "Disabling Show recently added apps";    
-    Add-RegistryKey -Path "HKLM:\Software\Policies\Microsoft\Windows\Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Policies\Microsoft\Windows\Explorer" -Name "HideRecentlyAddedApps" -Value 1;
 
     Write-SectionMessage "Disabling Show most used apps";
@@ -322,7 +335,7 @@ Write-Section "Updating context menu" {
     Remove-RegistryKey -Path "HKCR:\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}";
 
     Write-SectionMessage "Removing Share";
-    Remove-RegistryKey -PAth "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing";
+    Remove-RegistryKey -Path "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing";
 
     Write-SectionMessage "Removing Open with Vim";
     Remove-RegistryKey -Path "HKCR:\*\shell\Vim";
@@ -340,12 +353,12 @@ Write-Section "Updating context menu" {
     Push-Location;
     Set-Location -LiteralPath "HKCR:\*\shell";
     Add-RegistryKey -Path . -Name "Notepad";
-    Add-RegistryKey -Path ".\Notepad" -Name "command";
+    Set-Location -LiteralPath "HKCR:\*\shell\Notepad";
+    Set-ItemProperty -Path "." -Name "(Default)" -Value "Open with &Notepad";
+    Add-RegistryKey -Path "." -Name "command";
+    Set-Location -LiteralPath "HKCR:\*\shell\Notepad\command";
+    Set-ItemProperty -Path "." -Name "(Default)" -Value "C:\Windows\Notepad.exe %1";
     Pop-Location;
-
-    Update-RegistryKey -Path "HKCR:\*\shell\Notepad" -Name "(Default)" -Value "Open with &Notepad";
-    Update-RegistryKey -Path "HKCR:\*\shell\Notepad" -Name "Icon" -Value "C:\Windows\Notepad.exe";
-    Update-RegistryKey -Path "HKCR:\*\shell\Notepad\command" -Name "(Default)" -Value "C:\Windows\Notepad.exe %1";
 }
 
 Write-Section "Updating display settings" {
@@ -400,8 +413,8 @@ Write-Section "Uninstalling Desktop applications" {
 
     Start-Process "explorer.exe" | Out-Null;
 
-    Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 –Online;
-    Disable-WindowsOptionalFeature –FeatureName WindowsMediaPlayer -Online;
+    Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 �Online;
+    Disable-WindowsOptionalFeature �FeatureName WindowsMediaPlayer -Online;
 }
 
 Write-Section "Finalizing" {
