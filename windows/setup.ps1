@@ -3,7 +3,6 @@
 #################
 
 $BLOATWARE = @{
-    "*Microsoft.Advertising.Xaml*" = "Uninstalling Advertising";
     "*Microsoft.3DBuilder*" = "Uninstalling 3D Builder";
     "*Microsoft.DesktopAppInstaller*" = "Uninstalling Desktop App Installer";
     "*Microsoft.ZuneMusic*" = "Uninstalling Groove Music";
@@ -24,7 +23,6 @@ $BLOATWARE = @{
     "*Microsoft.SurfaceHub*" = "Uninstalling Surface Hub";
     "*Microsoft.MicrosoftOfficeHub*" = "Uninstalling Office Hub";
     "*Microsoft.WindowsFeedbackHub*" = "Uninstalling Feedback Hub";
-    "*Microsoft.WindowsAlarms*" = "Uninstalling Alarms";
     "*microsoft.windowscommunicationsapps*" = "Uninstalling Mail";
     "*Microsoft.Windows.Photos*" = "Uninstalling Photos";
     "*Microsoft.Office.Desktop*" = "Uninstalling Office";  
@@ -116,7 +114,7 @@ Function Write-SectionMessage {
     Param(
         [String] $message
     )
-Write-Host
+    Write-Host
     Write-Host "-> $message" -ForegroundColor Cyan;
 }
 
@@ -167,7 +165,7 @@ Write-Section "Installing package managers" {
     (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1') | Invoke-Expression | Out-Null;
 
     Write-SectionMessage "Installing PackageManagement";
-    Install-Module PowerShellGet -Confirm:$False | Out-Null;
+    Install-Module PowerShellGet -Confirm:$False -Force | Out-Null;
 }
 
 Write-Section "Installing frameworks and devtools" {
@@ -442,20 +440,31 @@ Write-Section "Updating display settings" {
 
     Write-SectionMessage "Disabling Adaptive Brightness for High Performance power plan (on battery)";
     powercfg -setdcvalueindex 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0 | Out-Null;
+
+    Write-SectionMessage "Change lid closed action to do nothing (plugged in)";
+    Update-RegistryKey -Path "HKLM:\System\CurrentControlSet\Control\Power\PowerSettings\4f971e89-eebd-4455-a8de-9e59040e7347\5ca83367-6e45-459f-a27b-476b1d01c936" -Name "Attributes" -Value 0;
 }
 
 Write-Section "Uninstalling UWP applications" {
     $BLOATWARE.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "Get-AppXPackage $($_.Name) -allusers | Remove-AppXPackage";
-        Invoke-Expression "Get-AppXProvisionedPackage -Online | Where-Object DisplayName -Like $($_.Name) | Remove-AppxProvisionedPackage -Online";
+        Invoke-Expression "Get-AppXPackage $($_.Name) -allusers | Remove-AppXPackage -ErrorAction SilentlyContinue";
+        Invoke-Expression "Get-AppXProvisionedPackage -Online | Where-Object DisplayName -Like $($_.Name) | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue";
     };
 }
 
 Write-Section "Uninstalling Desktop applications" {
     Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart;
     Disable-WindowsOptionalFeature -FeatureName WindowsMediaPlayer -Online -NoRestart;
-    
+
+    Write-SectionMessage "Removing OneDrive from Explorer sidebar";
+    Update-RegistryKey -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Name "System.IsPinnedToNameSpaceTree" -Value 0;
+
+    Remove-RegistryKey -Path "HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
+    Remove-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
+
+    Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk";
+
     taskkill.exe /F /IM "OneDrive.exe" | Out-Null;
     taskkill.exe /F /IM "explorer.exe" | Out-Null;
 
@@ -472,15 +481,7 @@ Write-Section "Uninstalling Desktop applications" {
 
     Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive" | Out-Null;
     Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:programdata\Microsoft OneDrive" | Out-Null;
-    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "C:\OneDriveTemp" | Out-Null;
-
-    Write-SectionMessage "Removing OneDrive from Explorer sidebar";
-    Update-RegistryKey -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Name "System.IsPinnedToNameSpaceTree" -Value 0;
-
-    Remove-RegistryKey -Path "HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
-    Remove-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
-
-    Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk";
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "C:\OneDriveTemp" | Out-Null;    
 
     Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | ForEach-Object { Unregister-ScheduledTask $_ -Confirm:$False } | Out-Null;
 
