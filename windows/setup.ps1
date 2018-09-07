@@ -3,38 +3,70 @@
 #################
 
 $BLOATWARE = @{
-    "Microsoft.ZuneMusic" = "Uninstalling Groove Music";
-    "Microsoft.WindowsMaps" = "Uninstalling Maps";
-    "Microsoft.WindowsCamera" = "Uninstalling Camera";
-    "Microsoft.MSPaint" = "Uninstalling Paint 3D";
-    "Microsoft.XboxApp" = "Uninstalling Xbox";
-    "Microsoft.SkypeApp" = "Uninstalling Skype";
-    "Microsoft.Messaging" = "Uninstalling Messaging";
-    "Microsoft.MicrosoftSolitaireCollection" = "Uninstalling Solitaire";
-    "Microsoft.People" = "Uninstalling People";
-    "Microsoft.GetHelp" = "Uninstalling Get Help";
-    "Microsoft.GetStarted" = "Uninstalling Get Started";
-    "Microsoft.Microsoft3DViewer" = "Uninstalling 3D Viewer";
-    "Microsoft.WindowsSoundRecorder" = "Uninstalling Sound Recorder";
-    "Microsoft.BingWeather" = "Uninstalling Weather";
-    "Microsoft.BingSports" = "Uninstalling Sports";
-    "Microsoft.BingNews" = "Uninstalling News";
-    "Microsoft.OneConnect" = "Uninstalling One Connect";
-    "Microsoft.SurfaceHub" = "Uninstalling Surface Hub";
-    "Microsoft.MicrosoftOfficeHub" = "Uninstalling Office Hub";
-    "Microsoft.WindowsFeedbackHub" = "Uninstalling Feedback Hub";
-    "Microsoft.WindowsAlarms" = "Uninstalling Alarms";
-    "microsoft.windowscommunicationsapps" = "Uninstalling Mail";
-    "Microsoft.Windows.Photos" = "Uninstalling Photos";
-    "Microsoft.Office.Desktop" = "Uninstalling Office";  
-    "Microsoft.XboxSpeechToTextOverlay" = "Uninstalling Xbox Speech to Text Overlay";
-    "Microsoft.XboxGameOverlay" = "Uninstalling Xbox Game Overlay";
-    "Microsoft.XboxGamingOverlay" = "Uninstalling Xbox Gaming Overlay";
-    "Microsoft.XboxIdentityProvider" = "Uninstalling Xbox Identity Provider";
-    "Microsoft.Xbox.TCUI" = "Uninstalling Xbox TCUI";
-    "Microsoft.Advertising.Xaml" = "Uninstalling Advertising Xaml";
-    "Microsoft.Wallet" = "Uninstalling Wallet";
-    "Microsoft.Print3D" = "Uninstalling Print3D";
+    "*Microsoft.Advertising.Xaml*" = "Uninstalling Advertising";
+    "*Microsoft.3DBuilder*" = "Uninstalling 3D Builder";
+    "*Microsoft.DesktopAppInstaller*" = "Uninstalling Desktop App Installer";
+    "*Microsoft.ZuneMusic*" = "Uninstalling Groove Music";
+    "*Microsoft.WindowsMaps*" = "Uninstalling Maps";
+    "*Microsoft.WindowsCamera*" = "Uninstalling Camera";
+    "*Microsoft.MSPaint*" = "Uninstalling Paint 3D";
+    "*Microsoft.XboxApp*" = "Uninstalling Xbox";
+    "*Microsoft.SkypeApp*" = "Uninstalling Skype";
+    "*Microsoft.Messaging*" = "Uninstalling Messaging";
+    "*Microsoft.People*" = "Uninstalling People";
+    "*Microsoft.GetHelp*" = "Uninstalling Get Help";
+    "*Microsoft.GetStarted*" = "Uninstalling Get Started";
+    "*Microsoft.Microsoft3DViewer*" = "Uninstalling 3D Viewer";
+    "*Microsoft.WindowsSoundRecorder*" = "Uninstalling Sound Recorder";
+    "*Microsoft.BingSports*" = "Uninstalling Sports";
+    "*Microsoft.BingNews*" = "Uninstalling News";
+    "*Microsoft.OneConnect*" = "Uninstalling One Connect";
+    "*Microsoft.SurfaceHub*" = "Uninstalling Surface Hub";
+    "*Microsoft.MicrosoftOfficeHub*" = "Uninstalling Office Hub";
+    "*Microsoft.WindowsFeedbackHub*" = "Uninstalling Feedback Hub";
+    "*Microsoft.WindowsAlarms*" = "Uninstalling Alarms";
+    "*microsoft.windowscommunicationsapps*" = "Uninstalling Mail";
+    "*Microsoft.Windows.Photos*" = "Uninstalling Photos";
+    "*Microsoft.Office.Desktop*" = "Uninstalling Office";  
+    "*Microsoft.XboxSpeechToTextOverlay*" = "Uninstalling Xbox Speech to Text Overlay";
+    "*Microsoft.XboxGameOverlay*" = "Uninstalling Xbox Game Overlay";
+    "*Microsoft.XboxGamingOverlay*" = "Uninstalling Xbox Gaming Overlay";
+    "*Microsoft.XboxIdentityProvider*" = "Uninstalling Xbox Identity Provider";
+    "*Microsoft.Xbox.TCUI*" = "Uninstalling Xbox TCUI";
+    "*Microsoft.Advertising.Xaml*" = "Uninstalling Advertising Xaml";
+    "*Microsoft.Wallet*" = "Uninstalling Wallet";
+    "*Microsoft.Print3D*" = "Uninstalling Print3D";
+    "*Microsoft.WindowsAlarms*" = "Uninstalling Alarms";
+    "*Microsoft.MicrosoftStickyNotes*" = "Uninstalling Sticky Notes";
+    "*DolbyLaboratories.DolbyAccess*" = "Uninstalling Dolby Access";
+    "*Microsoft.MicrosoftSolitaireCollection*" = "Uninstalling Solitaire";
+    "*king.com*" = "Uninstalling Candy Crush";
+    "*Twitter*" = "Uninstalling Twitter";
+    "*Facebook*" = "Uninstalling Facebook";
+    "*Pandora*" = "Uninstalling Pandora";
+    "*Shazam*" = "Uninstalling Shazam";
+    "*iHeartRadio*" = "Uninstalling iHeartRadio";
+    "*Netflix*" = "Uninstalling Netflix";
+    "*Wunderlist*" = "Uninstalling Wunderlist";
+    "*DrawboardPDF*" = "Uninstalling DrawboardPDF";
+    "*PhotoStudio*" = "Uninstalling PhotoStudio";
+    "*FarmVille*" = "Uninstalling FarmVille";
+    "*WinZip*" = "Uninstalling WinZip";
+    "*TuneInRadio*" = "Uninstalling TuneInRadio";
+    "*Spotify*" = "Uninstalling Spotify";
+    "*AutodeskSketchBook*" = "Uninstalling AutodeskSketchBook";
+    "*Duolingo*" = "Uninstalling Duolingo";
+    "*EclipseManager*" = "Uninstalling EclipseManager";
+    "*MarchofEmpires*" = "Uninstalling March of Empires";    
+    "*GAMELOFTSA*" = "Uninstalling Games from GAMELOFTSA";
+    "*flaregamesGmbH*" = "Uninstalling Games from flaregamesGmbH";
+    "*Playtika*" = "Uninstalling Games from Playtika";
+    "*KeeperSecurityInc*" = "Uninstalling Apps from KeeperSecurityInc";
+    "*ThumbmunkeysLtd*" = "Uninstalling Apps from ThumbmunkeysLtd";
+    "*XINGAG*" = "Uninstalling Apps from XINGAG";
+    "*ActiproSoftwareLLC*" = "Uninstalling Apps from ActiproSoftwareLLC";
+    "*Disney*" = "Uninstalling Apps from Disney";    
+    "*828B5831.HiddenCityMysteryofShadows*" = "Uninstalling Hidden City Mistery of Shadows";
 }
 
 $FRAMEWORKS = @{
@@ -117,7 +149,7 @@ Function Remove-RegistryKey {
     )
 
     If (Test-Path $Path) {
-        Remove-Item -LiteralPath $Path -Confirm -ErrorAction SilentlyContinue | Out-Null;
+        Remove-Item -LiteralPath $Path -Confirm:$False -ErrorAction SilentlyContinue | Out-Null;
     }
 }
 
@@ -132,35 +164,35 @@ Write-Section "Initializing" {
 
 Write-Section "Installing package managers" {
     Write-SectionMessage "Installing Chocolatey";
-    (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1') | Invoke-Expression;
+    (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1') | Invoke-Expression | Out-Null;
 
     Write-SectionMessage "Installing PackageManagement";
-    Install-Module PowerShellGet -Confirm;
+    Install-Module PowerShellGet -Confirm:$False | Out-Null;
 }
 
 Write-Section "Installing frameworks and devtools" {
     $FRAMEWORKS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "choco install $($_.Name) -y";
+        Invoke-Expression "choco install $($_.Name) -y -r --no-progress";
     };
 
     $DEVTOOLS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "choco install $($_.Name) -y";
+        Invoke-Expression "choco install $($_.Name) -y -r --no-progress";
     };
 }
 
 Write-Section "Installing applications" {
     $APPLICATIONS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "choco install $($_.Name) -y";
+        Invoke-Expression "choco install $($_.Name) -y -r --no-progress";
     };
 }
 
 Write-Section "Installing fonts" {
     $FONTS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "choco install $($_.Name) -y";
+        Invoke-Expression "choco install $($_.Name) -y -r --no-progress";
     };
 }
 
@@ -234,23 +266,60 @@ Write-Section "Updating file explorer settings" {
     Write-SectionMessage "Hide fequently used folders in Quick Access";
     Update-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "ShowRecent" -Value 0;
 
+    Write-SectionMessage "Removing 3D Objects folder from File Explorer";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}";
+
     Write-SectionMessage "Removing Desktop folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}";
 
     Write-SectionMessage "Removing Documents folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}";
 
     Write-SectionMessage "Removing Downloads folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}";
 
     Write-SectionMessage "Removing Music folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}";
 
     Write-SectionMessage "Removing Pictures folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}";
 
     Write-SectionMessage "Removing Videos folder from File Explorer";
     Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" -Name "ThisPCPolicy" -Value "Hide";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}";
+    Remove-RegistryKey -Path "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}";
+
+    Write-SectionMessage "Removing Network from File Explorer";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{B4FB3F98-C1EA-428d-A78A-D1F5659CBA93}";
+
+    Write-SectionMessage "Removing OneDrive from File Explorer";
+    Remove-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}";
+
+    # In case you want to hide the quick access folders
+    # Write-SectionMessage "Removing Quick Access from File Explorer";
+    # Update-RegistryKey -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "HubMode" -Value 1;
 }
 
 Write-Section "Updating taskbar settings" {
@@ -378,11 +447,15 @@ Write-Section "Updating display settings" {
 Write-Section "Uninstalling UWP applications" {
     $BLOATWARE.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        Invoke-Expression "Get-AppXPackage $($_.Name) | Remove-AppXPackage";
+        Invoke-Expression "Get-AppXPackage $($_.Name) -allusers | Remove-AppXPackage";
+        Invoke-Expression "Get-AppXProvisionedPackage -Online | Where-Object DisplayName -Like $($_.Name) | Remove-AppxProvisionedPackage -Online";
     };
 }
 
 Write-Section "Uninstalling Desktop applications" {
+    Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart;
+    Disable-WindowsOptionalFeature -FeatureName WindowsMediaPlayer -Online -NoRestart;
+    
     taskkill.exe /F /IM "OneDrive.exe" | Out-Null;
     taskkill.exe /F /IM "explorer.exe" | Out-Null;
 
@@ -404,20 +477,20 @@ Write-Section "Uninstalling Desktop applications" {
     Write-SectionMessage "Removing OneDrive from Explorer sidebar";
     Update-RegistryKey -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Name "System.IsPinnedToNameSpaceTree" -Value 0;
 
-    Remove-RegistryKey -Path "HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" -NAme "OneDriveSetup" | Out-Null;
+    Remove-RegistryKey -Path "HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
     Remove-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "OneDriveSetup" | Out-Null;
 
     Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk";
 
-    Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | ForEach-Object { Unregister-ScheduledTask $_ -Confirm $False } | Out-Null;
+    Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | ForEach-Object { Unregister-ScheduledTask $_ -Confirm:$False } | Out-Null;
 
     Start-Process "explorer.exe" | Out-Null;
-
-    Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 �Online;
-    Disable-WindowsOptionalFeature �FeatureName WindowsMediaPlayer -Online;
 }
 
 Write-Section "Finalizing" {
     Remove-PSDrive -Name "HKU";
     Remove-PSDrive -Name "HKCR";
 }
+
+Write-Host
+Write-Host "Please restart your computer";
