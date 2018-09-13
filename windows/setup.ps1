@@ -136,26 +136,26 @@ Write-Section "Installing package managers" {
 Write-Section "Installing frameworks and devtools" {
     $FRAMEWORKS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        choco install $($_.Name) -y -r --no-progress;
+        choco install $($_.Name) -y -r --no-progress --accept-license --ignore-checksum;
     };
 
     $DEVTOOLS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        choco install $($_.Name) -y -r --no-progress;
+        choco install $($_.Name) -y -r --no-progress --accept-license --ignore-checksum;
     };
 }
 
 Write-Section "Installing applications" {
     $APPLICATIONS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        choco install $($_.Name) -y -r --no-progress;
+        choco install $($_.Name) -y -r --no-progress --accept-license --ignore-checksum;
     };
 }
 
 Write-Section "Installing fonts" {
     $FONTS.GetEnumerator() | ForEach-Object {
         Write-SectionMessage "$($_.Value)";
-        choco install $($_.Name) -y -r --no-progress;
+        choco install $($_.Name) -y -r --no-progress --accept-license --ignore-checksum;
     };
 }
 
@@ -429,9 +429,6 @@ Write-Section "Uninstalling Desktop applications" {
     Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart;
     Disable-WindowsOptionalFeature -FeatureName WindowsMediaPlayer -Online -NoRestart;
 
-    Write-SectionMessage "Removing OneDrive from Explorer sidebar";
-    reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d 0 /t REG_DWORD /f;
-
     reg delete "HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" | Out-Null;
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" | Out-Null;
     
@@ -458,6 +455,9 @@ Write-Section "Uninstalling Desktop applications" {
     Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | ForEach-Object { Unregister-ScheduledTask $_ -Confirm:$False } | Out-Null;
 
     Start-Process "explorer.exe" | Out-Null;
+
+    Write-SectionMessage "Removing OneDrive from Explorer sidebar";
+    reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d 0 /t REG_DWORD /f;
 }
 
 Write-Host
