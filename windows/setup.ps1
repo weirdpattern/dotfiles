@@ -83,6 +83,7 @@ $APPLICATIONS = @{
     "vim" = "Installing Vim";
     "hyper" = "Installing Hyper";
     "vscode" = "Installing VSCode";
+    "dotpeek" = "Installing DotPeek";
     "jetbrains-rider" = "Installing Rider";
     "insomnia-rest-api-client" = "Installing Insomnia";
     "jing" = "Installing Jing";
@@ -128,7 +129,7 @@ Write-Section "Installing package managers" {
     (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1') | Invoke-Expression | Out-Null;
 
     Write-SectionMessage "Installing PackageManagement";
-    Install-PackageProvider /v NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null;
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null;
     Install-Module PowerShellGet -Confirm:$False -Force | Out-Null;
 }
 
