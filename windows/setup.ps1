@@ -160,6 +160,12 @@ Write-Section "Installing fonts" {
 }
 
 Write-Section "Updating system settings" {
+    Write-SectionMessage "Enabling secure sign in";
+    reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /d 0 /t REG_DWORD /f;
+    reg delete "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /f;
+    reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /f;
+    reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /f;
+
     Write-SectionMessage "Disabling Cortana";
     reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /d 0 /t REG_DWORD /f;
 
@@ -168,6 +174,12 @@ Write-Section "Updating system settings" {
 
     Write-SectionMessage "Disabling cloud downloads";
     reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /d 1 /t REG_DWORD /f;
+
+    Write-SectionMessage "Disabling windows notifications";
+    reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /d 1 /t REG_DWORD /f;
+
+    Write-SectionMessage "Turn off notification on lock screen";
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /d 0 /t REG_DWORD /f;
 
     Write-SectionMessage "Disabling Aero Shake";
     reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "NoWindowMinimizingShortcuts" /d 1 /t REG_DWORD /f;
@@ -332,13 +344,13 @@ Write-Section "Updating touchpad settings" {
     Write-SectionMessage "Disabling right click";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "RightClickZoneEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling three finders tap";
+    Write-SectionMessage "Disabling three fingers tap";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "ThreeFingerTapEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling four finders slide";
+    Write-SectionMessage "Disabling four fingers slide";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "FourFingerSlideEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling four finders tap";
+    Write-SectionMessage "Disabling four fingers tap";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "FourFingerTapEnabled" /d 0 /t REG_DWORD /f;
 }
 
@@ -429,9 +441,6 @@ Write-Section "Uninstalling Desktop applications" {
     Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart;
     Disable-WindowsOptionalFeature -FeatureName WindowsMediaPlayer -Online -NoRestart;
 
-    reg delete "HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" | Out-Null;
-    reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" | Out-Null;
-    
     Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk";
 
     taskkill.exe /F /IM "OneDrive.exe" | Out-Null;
@@ -445,7 +454,13 @@ Write-Section "Uninstalling Desktop applications" {
         Invoke-Expression "$env:systemroot\SysWOW64\OneDriveSetup.exe /uninstall" | Out-Null;
     }
 
-    Add-RegistryKey -Path "HKLM\Software\Wow6432Node\Policies\Microsoft\Windows" /v "OneDrive";
+    reg delete "HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f | Out-Null;
+    reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f | Out-Null;
+
+    reg delete "HKU\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f | Out-Null;
+    reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f | Out-Null;
+
+    reg add "HKLM\Software\Wow6432Node\Policies\Microsoft\Windows" /v "OneDrive";
     reg add "HKLM\Software\Wow6432Node\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSyncNGSC" /d 1 /t REG_DWORD /f;
 
     Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive" | Out-Null;
