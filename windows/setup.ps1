@@ -74,7 +74,7 @@ $FRAMEWORKS = @{
 $DEVTOOLS = @{
     "nodejs" = "Installing NodeJS";
     "yarn" = "Installing Yarn";
-    "git" = "Installing Git"; 
+    "git.install  --params '/NoShellIntegration /SChannel'" = "Installing Git"; 
 };
 
 $APPLICATIONS = @{
