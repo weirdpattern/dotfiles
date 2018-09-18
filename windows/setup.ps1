@@ -159,41 +159,41 @@ Write-Section "Installing fonts" {
 }
 
 Write-Section "Updating system settings" {
-    Write-SectionMessage "Enabling secure sign in";
+    Write-SectionMessage "Enable secure sign in";
     reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /d 0 /t REG_DWORD /f;
     reg delete "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /f;
     reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /f;
 
-    Write-SectionMessage "Disabling Cortana";
+    Write-SectionMessage "Disable Cortana";
     reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Action Center";
+    Write-SectionMessage "Disable Action Center";
     reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling cloud downloads";
+    Write-SectionMessage "Disable cloud downloads";
     reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling windows notifications";
+    Write-SectionMessage "Disable windows notifications";
     reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /d 1 /t REG_DWORD /f;
 
     Write-SectionMessage "Turn off notification on lock screen";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Aero Shake";
+    Write-SectionMessage "Disable Aero Shake";
     reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "NoWindowMinimizingShortcuts" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling images in Logon screen";
+    Write-SectionMessage "Disable images in Logon screen";
     reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling bloatware";
+    Write-SectionMessage "Disable bloatware";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling suggestions panel";
+    Write-SectionMessage "Disable suggestions panel";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /d 0 /t REG_DWORD /f;
@@ -201,20 +201,20 @@ Write-Section "Updating system settings" {
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /d 0 /t REG_DWORD /f;
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling My People suggestions panel";
+    Write-SectionMessage "Disable My People suggestions panel";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314563Enabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling locally relevant content";
+    Write-SectionMessage "Disable locally relevant content";
     reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling user activity tracking";
+    Write-SectionMessage "Disable user activity tracking";
     reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /d 0 /t REG_DWORD /f;
     reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /d 0 /t REG_DWORD /f;
     reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /d 0 /t REG_DWORD /f;
 }
 
 Write-Section "Updating desktop view" {
-    Write-SectionMessage "Adding Desktop icon";
+    Write-SectionMessage "Add Desktop icon";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" /d 1 /t REG_DWORD /f;
 }
 
@@ -240,60 +240,66 @@ Write-Section "Updating file explorer settings" {
     Write-SectionMessage "Hide fequently used folders in Quick Access";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowRecent" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Removing 3D Objects folder from File Explorer";
+    Write-SectionMessage "Show Libraries in Navigration Panel";
+    reg add "HKCU\Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" /v "System.IsPinnedToNameSpaceTree" /d 1 /t REG_DWORD /f;
+
+    Write-SectionMessage "Remove 3D Objects folder from File Explorer";
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f;
 
-    Write-SectionMessage "Removing Desktop folder from File Explorer";
+    Write-SectionMessage "Remove Desktop folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f;
 
-    Write-SectionMessage "Removing Documents folder from File Explorer";
+    Write-SectionMessage "Remove Documents folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f;
 
-    Write-SectionMessage "Removing Downloads folder from File Explorer";
+    Write-SectionMessage "Remove Downloads folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f;
 
-    Write-SectionMessage "Removing Music folder from File Explorer";
+    Write-SectionMessage "Remove Music folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f;
 
-    Write-SectionMessage "Removing Pictures folder from File Explorer";
+    Write-SectionMessage "Remove Pictures folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f;
 
-    Write-SectionMessage "Removing Videos folder from File Explorer";
+    Write-SectionMessage "Remove Videos folder from File Explorer";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /d "Hide" /t REG_SZ /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f;
     reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f;
 
-    Write-SectionMessage "Removing Network from File Explorer";
+    Write-SectionMessage "Remove Existing Libraries";
+    Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Libraries\*";
+
+    Write-SectionMessage "Remove Network from File Explorer";
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" /f;
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{B4FB3F98-C1EA-428d-A78A-D1F5659CBA93}" /f;
 
-    Write-SectionMessage "Removing OneDrive from File Explorer";
+    Write-SectionMessage "Remove OneDrive from File Explorer";
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f;
 
     # In case you want to hide the quick access folders
-    # Write-SectionMessage "Removing Quick Access from File Explorer";
-    # reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /d 1 /t REG_DWORD /f;
+    Write-SectionMessage "Remove Quick Access from File Explorer";
+    reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /d 1 /t REG_DWORD /f;
 }
 
 Write-Section "Updating taskbar settings" {
@@ -337,50 +343,50 @@ Write-Section "Updating taskbar settings" {
 }
 
 Write-Section "Updating touchpad settings" {
-    Write-SectionMessage "Disabling tap twice and drag to multi-select";
+    Write-SectionMessage "Disable tap twice and drag to multi-select";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "TapAndDrag" /d 0 /t REG_DWORD /f;
     
-    Write-SectionMessage "Disabling right click";
+    Write-SectionMessage "Disable right click";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "RightClickZoneEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling three fingers tap";
+    Write-SectionMessage "Disable three fingers tap";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "ThreeFingerTapEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling four fingers slide";
+    Write-SectionMessage "Disable four fingers slide";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "FourFingerSlideEnabled" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling four fingers tap";
+    Write-SectionMessage "Disable four fingers tap";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" /v "FourFingerTapEnabled" /d 0 /t REG_DWORD /f;
 }
 
 Write-Section "Updating start menu" {
-    Write-SectionMessage "Disabling Show app list in start menu";
+    Write-SectionMessage "Disable Show app list in start menu";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoStartMenuMorePrograms" /d 2 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Show recently added apps";    
+    Write-SectionMessage "Disable Show recently added apps";    
     reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /d 1 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Show most used apps";
+    Write-SectionMessage "Disable Show most used apps";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Show recently opened items in Jump Lists";
+    Write-SectionMessage "Disable Show recently opened items in Jump Lists";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Disabling Recent docs history";
+    Write-SectionMessage "Disable Recent docs history";
     reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /d 1 /t REG_DWORD /f;
 }
 
 Write-Section "Updating context menu" {
-    Write-SectionMessage "Updating Hyper context menu";
+    Write-SectionMessage "Update Hyper context menu";
     reg add "HKCR\Directory\Background\shell\Hyper" /ve -d "Open with &Hyper" /t REG_SZ /f;
 
-    Write-SectionMessage "Removing Scan with Windows Defender";
+    Write-SectionMessage "Remove Scan with Windows Defender";
     reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f;
 
     Write-SectionMessage "Sent To";
     reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f;
 
-    Write-SectionMessage "Removing Share";
+    Write-SectionMessage "Remove Share";
     reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f;
     reg delete "HKCR\Directory\shellex\ContextMenuHandlers\Sharing" /f;
     reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f;
@@ -390,38 +396,38 @@ Write-Section "Updating context menu" {
     reg delete "HKCR\Directory\shellex\PropertySheetHandlers\Sharing" /f;
     reg delete "HKCR\Drive\shellex\PropertySheetHandlers\Sharing" /f;
     
-    Write-SectionMessage "Removing Modern Share";
+    Write-SectionMessage "Remove Modern Share";
     reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f;
 
-    Write-SectionMessage "Removing Git GUI Here";
+    Write-SectionMessage "Remove Git GUI Here";
     reg delete "HKCR\Directory\Shell\git_gui" /f;
     reg delete "HKCR\Directory\Background\shell\git_gui" /f;
 
-    Write-SectionMessage "Removing Git Bash Here";
+    Write-SectionMessage "Remove Git Bash Here";
     reg delete "HKCR\Directory\shell\git_shell" /f;    
     reg delete "HKCR\Directory\Background\shell\git_shell" /f;    
 
-    Write-SectionMessage "Removing Open with Vim";
+    Write-SectionMessage "Remove Open with Vim";
     reg delete "HKCR\*\shell\Vim" /f;
     reg delete "HKCR\*\shell\ContextMenuHandlers\gvim" /f;    
 
-    Write-SectionMessage "Adding Open with Notepad";
+    Write-SectionMessage "Add Open with Notepad";
     reg add "HKCR\*\shell\Notepad" /ve /d "Open with &Notepad" /t REG_EXPAND_SZ /f 
     reg add "HKCR\*\shell\Notepad" /v "Icon" /d "$env:systemroot\System32\Notepad.exe" /t REG_EXPAND_SZ /f 
     reg add "HKCR\*\shell\Notepad\command" /ve /d "C:\Windows\Notepad.exe %1" /t REG_EXPAND_SZ /f;    
 }
 
 Write-Section "Updating display settings" {
-    Write-SectionMessage "Disabling Adaptive Brightness for Balanced power plan (plugged in)";
+    Write-SectionMessage "Disable Adaptive Brightness for Balanced power plan (plugged in)";
     powercfg -setacvalueindex 381b4222-f694-41f0-9685-ff5bb260df2e 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0 | Out-Null;
 
-    Write-SectionMessage "Disabling Adaptive Brightness for Balanced power plan (on battery)";
+    Write-SectionMessage "Disable Adaptive Brightness for Balanced power plan (on battery)";
     powercfg -setdcvalueindex 381b4222-f694-41f0-9685-ff5bb260df2e 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0 | Out-Null;
 
-    Write-SectionMessage "Disabling Adaptive Brightness for High Performance power plan (plugged in)";
+    Write-SectionMessage "Disable Adaptive Brightness for High Performance power plan (plugged in)";
     powercfg -setacvalueindex 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0 | Out-Null;
 
-    Write-SectionMessage "Disabling Adaptive Brightness for High Performance power plan (on battery)";
+    Write-SectionMessage "Disable Adaptive Brightness for High Performance power plan (on battery)";
     powercfg -setdcvalueindex 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0 | Out-Null;
 
     Write-SectionMessage "Change lid closed action to do nothing (plugged in)";
@@ -470,7 +476,7 @@ Write-Section "Uninstalling Desktop applications" {
 
     Start-Process "explorer.exe" | Out-Null;
 
-    Write-SectionMessage "Removing OneDrive from Explorer sidebar";
+    Write-SectionMessage "Remove OneDrive from Explorer sidebar";
     reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d 0 /t REG_DWORD /f;
 }
 
