@@ -24,7 +24,6 @@ $BLOATWARE = @{
     "*Microsoft.MicrosoftOfficeHub*" = "Uninstalling Office Hub";
     "*Microsoft.WindowsFeedbackHub*" = "Uninstalling Feedback Hub";
     "*microsoft.windowscommunicationsapps*" = "Uninstalling Mail";
-    "*Microsoft.Windows.Photos*" = "Uninstalling Photos";
     "*Microsoft.Office.Desktop*" = "Uninstalling Office";  
     "*Microsoft.XboxSpeechToTextOverlay*" = "Uninstalling Xbox Speech to Text Overlay";
     "*Microsoft.XboxGameOverlay*" = "Uninstalling Xbox Game Overlay";
