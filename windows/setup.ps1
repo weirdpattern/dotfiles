@@ -240,8 +240,8 @@ Write-Section "Updating file explorer settings" {
     Write-SectionMessage "Hide fequently used folders in Quick Access";
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowRecent" /d 0 /t REG_DWORD /f;
 
-    Write-SectionMessage "Show Libraries in Navigration Panel";
-    reg add "HKCU\Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" /v "System.IsPinnedToNameSpaceTree" /d 1 /t REG_DWORD /f;
+    Write-SectionMessage "Hide Libraries in Navigration Panel";
+    reg add "HKCU\Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" /v "System.IsPinnedToNameSpaceTree" /d 0 /t REG_DWORD /f;
 
     Write-SectionMessage "Remove 3D Objects folder from File Explorer";
     reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f;
