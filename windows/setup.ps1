@@ -87,7 +87,6 @@ $APPLICATIONS = @{
     "insomnia-rest-api-client" = "Installing Insomnia";
     "jing" = "Installing Jing";
     "1password" = "Installing 1Password";
-    "keypirinha" = "Installing Keypirinha";
     "googlechrome" = "Installing Chrome";
 };
 
