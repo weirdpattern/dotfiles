@@ -20,4 +20,4 @@ if (Test-Path "${env:programfiles}\Vim\vim80\vim.exe") {
 
 # user information
 [Environment]::SetEnvironmentVariable("GitUserName", "weirdpattern");
-[Environment]::SetEnvironmentVariable("GitUserEmail", "patricio@weirdpattern.com");
+[Environment]::SetEnvironmentVariable("GitUserEmail", "patricio.trevino@gmail.com");
