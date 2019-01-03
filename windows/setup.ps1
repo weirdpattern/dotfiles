@@ -35,6 +35,7 @@ $BLOATWARE = @{
     "*Microsoft.Print3D*" = "Uninstalling Print3D";
     "*Microsoft.WindowsAlarms*" = "Uninstalling Alarms";
     "*Microsoft.MicrosoftStickyNotes*" = "Uninstalling Sticky Notes";
+    "*Microsoft.ScreenSketch*" = "Uninstalling Screen and Sketch";
     "*DolbyLaboratories.DolbyAccess*" = "Uninstalling Dolby Access";
     "*SolitaireCollection*" = "Uninstalling Solitaire";
     "*king.com*" = "Uninstalling Candy Crush";
