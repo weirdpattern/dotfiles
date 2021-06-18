@@ -1,9 +1,0 @@
-####################################################################
-# Overrides settings in .bash_profile like aliases, functions, etc #
-####################################################################
-
-# Defines the java home
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-# Defines the path to the git repositories
-export SANDBOX_HOME="$HOME/Sandbox/"

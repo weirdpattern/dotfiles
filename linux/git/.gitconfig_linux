@@ -1,0 +1,7 @@
+[core]
+  editor = vim
+
+[pager]
+  log = less -X -F
+  show = less -X -F
+  diff = less -X -F

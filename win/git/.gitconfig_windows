@@ -1,0 +1,8 @@
+[core]
+  editor = code -w
+
+[user]
+  signingkey = 99FE3DE07C282EC3
+
+[credential]
+  helper = manager

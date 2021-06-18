@@ -1,5 +1,2 @@
-# Specific to jetbrains
-.idea
-
-# Specific to mac
+# OS Specifics
 .DS_Store

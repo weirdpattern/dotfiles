@@ -1,0 +1,14 @@
+[core]
+  editor = code -w
+  autocrlf = input
+
+[user]
+  signingkey = 
+
+[credential]
+  helper = osxkeychain
+
+[pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
