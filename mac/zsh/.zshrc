@@ -21,7 +21,6 @@ plugins=(
   gatsby
   git
   git-flow-avh
-  git-prompt
   jsontools
   npm
   sudo
