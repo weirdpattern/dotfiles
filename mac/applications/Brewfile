@@ -1,0 +1,30 @@
+cask_args appdir: '/Applications'
+
+tap "homebrew/cask-versions"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
+
+cask "displaylink"
+
+cask "1password"
+cask "raycast"
+cask "gpg-suite-no-mail"
+cask "notion"
+cask "openinterminal"
+cask "podman-desktop"
+
+cask "azure-data-studio"
+cask "dash"
+cask "iterm2"
+cask "postman"
+cask "proxyman"
+cask "royal-tsx"
+cask "rider"
+cask "visual-studio-code"
+
+cask "brave-browser"
+
+cask "font-fira-code"
+cask "font-jetbrains-mono"
+cask "font-fira-code-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
