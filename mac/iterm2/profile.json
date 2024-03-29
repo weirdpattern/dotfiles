@@ -327,6 +327,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.78823530673980713
   },
+  "ASCII Ligatures" : true,
   "Name" : "Default",
   "Cursor Text Color" : {
     "Red Component" : 0.90980392694473267,
@@ -344,7 +345,7 @@
     "Green Component" : 0.17254787683486938
   },
   "Transparency" : 0,
-  "Guid" : "DBF984B6-9124-437D-A60E-17FA38B6DD4A",
+  "Guid" : "D69C58F4-19F5-4968-AEE7-52C600968320",
   "Custom Directory" : "No",
   "Link Color" : {
     "Red Component" : 0.7450980544090271,
