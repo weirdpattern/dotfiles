@@ -1,0 +1,10 @@
+devops:
+  ssh:
+    configs:
+      - name: "id_devops"
+        path: "op://Private/azure devops ssh"
+
+os_include_roles:
+  - windows
+
+os_excluded_roles: []

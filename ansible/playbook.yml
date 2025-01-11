@@ -1,0 +1,52 @@
+---
+- name: Configure
+  hosts: localhost
+  connection: local
+
+  pre_tasks:
+    - name: Detect host environment
+      ansible.builtin.import_tasks: setup/detect_host_environment.yml
+      tags:
+        - always
+
+    - name: Detect host user
+      ansible.builtin.import_tasks: setup/detect_host_user.yml
+      tags:
+        - always
+
+    - name: Change PowerShell execution policy
+      ansible.builtin.import_tasks: setup/change_powershell_execution_policy.yml
+      when: ansible_host_environment == "windows"
+      tags:
+        - always
+
+  tasks:
+    - name: Include variables
+      ansible.builtin.include_vars: "{{ item }}"
+      when: lookup('ansible.builtin.pipe', '[ -f ' ~ item ~ ' ]; echo $?') == '0'
+      loop:
+        - "defaults.yml"
+        - "defaults.overrides.yml"
+        - "{{ ansible_host_environment }}.yml"
+        - "{{ ansible_host_environment }}-overrides.yml"
+      tags:
+        - always
+
+    - name: Set roles
+      ansible.builtin.set_fact:
+        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or inclusions | difference(exclusions | default([])) | sort }}"
+      vars:
+        inclusions: "{{ include_roles | default([]) }} + {{ os_include_roles | default([]) }}"
+        exclusions: "{{ exclude_roles | default([]) }} + {{ os_excluded_roles | default([]) }}"
+      tags:
+        - always
+
+    - name: Run roles
+      ansible.builtin.include_role:
+        name: "{{ item }}"
+        apply:
+          tags:
+            - "{{ item }}"
+      with_items: "{{ run_roles }}"
+      tags:
+        - always

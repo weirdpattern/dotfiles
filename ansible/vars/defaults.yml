@@ -1,0 +1,36 @@
+user: "weirdpattern"
+
+git:
+  user:
+    name: "op://Private/github/username"
+    email: "op://Private/github/email"
+  ssh:
+    signers: "op://Private/github/signers"
+    configs:
+      - name: "id_github"
+        path: "op://Private/github ssh"
+
+system:
+  hosts: []
+
+include_roles:
+  - 1password
+  - bat
+  - devops
+  - eza
+  - ghostty
+  - git
+  - github
+  - neovim
+  - nu
+  - pwsh
+  - raycast
+  - ssh
+  - starship
+  - system
+  - tana
+  - tldr
+  - wezterm
+  - zsh
+
+exclude_roles: []

@@ -1,0 +1,24 @@
+---
+- name: Detect host environment
+  ansible.builtin.shell: |
+    if [[ $(cat /proc/version | grep microsoft.*WSL) ]]; then
+      echo "windows"
+    elif [[ $(uname -o) == "Darwin" ]]; then
+      echo "macosx"
+    else
+      echo "{{ ansible_distribution | lower }}"
+    fi
+  register: ansible_host_environment
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+  changed_when: false
+
+- name: Register host environment
+  ansible.builtin.set_fact:
+    ansible_host_environment: "{{ ansible_host_environment.stdout }}"
+  when: ansible_host_environment.stdout != ""
+
+- name: Display host environment
+  ansible.builtin.debug:
+    msg: "Host environment is '{{ ansible_host_environment }}'"
