@@ -1,0 +1,8 @@
+---
+- name: "1Password | Windows | Install 1Password"
+  win_chocolatey:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - 1password
+    - op
