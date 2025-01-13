@@ -1,7 +1,6 @@
 ---
 - name: Configure
-  hosts: localhost
-  connection: local
+  hosts: local
 
   pre_tasks:
     - name: Detect host environment
@@ -25,19 +24,19 @@
       ansible.builtin.include_vars: "{{ item }}"
       when: lookup('ansible.builtin.pipe', '[ -f ' ~ item ~ ' ]; echo $?') == '0'
       loop:
-        - "defaults.yml"
-        - "defaults.overrides.yml"
-        - "{{ ansible_host_environment }}.yml"
-        - "{{ ansible_host_environment }}-overrides.yml"
+        - "vars/defaults.yml"
+        - "vars/defaults.overrides.yml"
+        - "vars/os/{{ ansible_host_environment }}.yml"
+        - "vars/os/{{ ansible_host_environment }}-overrides.yml"
       tags:
         - always
 
     - name: Set roles
       ansible.builtin.set_fact:
-        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or inclusions | difference(exclusions | default([])) | sort }}"
+        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or inclusions | difference(exclusions | default([])) }}"
       vars:
-        inclusions: "{{ include_roles | default([]) }} + {{ os_include_roles | default([]) }}"
-        exclusions: "{{ exclude_roles | default([]) }} + {{ os_excluded_roles | default([]) }}"
+        inclusions: "{{ include_roles | default([]) + os_include_roles | default([]) }}"
+        exclusions: "{{ exclude_roles | default([]) + os_excluded_roles | default([]) + ['_import'] }}"
       tags:
         - always
 

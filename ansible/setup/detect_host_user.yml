@@ -12,12 +12,12 @@
 - name: Register current user when in Windows Subsystem for Linux
   ansible.builtin.set_fact:
     ansible_host_user: "{{ username.stdout }}"
-  when: ansible_host_user is not defined
+  when: ansible_host_environment == "windows"
 
 - name: Register current user when not in Windows Subsystem for Linux
   ansible.builtin.set_fact:
     ansible_host_user: "{{ ansible_env['USER']}}"
-  when: ansible_host_user is not defined
+  when: ansible_host_environment != "windows"
 
 - name: DEBUG
   ansible.builtin.debug:

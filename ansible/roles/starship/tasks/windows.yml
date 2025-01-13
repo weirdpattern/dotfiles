@@ -1,0 +1,19 @@
+- name: "Ensure C:/Program Files/Powershell/7/profile dir exists"
+  ansible.builtin.shell: |
+    New-Item "$PROFILE/profile" -ItemType Directory -Force -ErrorAction SilentlyContinue
+  args:
+    executable: powershell.exe
+
+- name: "Ensure C:/Program Files/Powershell/7/profile/registration dir exists"
+  ansible.builtin.shell: |
+    New-Item "$PROFILE/profile/registration" -ItemType Directory -Force -ErrorAction SilentlyContinue
+  args:
+    executable: powershell.exe
+
+
+
+- name: "Deploy powershell registration script"
+  ansible.builtin.copy:
+    src: registration.ps1
+    dest: "C:/Program Files/Powershell/7/profile/registration/starship.ps1"
+    mode: "0644"

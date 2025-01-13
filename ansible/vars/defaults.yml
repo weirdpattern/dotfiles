@@ -15,22 +15,22 @@ system:
 
 include_roles:
   - 1password
-  - bat
-  - devops
-  - eza
-  - ghostty
-  - git
-  - github
-  - neovim
-  - nu
-  - pwsh
-  - raycast
-  - ssh
+  # - bat
+  # - devops
+  # - eza
+  # - ghostty
+  # - git
+  # - github
+  # - neovim
+  # - nu
+  # - pwsh
+  # - raycast
+  # - ssh
   - starship
-  - system
-  - tana
-  - tldr
-  - wezterm
-  - zsh
+  # - system
+  # - tana
+  # - tldr
+  # - wezterm
+  # - zsh
 
 exclude_roles: []

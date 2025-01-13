@@ -1,5 +1,5 @@
 ---
-- name: "1Password | Windows | Install 1Password"
+- name: "Install 1Password on Windows"
   win_chocolatey:
     name: "{{ item }}"
     state: present

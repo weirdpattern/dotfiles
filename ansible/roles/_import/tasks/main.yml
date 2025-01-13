@@ -1,0 +1,9 @@
+---
+- name: "Checking for {{ name }} {{ ansible_host_environment }} environment config"
+  ansible.builtin.stat:
+    path: "{{ file }}"
+  register: environment_config
+
+- name: "Run {{ name }} {{ ansible_host_environment }} tasks"
+  ansible.builtin.include_tasks: "{{ file }}"
+  when: environment_config.stat.exists

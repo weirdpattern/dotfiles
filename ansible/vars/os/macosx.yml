@@ -1,4 +1,4 @@
-os_include_roles:
-  - macosx
+os_include_roles: []
+  # - macosx
 
 os_excluded_roles: []

@@ -1,0 +1,41 @@
+- name: "Ensure .config dir exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure .config/zsh dir exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure .config/zsh/registration dir exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh/registration"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy zsh registration script"
+  ansible.builtin.copy:
+    src: registration.zsh
+    dest: "{{ ansible_user_dir }}/.config/zsh/registration/starship.zsh"
+    mode: "0644"
+
+- name: "Ensure .config/powershell dir exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/powershell"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure .config/powershell/registration dir exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/powershell/registration"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy powershell registration script"
+  ansible.builtin.copy:
+    src: registration.ps1
+    dest: "{{ ansible_user_dir }}/.config/powershell/registration/starship.ps1"
+    mode: "0644"

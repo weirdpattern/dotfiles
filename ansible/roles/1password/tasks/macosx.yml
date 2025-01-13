@@ -1,8 +1,10 @@
 ---
-- name: "1Password | MacOSX | Install 1Password"
+- name: "Install 1Password on MacOSX"
   community.general.homebrew_cask:
-    name: "{{ item }}"
+    name: "{{ app_item }}"
     state: present
+  loop_control:
+    loop_var: app_item
   loop:
     - 1password
     - 1password-cli
