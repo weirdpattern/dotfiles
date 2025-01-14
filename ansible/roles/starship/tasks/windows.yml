@@ -1,19 +1,26 @@
-- name: "Ensure C:/Program Files/Powershell/7/profile dir exists"
-  ansible.builtin.shell: |
-    New-Item "$PROFILE/profile" -ItemType Directory -Force -ErrorAction SilentlyContinue
-  args:
-    executable: powershell.exe
+---
+- name: "Install starship on Windows"
+  chocolatey.chocolatey.win_chocolatey:
+    name: starship
+    state: present
 
-- name: "Ensure C:/Program Files/Powershell/7/profile/registration dir exists"
-  ansible.builtin.shell: |
-    New-Item "$PROFILE/profile/registration" -ItemType Directory -Force -ErrorAction SilentlyContinue
-  args:
-    executable: powershell.exe
+- name: "Ensure profile dir exists in $PSHOME"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile" -ItemType Directory -ErrorAction SilentlyContinue
 
-
+- name: "Ensure registration dir exists in $PSHOME/profile"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile/registration" -ItemType Directory -ErrorAction SilentlyContinue
 
 - name: "Deploy powershell registration script"
-  ansible.builtin.copy:
-    src: registration.ps1
-    dest: "C:/Program Files/Powershell/7/profile/registration/starship.ps1"
-    mode: "0644"
+  ansible.builtin.win_powershell:
+    script: |
+      [CmdletBinding()]
+      param (
+        [String]
+        $file
+      )
+
+      Copy-Item $file -Destination "$PSHOME/profile/registration/starship.ps1"
+    parameters:
+      file: "{{ role_path }}/files/registration.ps1"

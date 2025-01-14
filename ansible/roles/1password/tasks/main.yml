@@ -1,24 +1,9 @@
 ---
-- name: "Ensure .config dir exists"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-    mode: "0755"
+- name: "Checking for {{ role_name }} {{ ansible_host_environment }} environment config"
+  ansible.builtin.stat:
+    path: "{{ role_path }}"
+  register: environment_config
 
-- name: "Ensure .config/1password dir exists"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/1Password"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure .config/1password/ssh dir exists"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/1Password/ssh"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy ssh config"
-  ansible.builtin.copy:
-    src: agent.toml
-    dest: "{{ ansible_user_dir }}/.config/1Password/ssh/agent.toml"
-    mode: "0644"
+- name: "Run {{ role_name }} {{ ansible_host_environment }} tasks"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ ansible_host_environment }}.yml"
+  when: environment_config.stat.exists

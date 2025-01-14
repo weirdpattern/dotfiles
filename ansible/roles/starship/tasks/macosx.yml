@@ -1,16 +1,22 @@
-- name: "Ensure .config dir exists"
+---
+- name: "Install starship on MacOSX"
+  community.general.homebrew_cask:
+    name: starship
+    state: present
+
+- name: "Ensure .config dir exists in ~/"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config"
     state: directory
     mode: "0755"
 
-- name: "Ensure .config/zsh dir exists"
+- name: "Ensure zsh dir exists in ~/.config"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/zsh"
     state: directory
     mode: "0755"
 
-- name: "Ensure .config/zsh/registration dir exists"
+- name: "Ensure registration dir exists in ~/.config/zsh"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/zsh/registration"
     state: directory
@@ -22,13 +28,13 @@
     dest: "{{ ansible_user_dir }}/.config/zsh/registration/starship.zsh"
     mode: "0644"
 
-- name: "Ensure .config/powershell dir exists"
+- name: "Ensure powershell dir exists in ~/.config"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/powershell"
     state: directory
     mode: "0755"
 
-- name: "Ensure .config/powershell/registration dir exists"
+- name: "Ensure registration dir exists in ~/.config/powershell"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/powershell/registration"
     state: directory

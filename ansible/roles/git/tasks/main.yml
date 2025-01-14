@@ -1,0 +1,42 @@
+---
+- name: "Checking for {{ role_name }} {{ ansible_host_environment }} environment config"
+  ansible.builtin.stat:
+    path: "{{ role_path }}"
+  register: environment_config
+
+- name: "Run {{ role_name }} {{ ansible_host_environment }} tasks"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ ansible_host_environment }}.yml"
+  when: environment_config.stat.exists
+
+- name: "Read user.email secret from 1Password"
+  ansible.builtin.command: "op --account my.1password.com read '{{ op.git.user.email }}'"
+  register: op_git_user_email
+  changed_when: false
+
+- name: "Set git_user_email fact"
+  ansible.builtin.set_fact:
+    git_user_email: "{{ op_git_user_email.stdout }}"
+  no_log: true
+
+- name: "Add user.email to config"
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_user_email }}"
+  no_log: true
+
+- name: "Read user.name secret from 1Password"
+  ansible.builtin.command: "op --account my.1password.com read '{{ op.git.user.name }}'"
+  register: op_git_user_name
+  changed_when: false
+
+- name: "Set git_user_name fact"
+  ansible.builtin.set_fact:
+    git_user_name: "{{ op_git_user_name.stdout }}"
+  no_log: true
+
+- name: "Add user.name to config"
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user_name }}"

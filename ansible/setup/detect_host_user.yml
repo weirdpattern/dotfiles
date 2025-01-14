@@ -2,7 +2,7 @@
 - name: Detect current user when in Windows Subsystem for Linux
   ansible.builtin.shell:
     cmd: $env:UserName
-  register: username
+  register: gen_username
   changed_when: false
   failed_when: username.rc != 0
   when: ansible_host_environment == "windows"

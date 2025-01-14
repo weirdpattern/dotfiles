@@ -1,4 +1,7 @@
 devops:
+  user:
+    name: "op://Private/azure devops/name"
+    email: "op://Private/azure devops/email"
   ssh:
     configs:
       - name: "id_devops"

@@ -8,3 +8,27 @@
   loop:
     - 1password
     - 1password-cli
+
+- name: "Ensure .config dir exists in ~/"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure 1password dir exists in ~/.config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/1Password"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure ssh dir exists in ~/.config/1password"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/1Password/ssh"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy ssh config"
+  ansible.builtin.copy:
+    src: agent.toml
+    dest: "{{ ansible_user_dir }}/.config/1Password/ssh/agent.toml"
+    mode: "0644"

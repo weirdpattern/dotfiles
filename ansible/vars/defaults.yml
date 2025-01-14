@@ -2,7 +2,7 @@ user: "weirdpattern"
 
 git:
   user:
-    name: "op://Private/github/username"
+    name: "op://Private/github/name"
     email: "op://Private/github/email"
   ssh:
     signers: "op://Private/github/signers"
@@ -19,7 +19,8 @@ include_roles:
   # - devops
   # - eza
   # - ghostty
-  # - git
+  - git
+  # - git-delta
   # - github
   # - neovim
   # - nu

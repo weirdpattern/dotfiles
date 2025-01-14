@@ -1,0 +1,31 @@
+---
+- name: "Install git on Windows"
+  chocolatey.chocolatey.win_chocolatey:
+    name: git
+    state: present
+
+- name: "Ensure .config dir exists in ~/"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config"
+    state: directory
+
+- name: "Ensure git dir exists in ~/.config"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config/git"
+    state: directory
+
+- name: "Deploy git config"
+  ansible.windows.win_copy:
+    src: config
+    dest: "{{ ansible_user_dir }}/.config/git/config"
+
+- name: "Update ssh command"
+  community.general.git_config:
+    name: core.sshCommand
+    scope: global
+    value: "C:/Windows/System32/OpenSSH/ssh.exe"
+
+- name: "Remove .gitconfig from ~/"
+  ansible.builtin.win_file:
+    path: "{{ ansible_user_dir }}/.gitconfig"
+    state: absent

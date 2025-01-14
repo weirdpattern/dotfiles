@@ -1,7 +1,0 @@
----
-dependencies:
-  - role: import
-    vars:
-      scope: "starship"
-      name: "{{ scope }}"
-      file: "{{ [playbook_dir, 'roles', scope, 'tasks/', ansible_host_environment] | ansible.builtin.path_join }}.yml"

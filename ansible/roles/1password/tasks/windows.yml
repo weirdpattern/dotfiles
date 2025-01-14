@@ -1,8 +1,49 @@
 ---
 - name: "Install 1Password on Windows"
-  win_chocolatey:
+  chocolatey.chocolatey.win_chocolatey:
     name: "{{ item }}"
     state: present
   loop:
     - 1password
     - op
+
+- name: "Ensure .config dir exists in ~/"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config"
+    state: directory
+
+- name: "Ensure 1password dir exists in ~/.config"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config/1Password"
+    state: directory
+
+- name: "Ensure ssh dir exists in ~/.config/1Password"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config/1Password/ssh"
+    state: directory
+
+- name: "Deploy ssh config"
+  ansible.windows.win_copy:
+    src: agent.toml
+    dest: "{{ ansible_user_dir }}/.config/1Password/ssh/agent.toml"
+
+- name: "Ensure 1Password dir exists in ~/AppData/Local"
+  ansible.windows.win_file:
+    path: "{{ lookup('ansible.builtin.env', 'LocalAppData') }}/1Password"
+    state: directory
+
+- name: "Ensure config dir exists in ~/AppData/Local/1Password"
+  ansible.windows.win_file:
+    path: "{{ lookup('ansible.builtin.env', 'LocalAppData') }}/1Password/config"
+    state: directory
+
+- name: "Ensure ssh dir exists in ~/AppData/Local/1password/config"
+  ansible.windows.win_file:
+    path: "{{ lookup('ansible.builtin.env', 'LocalAppData') }}/1Password/config/ssh"
+    state: directory
+
+- name: "Create symbolic link to configuration"
+  ansible.builtin.win_powershell:
+    script: |
+      Remove-Item -Path $env:LOCALAPPDATA/1Password/config/ssh/agent.toml -Force -ErrorAction 'SilentlyContinue'
+      New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA/1Password/config/ssh/agent.toml" -Target ".config/1password/ssh/agent.toml"
