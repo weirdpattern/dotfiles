@@ -17,7 +17,7 @@
     path: "{{ ansible_user_dir }}/.config/delta"
     state: directory
 
-- name: "Deploy themes"
+- name: "Deploy delta themes"
   ansible.windows.win_copy:
     src: themes
     dest: "{{ ansible_user_dir }}/.config/delta/themes"

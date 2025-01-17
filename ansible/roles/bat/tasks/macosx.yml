@@ -1,0 +1,50 @@
+---
+- name: "Install bat on MacOSX"
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - less
+    - bat
+
+- name: "Ensure bat dir exists in ~/.config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/bat"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy bat config script"
+  ansible.builtin.copy:
+    src: config
+    dest: "{{ ansible_user_dir }}/.config/bat/config"
+    mode: "0644"
+
+- name: "Ensure zsh dir exists in ~/.config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure aliases dir exists in ~/.config/zsh"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh/aliases"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy bat aliases script"
+  ansible.builtin.copy:
+    src: aliases.zsh
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/bat.zsh"
+    mode: "0644"
+
+- name: "Ensure exports dir exists in ~/.config/zsh"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh/exports"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy bat exports script"
+  ansible.builtin.copy:
+    src: exports.zsh
+    dest: "{{ ansible_user_dir }}/.config/zsh/exports/bat.zsh"
+    mode: "0644"

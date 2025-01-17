@@ -1,0 +1,61 @@
+---
+- name: "Install bat on Windows"
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - less
+    - bat
+
+- name: "Ensure .config dir exists in ~/"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config"
+    state: directory
+
+- name: "Ensure bat dir exists in ~/.config"
+  ansible.windows.win_file:
+    path: "{{ ansible_user_dir }}/.config/bat"
+    state: directory
+
+- name: "Deploy bat config"
+  ansible.windows.win_copy:
+    src: config
+    dest: "{{ ansible_user_dir }}/.config/bat/config"
+
+- name: "Ensure profile dir exists in $PSHOME"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile" -ItemType Directory -ErrorAction SilentlyContinue
+
+- name: "Ensure aliases dir exists in $PSHOME/profile"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile/aliases" -ItemType Directory -ErrorAction SilentlyContinue
+
+- name: "Deploy bat aliases script"
+  ansible.builtin.win_powershell:
+    script: |
+      [CmdletBinding()]
+      param (
+        [String]
+        $file
+      )
+
+      Copy-Item $file -Destination "$PSHOME/profile/aliases/bat.ps1"
+    parameters:
+      file: "{{ role_path }}/files/aliases.ps1"
+
+- name: "Ensure exports dir exists in $PSHOME/profile"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile/exports" -ItemType Directory -ErrorAction SilentlyContinue
+
+- name: "Deploy bat exports script"
+  ansible.builtin.win_powershell:
+    script: |
+      [CmdletBinding()]
+      param (
+        [String]
+        $file
+      )
+
+      Copy-Item $file -Destination "$PSHOME/profile/exports/bat.ps1"
+    parameters:
+      file: "{{ role_path }}/files/exports.ps1"

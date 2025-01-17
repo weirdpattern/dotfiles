@@ -3,3 +3,24 @@
   chocolatey.chocolatey.win_chocolatey:
     name: tldr
     state: present
+
+- name: "Ensure profile dir exists in $PSHOME"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile" -ItemType Directory -ErrorAction SilentlyContinue
+
+- name: "Ensure aliases dir exists in $PSHOME/profile"
+  ansible.builtin.win_powershell:
+    script: New-Item "$PSHOME/profile/aliases" -ItemType Directory -ErrorAction SilentlyContinue
+
+- name: "Deploy tldr aliases script"
+  ansible.builtin.win_powershell:
+    script: |
+      [CmdletBinding()]
+      param (
+        [String]
+        $file
+      )
+
+      Copy-Item $file -Destination "$PSHOME/profile/aliases/tldr.ps1"
+    parameters:
+      file: "{{ role_path }}/files/aliases.ps1"

@@ -1,5 +1,23 @@
 ---
-- name: "Install tldr on MacOSX"
+- name: "Install tlrc on MacOSX"
   community.general.homebrew:
-    name: tldr
+    name: tlrc
     state: present
+
+- name: "Ensure zsh dir exists in ~/.config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh"
+    state: directory
+    mode: "0755"
+
+- name: "Ensure aliases dir exists in ~/.config/zsh"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh/aliases"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy tldr aliases script"
+  ansible.builtin.copy:
+    src: aliases.zsh
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/tldr.zsh"
+    mode: "0644"

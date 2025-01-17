@@ -19,7 +19,7 @@
     state: directory
     mode: "0755"
 
-- name: "Deploy themes"
+- name: "Deploy delta themes"
   ansible.builtin.copy:
     src: themes
     dest: "{{ ansible_user_dir }}/.config/delta/themes"
