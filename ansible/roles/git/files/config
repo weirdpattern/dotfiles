@@ -1,0 +1,41 @@
+[core]
+  editor = nvim -f
+
+[init]
+	defaultBranch = main
+
+[diff]
+	colorMoved = zebra
+
+[http]
+  sslVerify = true
+
+[commit]
+  verbose = true
+
+[rerere]
+	enabled = true
+  autoupdate = true
+
+[fetch]
+	prune = true
+
+[pull]
+	ff = only
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[alias]
+  aliases = ! git config --list | awk '/alias/{ print $1 }' | perl -pe 's/alias\\.//g' | perl -pe 's/=.+//g'
+  branches = ! git for-each-ref --sort='-authordate' --format='%(refname)' refs/heads | sed -e 's-refs/heads/--'
+  last = log -1 HEAD --stat
+  smartlog = log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)<%H>%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)<%ae>%Creset%n%C(cyan)%s%n%Creset'
+  amend = commit --amend
+  force = push --force-with-lease
+  undo = reset --hard
+  rollback = reset HEAD~1 --mixed
+  repo-name = ! "[ -n \"$(git remote)\" ] && git remote -v | head -1 | cut -d ' ' -f 1 | grep -E --only-matching '([^:/ ]+/[^/ ]+)(\\.git)?$' | sed 's/\\.git$//' || basename $(pwd)"
+	branch-name = ! "git rev-parse HEAD >/dev/null 2>&1 && git rev-parse --abbrev-ref HEAD || echo '???no-branch???'"
+	repo-and-branch-name = ! "echo $(git repo-name)':'$(git branch-name)"

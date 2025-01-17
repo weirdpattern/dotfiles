@@ -1,6 +1,6 @@
 ---
 - name: "Install starship on MacOSX"
-  community.general.homebrew_cask:
+  community.general.homebrew:
     name: starship
     state: present
 

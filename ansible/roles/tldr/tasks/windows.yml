@@ -1,0 +1,5 @@
+---
+- name: "Install tldr on Windows"
+  chocolatey.chocolatey.win_chocolatey:
+    name: tldr
+    state: present

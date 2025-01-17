@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "New ansible role",
+      "command": "mkdir -p './ansible/roles/${input:role}/tasks' && touch './ansible/roles/${input:role}/tasks/main.yml' './ansible/roles/${input:role}/tasks/macosx.yml' './ansible/roles/${input:role}/tasks/windows.yml'",
+      "windows": {
+        "command": "New-Item './ansible/roles/${input:role}/tasks' -ItemType Directory -Force && New-Item './ansible/roles/${input:role}/tasks/main.yml' -ItemType File && New-Item './ansible/roles/${input:role}/tasks/macosx.yml' -ItemType File && New-Item './ansible/roles/${input:role}/tasks/windows.yml' -ItemType File",
+      },
+      "type": "shell",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "role",
+      "description": "Enter the name of the role"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 - name: "Install git on MacOSX"
-  community.general.homebrew_cask:
+  community.general.homebrew:
     name: git
     state: present
 

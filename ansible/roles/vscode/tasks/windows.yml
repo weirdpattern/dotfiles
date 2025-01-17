@@ -1,0 +1,5 @@
+---
+- name: "Install vscode on Windows"
+  chocolatey.chocolatey.win_chocolatey:
+    name: vscode
+    state: present

@@ -1,0 +1,57 @@
+---
+- name: "Checking for {{ role_name }} {{ ansible_host_environment }} environment config"
+  ansible.builtin.stat:
+    path: "{{ role_path }}"
+  register: environment_config
+
+- name: "Run {{ role_name }} {{ ansible_host_environment }} tasks"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ ansible_host_environment }}.yml"
+  when: environment_config.stat.exists
+
+- name: "Add include.path to config"
+  community.general.git_config:
+    name: include.path
+    scope: global
+    value: "{{ ansible_user_dir }}/.config/delta/themes"
+
+- name: "Add core.pages to config"
+  community.general.git_config:
+    name: core.pager
+    scope: global
+    value: delta
+
+- name: "Add interactive.diffFilter to config"
+  community.general.git_config:
+    name: interactive.diffFilter
+    scope: global
+    value: delta --color-only
+
+- name: "Add merge.conflictStyle to config"
+  community.general.git_config:
+    name: merge.conflictStyle
+    scope: global
+    value: zdiff3
+
+- name: "Add delta.navigate to config"
+  community.general.git_config:
+    name: delta.navigate
+    scope: global
+    value: true
+
+- name: "Add delta.side-by-side to config"
+  community.general.git_config:
+    name: delta.side-by-side
+    scope: global
+    value: true
+
+- name: "Add delta.hyperlinks to config"
+  community.general.git_config:
+    name: delta.hyperlinks
+    scope: global
+    value: true
+
+- name: "Add delta.features to config"
+  community.general.git_config:
+    name: delta.features
+    scope: global
+    value: gruvbox
