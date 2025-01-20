@@ -1,11 +1,12 @@
 ---
 - name: "Install 1Password on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: "{{ item }}"
-    state: present
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "{{ item }}"
   loop:
-    - 1password
-    - op
+    - "AgileBits.1Password"
+    - "AgileBits.1Password.CLI"
 
 - name: "Ensure .config dir exists in ~/"
   ansible.windows.win_file:

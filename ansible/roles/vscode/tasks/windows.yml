@@ -1,5 +1,6 @@
 ---
-- name: "Install vscode on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: vscode
-    state: present
+- name: "Install tldr on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "Microsoft.VisualStudioCode"

@@ -1,11 +1,8 @@
 ---
-- name: "Install bat on MacOSX"
+- name: "Install eza on MacOSX"
   community.general.homebrew:
-    name: "{{ item }}"
+    name: eza
     state: present
-  loop:
-    - less
-    - bat
 
 - name: "Ensure .config dir exists in ~/"
   ansible.builtin.file:
@@ -13,16 +10,16 @@
     state: directory
     mode: "0755"
 
-- name: "Ensure bat dir exists in ~/.config"
+- name: "Ensure eza dir exists in ~/.config"
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/bat"
+    path: "{{ ansible_user_dir }}/.config/eza"
     state: directory
     mode: "0755"
 
-- name: "Deploy bat config script"
+- name: "Deploy eza themes"
   ansible.builtin.copy:
-    src: config
-    dest: "{{ ansible_user_dir }}/.config/bat/config"
+    src: theme.yml
+    dest: "{{ ansible_user_dir }}/.config/eza/theme.yml"
     mode: "0644"
 
 - name: "Ensure zsh dir exists in ~/.config"
@@ -37,10 +34,10 @@
     state: directory
     mode: "0755"
 
-- name: "Deploy bat aliases script"
+- name: "Deploy eza aliases script"
   ansible.builtin.copy:
     src: aliases.zsh
-    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/bat.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/eza.zsh"
     mode: "0644"
 
 - name: "Ensure exports dir exists in ~/.config/zsh"
@@ -49,8 +46,8 @@
     state: directory
     mode: "0755"
 
-- name: "Deploy bat exports script"
+- name: "Deploy eza exports script"
   ansible.builtin.copy:
     src: exports.zsh
-    dest: "{{ ansible_user_dir }}/.config/zsh/exports/bat.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/exports/eza.zsh"
     mode: "0644"

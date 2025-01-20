@@ -7,7 +7,6 @@ devops:
       - name: "id_devops"
         path: "op://Private/azure devops ssh"
 
-os_include_roles:
-  - windows
+os_include_roles: []
 
 os_excluded_roles: []

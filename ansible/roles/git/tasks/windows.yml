@@ -1,8 +1,9 @@
 ---
 - name: "Install git on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: git
-    state: present
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "Git.Git"
 
 - name: "Ensure .config dir exists in ~/"
   ansible.windows.win_file:

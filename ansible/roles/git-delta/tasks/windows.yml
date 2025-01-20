@@ -1,11 +1,12 @@
 ---
 - name: "Install git delta on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: "{{ item }}"
-    state: present
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "{{ item }}"
   loop:
-    - less
-    - delta
+    - "jftuga.less"
+    - "dandavison.delta"
 
 - name: "Ensure .config dir exists in ~/"
   ansible.windows.win_file:

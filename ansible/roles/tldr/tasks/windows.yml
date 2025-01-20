@@ -1,8 +1,9 @@
 ---
 - name: "Install tldr on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: tldr
-    state: present
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "tldr-pages.tlrc"
 
 - name: "Ensure profile dir exists in $PSHOME"
   ansible.builtin.win_powershell:

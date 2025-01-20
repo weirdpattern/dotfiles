@@ -1,8 +1,9 @@
 ---
 - name: "Install starship on Windows"
-  chocolatey.chocolatey.win_chocolatey:
-    name: starship
-    state: present
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "Starship.Starship"
 
 - name: "Ensure profile dir exists in $PSHOME"
   ansible.builtin.win_powershell:

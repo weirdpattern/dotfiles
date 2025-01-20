@@ -15,12 +15,12 @@ system:
 
 include_roles:
   - 1password
-  # - bat
+  - bat
   # - devops
-  # - eza
+  - eza
   # - ghostty
   - git
-  # - git-delta
+  - git-delta
   # - github
   # - neovim
   # - nu
@@ -30,7 +30,8 @@ include_roles:
   - starship
   # - system
   # - tana
-  # - tldr
+  - tldr
+  - vscode
   # - wezterm
   # - zsh
 

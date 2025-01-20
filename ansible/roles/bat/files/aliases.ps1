@@ -7,9 +7,7 @@ function Private:Invoke-Cat {
 
 Set-Alias help Private:Help
 function Private:Help {
-  param(
-    [string]$Command
-  )
+  param([string]$Command)
 
   Get-Help $Command | bat --language=man --theme=TwoDark
 }

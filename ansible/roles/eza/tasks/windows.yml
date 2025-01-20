@@ -1,27 +1,24 @@
 ---
-- name: "Install bat on Windows"
+- name: "Install eza on Windows"
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "{{ item }}"
-  loop:
-    - "jftuga.less"
-    - "sharkdp.bat"
+    winget_package: "eza-community.eza"
 
 - name: "Ensure .config dir exists in ~/"
   ansible.windows.win_file:
     path: "{{ ansible_user_dir }}/.config"
     state: directory
 
-- name: "Ensure bat dir exists in ~/.config"
+- name: "Ensure eza dir exists in ~/.config"
   ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config/bat"
+    path: "{{ ansible_user_dir }}/.config/eza"
     state: directory
 
-- name: "Deploy bat config"
+- name: "Deploy eza themes"
   ansible.windows.win_copy:
-    src: config
-    dest: "{{ ansible_user_dir }}/.config/bat/config"
+    src: theme.yml
+    dest: "{{ ansible_user_dir }}/.config/eza/theme.yml"
 
 - name: "Ensure profile dir exists in $PSHOME"
   ansible.builtin.win_powershell:
@@ -31,7 +28,7 @@
   ansible.builtin.win_powershell:
     script: New-Item "$PSHOME/profile/aliases" -ItemType Directory -ErrorAction SilentlyContinue
 
-- name: "Deploy bat aliases script"
+- name: "Deploy eza aliases script"
   ansible.builtin.win_powershell:
     script: |
       [CmdletBinding()]
@@ -40,7 +37,7 @@
         $file
       )
 
-      Copy-Item $file -Destination "$PSHOME/profile/aliases/bat.ps1"
+      Copy-Item $file -Destination "$PSHOME/profile/aliases/eza.ps1"
     parameters:
       file: "{{ role_path }}/files/aliases.ps1"
 
@@ -48,7 +45,7 @@
   ansible.builtin.win_powershell:
     script: New-Item "$PSHOME/profile/exports" -ItemType Directory -ErrorAction SilentlyContinue
 
-- name: "Deploy bat exports script"
+- name: "Deploy eza exports script"
   ansible.builtin.win_powershell:
     script: |
       [CmdletBinding()]
@@ -57,6 +54,6 @@
         $file
       )
 
-      Copy-Item $file -Destination "$PSHOME/profile/exports/bat.ps1"
+      Copy-Item $file -Destination "$PSHOME/profile/exports/eza.ps1"
     parameters:
       file: "{{ role_path }}/files/exports.ps1"
