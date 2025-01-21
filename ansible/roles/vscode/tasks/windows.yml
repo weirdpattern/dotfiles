@@ -1,5 +1,5 @@
 ---
-- name: "Install tldr on Windows"
+- name: "Install Visual Studio Code on Windows"
   ansible.builtin.include_role:
     name: winget
   vars:

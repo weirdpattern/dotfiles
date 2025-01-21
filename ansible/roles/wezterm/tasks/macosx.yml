@@ -1,0 +1,5 @@
+---
+- name: "Install Wezterm on MacOSX"
+  community.general.homebrew_cask:
+    name: wezterm
+    state: present

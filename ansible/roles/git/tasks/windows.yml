@@ -16,7 +16,7 @@
     scope: global
     value: "C:/Windows/System32/OpenSSH/ssh.exe"
 
-- name: "Remove .gitconfig from ~/"
+- name: "Remove .gitconfig from {{ ansible_user_dir }}"
   ansible.builtin.win_file:
     path: "{{ ansible_user_dir }}/.gitconfig"
     state: absent

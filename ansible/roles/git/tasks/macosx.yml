@@ -9,7 +9,7 @@
     src: "{{ ansible_user_dir }}/dotfiles/config/.config/git"
     dest: "{{ ansible_user_dir }}/.config/git"
 
-- name: "Remove .gitconfig from ~/"
+- name: "Remove .gitconfig from {{ ansible_user_dir }}"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.gitconfig"
     state: absent
