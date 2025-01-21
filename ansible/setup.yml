@@ -19,6 +19,11 @@
       tags:
         - always
 
+    - name: Detect PowerShell directory
+      ansible.builtin.import_tasks: setup/detect_powershell_directory.yml
+      tags:
+        - always
+
   tasks:
     - name: Include variables
       ansible.builtin.include_vars: "{{ item }}"

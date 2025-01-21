@@ -7,50 +7,27 @@
     - less
     - bat
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure bat dir exists in ~/.config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/bat"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy bat config script"
+- name: "Deploy bat .config files"
   ansible.builtin.copy:
-    src: config
-    dest: "{{ ansible_user_dir }}/.config/bat/config"
-    mode: "0644"
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/bat"
+    dest: "{{ ansible_user_dir }}/.config/bat"
 
-- name: "Ensure zsh dir exists in ~/.config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure aliases dir exists in ~/.config/zsh"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh/aliases"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy bat aliases script"
+- name: "Deploy bat zsh aliases files"
   ansible.builtin.copy:
-    src: aliases.zsh
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/aliases/bat.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/aliases/bat.zsh"
-    mode: "0644"
 
-- name: "Ensure exports dir exists in ~/.config/zsh"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh/exports"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy bat exports script"
+- name: "Deploy bat zsh exports files"
   ansible.builtin.copy:
-    src: exports.zsh
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/exports/bat.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/exports/bat.zsh"
-    mode: "0644"
+
+- name: "Deploy bat powershell aliases files"
+  ansible.builtin.copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/bat.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/bat.ps1"
+
+- name: "Deploy bat powershell exports files"
+  ansible.builtin.copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/exports/bat.ps1"
+    dest: "{{ ansible_powershell_dir }}/exports/bat.ps1"

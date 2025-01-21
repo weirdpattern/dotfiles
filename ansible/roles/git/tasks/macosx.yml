@@ -4,23 +4,10 @@
     name: git
     state: present
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure git dir exists in ~/.config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/git"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy git config"
+- name: "Deploy git .config files"
   ansible.builtin.copy:
-    src: config
-    dest: "{{ ansible_user_dir }}/.config/git/config"
-    mode: "0644"
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/git"
+    dest: "{{ ansible_user_dir }}/.config/git"
 
 - name: "Remove .gitconfig from ~/"
   ansible.builtin.file:

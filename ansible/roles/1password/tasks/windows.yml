@@ -8,20 +8,10 @@
     - "AgileBits.1Password"
     - "AgileBits.1Password.CLI"
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-
-- name: "Ensure 1password dir exists in ~/.config"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config/1Password"
-    state: directory
-
-- name: "Ensure ssh dir exists in ~/.config/1Password"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config/1Password/ssh"
-    state: directory
+- name: "Deploy 1Password .config files"
+  ansible.windows.win_copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/1password"
+    dest: "{{ ansible_user_dir }}/.config/1password"
 
 - name: "Deploy ssh config"
   ansible.windows.win_copy:

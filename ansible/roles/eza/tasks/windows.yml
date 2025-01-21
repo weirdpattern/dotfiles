@@ -5,55 +5,17 @@
   vars:
     winget_package: "eza-community.eza"
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-
-- name: "Ensure eza dir exists in ~/.config"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config/eza"
-    state: directory
-
-- name: "Deploy eza themes"
+- name: "Deploy eza .config files"
   ansible.windows.win_copy:
-    src: theme.yml
-    dest: "{{ ansible_user_dir }}/.config/eza/theme.yml"
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/eza"
+    dest: "{{ ansible_user_dir }}/.config/eza"
 
-- name: "Ensure profile dir exists in $PSHOME"
-  ansible.builtin.win_powershell:
-    script: New-Item "$PSHOME/profile" -ItemType Directory -ErrorAction SilentlyContinue
+- name: "Deploy eza powershell aliases files"
+  ansible.windows.win_copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/eza.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/eza.ps1"
 
-- name: "Ensure aliases dir exists in $PSHOME/profile"
-  ansible.builtin.win_powershell:
-    script: New-Item "$PSHOME/profile/aliases" -ItemType Directory -ErrorAction SilentlyContinue
-
-- name: "Deploy eza aliases script"
-  ansible.builtin.win_powershell:
-    script: |
-      [CmdletBinding()]
-      param (
-        [String]
-        $file
-      )
-
-      Copy-Item $file -Destination "$PSHOME/profile/aliases/eza.ps1"
-    parameters:
-      file: "{{ role_path }}/files/aliases.ps1"
-
-- name: "Ensure exports dir exists in $PSHOME/profile"
-  ansible.builtin.win_powershell:
-    script: New-Item "$PSHOME/profile/exports" -ItemType Directory -ErrorAction SilentlyContinue
-
-- name: "Deploy eza exports script"
-  ansible.builtin.win_powershell:
-    script: |
-      [CmdletBinding()]
-      param (
-        [String]
-        $file
-      )
-
-      Copy-Item $file -Destination "$PSHOME/profile/exports/eza.ps1"
-    parameters:
-      file: "{{ role_path }}/files/exports.ps1"
+- name: "Deploy eza powershell exports files"
+  ansible.windows.win_copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/exports/eza.ps1"
+    dest: "{{ ansible_powershell_dir }}/exports/eza.ps1"

@@ -4,50 +4,27 @@
     name: eza
     state: present
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure eza dir exists in ~/.config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/eza"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy eza themes"
+- name: "Deploy eza .config files"
   ansible.builtin.copy:
-    src: theme.yml
-    dest: "{{ ansible_user_dir }}/.config/eza/theme.yml"
-    mode: "0644"
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/eza"
+    dest: "{{ ansible_user_dir }}/.config/eza"
 
-- name: "Ensure zsh dir exists in ~/.config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh"
-    state: directory
-    mode: "0755"
-
-- name: "Ensure aliases dir exists in ~/.config/zsh"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh/aliases"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy eza aliases script"
+- name: "Deploy eza zsh aliases files"
   ansible.builtin.copy:
-    src: aliases.zsh
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/aliases/eza.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/aliases/eza.zsh"
-    mode: "0644"
 
-- name: "Ensure exports dir exists in ~/.config/zsh"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/zsh/exports"
-    state: directory
-    mode: "0755"
-
-- name: "Deploy eza exports script"
+- name: "Deploy eza zsh exports files"
   ansible.builtin.copy:
-    src: exports.zsh
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/exports/eza.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/exports/eza.zsh"
-    mode: "0644"
+
+- name: "Deploy eza powershell aliases files"
+  ansible.builtin.copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/eza.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/eza.ps1"
+
+- name: "Deploy eza powershell exports files"
+  ansible.builtin.copy:
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/exports/eza.ps1"
+    dest: "{{ ansible_powershell_dir }}/exports/eza.ps1"

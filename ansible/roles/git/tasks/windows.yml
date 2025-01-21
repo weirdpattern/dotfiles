@@ -5,20 +5,10 @@
   vars:
     winget_package: "Git.Git"
 
-- name: "Ensure .config dir exists in ~/"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config"
-    state: directory
-
-- name: "Ensure git dir exists in ~/.config"
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}/.config/git"
-    state: directory
-
-- name: "Deploy git config"
+- name: "Deploy git .config files"
   ansible.windows.win_copy:
-    src: config
-    dest: "{{ ansible_user_dir }}/.config/git/config"
+    src: "{{ ansible_user_dir }}/dotfiles/config/.config/git"
+    dest: "{{ ansible_user_dir }}/.config/git"
 
 - name: "Update ssh command"
   community.general.git_config:
