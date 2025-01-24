@@ -4,7 +4,7 @@
     name: wezterm
     state: present
 
-- name: "Deploy starship .config files"
+- name: "Deploy wezterm .config files"
   ansible.builtin.copy:
     src: "{{ dotfiles }}/config/.config/wezterm"
     dest: "{{ ansible_user_dir }}/.config/wezterm"

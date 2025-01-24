@@ -1,1 +1,1 @@
-[Environment]::SetEnvironmentVariable("EZA_CONFIG_DIR", "~/.config/eza");
+[Environment]::SetEnvironmentVariable("EZA_CONFIG_DIR", "${env:UserProfile}/.config/eza");

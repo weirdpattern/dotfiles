@@ -1,0 +1,10 @@
+---
+- name: "Install neovim on MacOSX"
+  community.general.homebrew_cask:
+    name: neovim
+    state: present
+
+- name: "Deploy neovim .config files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/nvim"
+    dest: "{{ ansible_user_dir }}/.config/nvim"

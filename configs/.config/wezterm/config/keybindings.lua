@@ -10,16 +10,6 @@ local module = {}
 module.SUPER = platform:find("windows") and "ALT" or "SUPER"
 module.COMMAND = platform:find("windows") and "CTRL" or "SUPER"
 
-local smart_split = wezterm.action_callback(function(window, pane)
-  local dimension = pane:get_dimensions()
-
-  if dimension.pixel_height > dimension.pixel_width then
-    window:perform_action(action.SplitVertical({ domain = "CurrentPaneDomain" }))
-  else
-    window:perform_action(action.SplitHorizontal({ domain = "CurrentPaneDomain" }))
-  end
-end)
-
 module.setup = function(config)
   config.disable_default_key_bindings = true
 
@@ -38,7 +28,6 @@ module.setup = function(config)
     { key = "LeftArrow", mods = module.SUPER, action = action.SendString("\x1bb") },
     { key = "RightArrow", mods = module.SUPER, action = action.SendString("\x1bf") },
     { key = "t", mods = "CTRL", action = action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS" }) },
-    { key = "Enter", mods = "LEADER", action = smart_split },
     {
       key = "p",
       mods = "LEADER",
@@ -68,6 +57,16 @@ module.setup = function(config)
       { key = "PageUp", action = action.RotatePanes("Clockwise") },
       { key = "PageDown", action = action.RotatePanes("CounterClockwise") },
       { key = "Home", action = action.PaneSelect({ mode = "SwapWithActive" }) },
+      { key = "Enter", action = wezterm.action_callback(function(window, pane)
+          local dimension = pane:get_dimensions()
+
+          if dimension.pixel_height > dimension.pixel_width then
+            window:perform_action(action.SplitVertical({ domain = "CurrentPaneDomain" }), pane)
+          else
+            window:perform_action(action.SplitHorizontal({ domain = "CurrentPaneDomain" }), pane)
+          end
+        end)
+      },
       { key = "v", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
       { key = "s", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
       { key = "<", action = action.AdjustPaneSize({ "Left", 1 }) },
