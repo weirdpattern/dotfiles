@@ -7,5 +7,5 @@
 
 - name: "Deploy tldr powershell aliases files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/tldr.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/aliases/tldr.ps1"
     dest: "{{ ansible_powershell_dir }}/aliases/tldr.ps1"

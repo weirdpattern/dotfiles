@@ -10,15 +10,15 @@
 
 - name: "Deploy bat .config files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/bat"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/bat"
     dest: "{{ ansible_user_dir }}/.config/bat"
 
 - name: "Deploy bat powershell aliases files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/bat.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/aliases/bat.ps1"
     dest: "{{ ansible_powershell_dir }}/aliases/bat.ps1"
 
 - name: "Deploy bat powershell exports files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/exports/bat.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/exports/bat.ps1"
     dest: "{{ ansible_powershell_dir }}/exports/bat.ps1"

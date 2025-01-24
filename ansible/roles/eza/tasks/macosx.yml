@@ -6,25 +6,25 @@
 
 - name: "Deploy eza .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/eza"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/eza"
     dest: "{{ ansible_user_dir }}/.config/eza"
 
 - name: "Deploy eza zsh aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/aliases/eza.zsh"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/aliases/eza.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/aliases/eza.zsh"
 
 - name: "Deploy eza zsh exports files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/exports/eza.zsh"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/exports/eza.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/exports/eza.zsh"
 
 - name: "Deploy eza powershell aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/aliases/eza.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/aliases/eza.ps1"
     dest: "{{ ansible_powershell_dir }}/aliases/eza.ps1"
 
 - name: "Deploy eza powershell exports files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/exports/eza.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/exports/eza.ps1"
     dest: "{{ ansible_powershell_dir }}/exports/eza.ps1"

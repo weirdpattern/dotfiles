@@ -11,5 +11,5 @@
 
 - name: "Deploy 1Password .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/1password"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/1password"
     dest: "{{ ansible_user_dir }}/.config/1password"

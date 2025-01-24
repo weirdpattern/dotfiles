@@ -6,16 +6,16 @@
 
 - name: "Deploy starship .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/starship"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/starship"
     dest: "{{ ansible_user_dir }}/.config/starship"
 
 - name: "Deploy starship zsh registration files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/zsh/registrations/starship.zsh"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/registrations/starship.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/registrations/starship.zsh"
 
 - name: "Deploy starship powershell registration files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/dotfiles/config/.config/powershell/registrations/starship.ps1"
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/registrations/starship.ps1"
     dest: "{{ ansible_powershell_dir }}/registrations/starship.ps1"
 

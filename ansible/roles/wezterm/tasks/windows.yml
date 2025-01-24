@@ -1,6 +1,11 @@
 ---
-- name: "Install Wezterm on Windows"
+- name: "Install wezterm on Windows"
   ansible.builtin.include_role:
     name: winget
   vars:
     winget_package: "wez.wezterm"
+
+- name: "Deploy wezterm .config files"
+  ansible.windows.win_copy:
+    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/wezterm"
+    dest: "{{ ansible_user_dir }}/.config/wezterm"
