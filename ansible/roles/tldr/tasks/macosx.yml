@@ -6,10 +6,10 @@
 
 - name: "Deploy tldr zsh aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/aliases/tldr.zsh"
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/tldr.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/aliases/tldr.zsh"
 
 - name: "Deploy tldr powershell aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/aliases/tldr.ps1"
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/tldr.ps1"
     dest: "{{ ansible_powershell_dir }}/aliases/tldr.ps1"

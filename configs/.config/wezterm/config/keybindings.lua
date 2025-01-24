@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
+local workspaces = require("config.workspaces")
 
+local mux = wezterm.mux
 local action = wezterm.action
 local platform = wezterm.target_triple
 
@@ -38,28 +40,25 @@ module.setup = function(config)
     { key = "t", mods = "CTRL", action = action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS" }) },
     { key = "Enter", mods = "LEADER", action = smart_split },
     {
-      key = "w",
+      key = "p",
       mods = "LEADER",
-      action = action.ActivateKeyTable({ name = "windows", one_shot = false, timeout_milliseconds = 2000 })
+      action = action.ActivateKeyTable({ name = "panes", one_shot = false, timeout_milliseconds = 2000 })
     },
     {
-      key = '.',
-      mods = 'LEADER',
-      action = action.PromptInputLine {
-        description = 'Enter new name for tab',
-        action = wezterm.action_callback(
-          function(window, pane, line)
-            if line then
-              window:active_tab():set_title(line)
-            end
-          end
-        )
-      }
+      key = "s",
+      mods = "LEADER",
+      action = action.ActivateKeyTable({ name = "sessions", one_shot = true, timeout_milliseconds = 2000 })
+    },
+    {
+      key = "w",
+      mods = "LEADER",
+      action = action.ActivateKeyTable({ name = "windows", one_shot = true, timeout_milliseconds = 2000 })
     }
   }
 
   config.key_tables = {
-    windows = {
+    panes = {
+      { key = "Escape", action = action.PopKeyTable },
       { key = "q", action = action.CloseCurrentPane({ confirm = false }) },
       { key = "h", action = action.ActivatePaneDirection("Left") },
       { key = "j", action = action.ActivatePaneDirection("Down") },
@@ -75,7 +74,52 @@ module.setup = function(config)
       { key = "-", action = action.AdjustPaneSize({ "Down", 1 }) },
       { key = "+", action = action.AdjustPaneSize({ "Up", 1 }) },
       { key = ">", action = action.AdjustPaneSize({ "Right", 1 }) },
-      { key = "Escape", action = action.PopKeyTable }
+      { key = '.', action = action.PromptInputLine {
+          description = 'Enter new name for tab',
+          action = wezterm.action_callback(
+            function(window, pane, line)
+              if line then
+                window:active_tab():set_title(line)
+              end
+            end
+          )
+        }
+      }
+    },
+    sessions = {
+      { key = "Escape", action = action.PopKeyTable },
+      { key = "o", action = workspaces.select_project() },
+      { key = "s", action = action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
+      { key = '.', action = action.PromptInputLine {
+          description = 'Enter new name for workspace',
+          action = wezterm.action_callback(
+            function(window, pane, line)
+              if line then
+                mux.rename_workspace(
+                  mux.get_active_workspace(),
+                  line
+                )
+              end
+            end
+          )
+        }
+      }
+    },
+    windows = {
+      { key = "Escape", action = action.PopKeyTable },
+      { key = "h", action = action.Hide },
+      { key = "UpArrow", action = wezterm.action_callback(
+          function(window, pane)
+            window:maximize()
+          end
+        )
+      },
+      { key = "DownArrow", action = wezterm.action_callback(
+          function(window, pane)
+            window:restore()
+          end
+        )
+      }
     }
   }
 

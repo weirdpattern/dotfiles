@@ -7,9 +7,9 @@ module.setup = function(config)
 
   config.animation_fps = 60
   config.max_fps = 60
-  config.color_scheme = "Gruvbox Dark"
+  config.color_scheme = "Gruvbox dark, pale (base16)"
 
-  config.font = wezterm.font("JetBrains Mono")
+  config.font = wezterm.font("JetBrainsMono Nerd Font Propo")
   config.font_size = 9.5
 
   config.window_background_opacity = 1.0
@@ -25,27 +25,26 @@ module.setup = function(config)
     brights = { "#928374", "#fb4934", "#b8bb26", "#fabd2f", "#83a598", "#d3869b", "#8ec07c", "#ebdbb2" },
 
     tab_bar = {
-      background = "#000000",
+      background = "#282828",
       active_tab = {
         bg_color = "#585b70",
-        fg_color = "#cdd6f4",
+        fg_color = "#cdd6f4"
       },
       inactive_tab = {
         bg_color = "#313244",
-        fg_color = "#45475a",
+        fg_color = "#45475a"
       },
       inactive_tab_hover = {
         bg_color = "#313244",
-        fg_color = "#cdd6f4",
+        fg_color = "#cdd6f4"
       },
       new_tab = {
         bg_color = "#1f1f28",
-        fg_color = "#cdd6f4",
+        fg_color = "#cdd6f4"
       },
       new_tab_hover = {
         bg_color = "#181825",
-        fg_color = "#cdd6f4",
-        italic = true,
+        fg_color = "#cdd6f4"
       },
     },
   }

@@ -6,7 +6,7 @@
 
 - name: "Deploy git .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/git"
+    src: "{{ dotfiles }}/config/.config/git"
     dest: "{{ ansible_user_dir }}/.config/git"
 
 - name: "Remove .gitconfig from {{ ansible_user_dir }}"

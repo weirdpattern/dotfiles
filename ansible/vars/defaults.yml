@@ -1,5 +1,7 @@
 user: "weirdpattern"
 
+dotfiles: "{{ ansible_user_dir }}/_/p/dotfiles"
+
 git:
   user:
     name: "op://Private/github/name"
@@ -32,7 +34,7 @@ include_roles:
   # - tana
   - tldr
   - vscode
-  # - wezterm
+  - wezterm
   # - zsh
 
 exclude_roles: []

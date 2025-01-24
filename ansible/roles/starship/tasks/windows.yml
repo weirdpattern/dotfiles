@@ -7,10 +7,10 @@
 
 - name: "Deploy starship .config files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/starship"
+    src: "{{ dotfiles }}/config/.config/starship"
     dest: "{{ ansible_user_dir }}/.config/starship"
 
 - name: "Deploy starship powershell registration files"
   ansible.windows.win_copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/registrations/starship.ps1"
+    src: "{{ dotfiles }}/config/.config/powershell/registrations/starship.ps1"
     dest: "{{ ansible_powershell_dir }}/registrations/starship.ps1"

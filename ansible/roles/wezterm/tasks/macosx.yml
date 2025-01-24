@@ -6,5 +6,5 @@
 
 - name: "Deploy starship .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/wezterm"
+    src: "{{ dotfiles }}/config/.config/wezterm"
     dest: "{{ ansible_user_dir }}/.config/wezterm"

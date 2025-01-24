@@ -9,25 +9,25 @@
 
 - name: "Deploy bat .config files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/bat"
+    src: "{{ dotfiles }}/config/.config/bat"
     dest: "{{ ansible_user_dir }}/.config/bat"
 
 - name: "Deploy bat zsh aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/aliases/bat.zsh"
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/bat.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/aliases/bat.zsh"
 
 - name: "Deploy bat zsh exports files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/zsh/exports/bat.zsh"
+    src: "{{ dotfiles }}/config/.config/zsh/exports/bat.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/exports/bat.zsh"
 
 - name: "Deploy bat powershell aliases files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/aliases/bat.ps1"
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/bat.ps1"
     dest: "{{ ansible_powershell_dir }}/aliases/bat.ps1"
 
 - name: "Deploy bat powershell exports files"
   ansible.builtin.copy:
-    src: "{{ ansible_user_dir }}/.dotfiles/config/.config/powershell/exports/bat.ps1"
+    src: "{{ dotfiles }}/config/.config/powershell/exports/bat.ps1"
     dest: "{{ ansible_powershell_dir }}/exports/bat.ps1"
