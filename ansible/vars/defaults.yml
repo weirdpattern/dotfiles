@@ -17,24 +17,25 @@ system:
 
 include_roles:
   - 1password
+  - pwsh
+  - zsh
+  - starship
   - bat
-  # - devops
+  - ripgrep
+  - fzf
   - eza
-  # - ghostty
   - git
   - git-delta
-  # - github
-  # - neovim
-  # - nu
-  # - pwsh
-  # - raycast
-  # - ssh
-  - starship
-  # - system
-  # - tana
   - tldr
+  - neovim
   - vscode
   - wezterm
-  # - zsh
+  # - ghostty
+  # - devops
+  # - github
+  # - raycast
+  # - ssh
+  # - system
+  # - tana
 
 exclude_roles: []

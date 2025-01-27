@@ -21,11 +21,6 @@ module.setup = function(config)
     })
 
     table.insert(launch_menu, {
-      label = "NuShell",
-      args = { "nu.exe" }
-    })
-
-    table.insert(launch_menu, {
       label = "Command Prompt",
       args = { "cmd.exe" }
     })
@@ -45,11 +40,6 @@ module.setup = function(config)
     table.insert(launch_menu, {
       label = "PowerShell",
       args = { "/usr/local/bin/pswh", "-NoLogo" }
-    })
-
-    table.insert(launch_menu, {
-      label = "NuShell",
-      args = { "/usr/local/bin/nu" }
     })
   end
 

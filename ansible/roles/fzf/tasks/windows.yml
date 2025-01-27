@@ -1,0 +1,21 @@
+---
+- name: "Install fzf on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "junegunn.fzf"
+
+- name: "Deploy fzf powershell aliases files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/fzf.ps1"
+
+- name: "Deploy fzf powershell exports files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/exports/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/exports/fzf.ps1"
+
+- name: "Deploy fzf powershell registration files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/registrations/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/registrations/fzf.ps1"

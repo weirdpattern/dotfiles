@@ -1,0 +1,6 @@
+---
+- name: "Install tldr on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "BurntSushi.ripgrep.MSVC"

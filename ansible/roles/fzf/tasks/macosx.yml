@@ -1,0 +1,35 @@
+---
+- name: "Install fzf on MacOSX"
+  community.general.homebrew_cask:
+    name: fzf
+    state: present
+
+- name: "Deploy fzf zsh aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/fzf.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/fzf.zsh"
+
+- name: "Deploy fzf zsh exports files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/exports/fzf.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/exports/fzf.zsh"
+
+- name: "Deploy fzf zsh registration files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/registrations/fzf.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/registrations/fzf.zsh"
+
+- name: "Deploy fzf powershell aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/fzf.ps1"
+
+- name: "Deploy fzf powershell exports files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/exports/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/exports/fzf.ps1"
+
+- name: "Deploy fzf powershell registration files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/registrations/fzf.ps1"
+    dest: "{{ ansible_powershell_dir }}/registrations/fzf.ps1"

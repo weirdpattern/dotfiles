@@ -7,15 +7,3 @@
 - name: "Run {{ role_name }} {{ ansible_host_environment }} tasks"
   ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ ansible_host_environment }}.yml"
   when: environment_config.stat.exists
-
-- name: Install PSReadLine via PowerShell
-  ansible.builtin.shell: |
-    Install-Module PSReadLine -AcceptLicense -Confirm
-  args:
-    executable: powershell.exe
-
-- name: Install PSfzf via PowerShell
-  ansible.builtin.shell: |
-    Install-Module PSfzf -AcceptLicense -Confirm
-  args:
-    executable: powershell.exe
