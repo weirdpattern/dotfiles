@@ -1,0 +1,6 @@
+---
+- name: "Install zig on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "zig.zig"
