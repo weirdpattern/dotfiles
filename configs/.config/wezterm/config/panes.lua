@@ -63,10 +63,10 @@ module.setup = function(config)
 
   config.window_decorations = "TITLE|RESIZE"
   config.window_padding = {
-    left = 0,
-    right = 0,
+    left = 5,
+    right = 5,
     top = 0,
-    bottom = 0
+    bottom = 5
   }
 
   wezterm.on("update-status", function(window)

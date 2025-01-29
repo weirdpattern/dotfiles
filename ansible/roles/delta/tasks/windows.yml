@@ -1,0 +1,14 @@
+---
+- name: "Install delta on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "{{ item }}"
+  loop:
+    - "jftuga.less"
+    - "dandavison.delta"
+
+- name: "Deploy delta .config files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/delta"
+    dest: "{{ ansible_user_dir }}/.config/delta"

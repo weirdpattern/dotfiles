@@ -1,0 +1,16 @@
+---
+- name: "Install lazygit on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "JesseDuffield.lazygit"
+
+- name: "Deploy lazygit .config files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/lazygit"
+    dest: "{{ ansible_user_dir }}/.config/lazygit"
+
+- name: "Deploy lazygit powershell aliases files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/lazygit.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/lazygit.ps1"

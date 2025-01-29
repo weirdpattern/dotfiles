@@ -1,0 +1,20 @@
+---
+- name: "Install lazygit on MacOSX"
+  community.general.homebrew:
+    name: lazygit
+    state: present
+
+- name: "Deploy lazygit .config files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/lazygit"
+    dest: "{{ ansible_user_dir }}/.config/lazygit"
+
+- name: "Deploy lazygit zsh aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/lazygit.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/lazygit.zsh"
+
+- name: "Deploy lazygit powershell aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/lazygit.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/lazygit.ps1"

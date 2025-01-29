@@ -1,0 +1,10 @@
+---
+- name: "Install jq on MacOSX"
+  community.general.homebrew:
+    name: jq
+    state: present
+
+- name: "Deploy jq zsh aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/jq.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/jq.zsh"

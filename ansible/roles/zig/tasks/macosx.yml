@@ -1,5 +1,5 @@
 ---
 - name: "Install zig on MacOSX"
-  community.general.homebrew_cask:
+  community.general.homebrew:
     name: zig
     state: present

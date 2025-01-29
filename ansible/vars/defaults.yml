@@ -25,10 +25,12 @@ include_roles:
   - ripgrep
   - fzf
   - eza
+  - jq
   - git
-  - git-delta
+  - delta
   - tldr
   - neovim
+  - lazygit
   - vscode
   - wezterm
   # - ghostty

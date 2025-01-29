@@ -1,0 +1,9 @@
+---
+- name: "Checking for {{ role_name }} {{ ansible_host_environment }} environment config"
+  ansible.builtin.stat:
+    path: "{{ role_path }}"
+  register: environment_config
+
+- name: "Run {{ role_name }} {{ ansible_host_environment }} tasks"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ ansible_host_environment }}.yml"
+  when: environment_config.stat.exists
