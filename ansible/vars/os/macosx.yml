@@ -1,3 +1,5 @@
-os_include_roles: []
+os_include_roles:
+  # - ghostty
+  # - raycast
 
 os_excluded_roles: []

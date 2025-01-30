@@ -1,0 +1,6 @@
+---
+- name: "Install powertoys on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "Microsoft.PowerToys"

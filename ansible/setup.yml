@@ -24,6 +24,12 @@
       tags:
         - always
 
+    - name: Ensure Winget is installed
+      ansible.builtin.import_tasks: setup/ensure_winget_installed.yml
+      when: ansible_host_environment == "windows"
+      tags:
+        - always
+
   tasks:
     - name: Include variables
       ansible.builtin.include_vars: "{{ item }}"
@@ -40,8 +46,8 @@
       ansible.builtin.set_fact:
         run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or inclusions | difference(exclusions | default([])) }}"
       vars:
-        inclusions: "{{ os_include_roles | default([]) + include_roles | default([]) }}"
-        exclusions: "{{ os_excluded_roles | default([]) + exclude_roles | default([]) }}"
+        inclusions: "{{ include_roles | default([]) + os_include_roles | default([]) }}"
+        exclusions: "{{ exclude_roles | default([]) + os_excluded_roles | default([]) }}"
       tags:
         - always
 

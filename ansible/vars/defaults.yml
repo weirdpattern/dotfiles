@@ -17,7 +17,7 @@ system:
 
 include_roles:
   - 1password
-  - pwsh
+  - powershell
   - zsh
   - zig
   - starship
@@ -33,10 +33,8 @@ include_roles:
   - lazygit
   - vscode
   - wezterm
-  # - ghostty
   # - devops
   # - github
-  # - raycast
   # - ssh
   # - system
   # - tana

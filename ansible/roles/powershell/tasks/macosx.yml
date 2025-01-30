@@ -1,0 +1,10 @@
+---
+- name: "Install powershell on MacOSX"
+  community.general.homebrew_cask:
+    name: powershell
+    state: present
+
+- name: "Deploy powershell .config files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/profile.ps1"
+    dest: "{{ ansible_user_dir }}/.config/powershell/profile.ps1"

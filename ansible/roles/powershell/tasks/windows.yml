@@ -1,0 +1,11 @@
+---
+- name: "Install powershell on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "Microsoft.PowerShell"
+
+- name: "Deploy powershell .config files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/profile.ps1"
+    dest: "{{ ansible_powershell_dir }}/profile.ps1"
