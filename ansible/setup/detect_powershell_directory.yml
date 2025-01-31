@@ -1,6 +1,7 @@
 ---
 - name: Detect current user when in Windows Subsystem for Linux
-  ansible.windows.win_powershell: $PSHOME
+  ansible.windows.win_powershell:
+    script: $PSHOME
   register: powershell_directory
   changed_when: false
   failed_when: powershell_directory.rc != 0

@@ -1,6 +1,7 @@
 ---
 - name: Detect current user when in Windows Subsystem for Linux
-  ansible.windows.win_powershell: $env:UserName
+  ansible.windows.win_powershell:
+    script: $env:UserName
   register: username
   changed_when: false
   failed_when: username.rc != 0

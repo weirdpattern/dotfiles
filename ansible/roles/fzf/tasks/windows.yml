@@ -6,12 +6,14 @@
     winget_package: junegunn.fzf
 
 - name: Install PSReadLine via PowerShell
-  ansible.windows.win_powershell: |
-    Install-Module PSReadLine -AcceptLicense -Confirm
+  ansible.windows.win_powershell:
+    script: |
+      Install-Module PSReadLine -AcceptLicense -Confirm
 
 - name: Install PSfzf via PowerShell
-  ansible.windows.win_powershell: |
-    Install-Module PSfzf -AcceptLicense -Confirm
+  ansible.windows.win_powershell:
+    script: |
+      Install-Module PSfzf -AcceptLicense -Confirm
 
 - name: "Deploy fzf powershell aliases files"
   ansible.windows.win_copy:

@@ -1,8 +1,9 @@
 ---
 - name: Change PowerShell execution policy
-  ansible.windows.win_powershell: |
-    Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
-    $CurrentPolicy = Get-ExecutionPolicy
-    Write-Host ($CurrentPolicy -eq 'RemoteSigned')
+  ansible.windows.win_powershell:
+    script: |
+      Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
+      $CurrentPolicy = Get-ExecutionPolicy
+      Write-Host ($CurrentPolicy -eq 'RemoteSigned')
   register: ps_exec_result
   changed_when: ps_exec_result.stdout != 'True'
