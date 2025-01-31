@@ -1,0 +1,11 @@
+---
+- name: "Install fselect on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: fselect.fselect
+
+- name: "Deploy fselect powershell aliases files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/fselect.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/fselect.ps1"

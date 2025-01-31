@@ -1,0 +1,15 @@
+---
+- name: "Install fselect on MacOSX"
+  community.general.homebrew:
+    name: fselect
+    state: present
+
+- name: "Deploy fselect zsh aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/zsh/aliases/fselect.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/aliases/fselect.zsh"
+
+- name: "Deploy fselect powershell aliases files"
+  ansible.builtin.copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/fselect.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/fselect.ps1"
