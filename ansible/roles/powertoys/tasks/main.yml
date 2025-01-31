@@ -3,4 +3,4 @@
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "Microsoft.PowerToys"
+    winget_package: Microsoft.PowerToys

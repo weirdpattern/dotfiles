@@ -3,7 +3,7 @@
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "tldr-pages.tlrc"
+    winget_package: tldr-pages.tlrc
 
 - name: "Deploy tldr powershell aliases files"
   ansible.windows.win_copy:

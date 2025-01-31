@@ -28,6 +28,7 @@ include_roles:
   - jq
   - git
   - delta
+  - tana
   - tldr
   - neovim
   - lazygit
@@ -37,6 +38,5 @@ include_roles:
   # - github
   # - ssh
   # - system
-  # - tana
 
 exclude_roles: []

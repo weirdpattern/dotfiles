@@ -5,8 +5,8 @@
   vars:
     winget_package: "{{ item }}"
   loop:
-    - "jftuga.less"
-    - "sharkdp.bat"
+    - jftuga.less
+    - sharkdp.bat
 
 - name: "Deploy bat .config files"
   ansible.windows.win_copy:

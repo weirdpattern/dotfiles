@@ -1,5 +1,5 @@
 ---
-- name: "Install tlrc on MacOSX"
+- name: "Install ripgrep on MacOSX"
   community.general.homebrew:
     name: ripgrep
     state: present

@@ -3,9 +3,9 @@
   "tasks": [
     {
       "label": "New ansible role",
-      "command": "mkdir -p './ansible/roles/${input:role}/tasks' && touch './ansible/roles/${input:role}/tasks/main.yml' './ansible/roles/${input:role}/tasks/macosx.yml' './ansible/roles/${input:role}/tasks/windows.yml'",
+      "command": "mkdir -p '${workspaceRoot}/ansible/roles/${input:role}/tasks' && touch '${workspaceRoot}/ansible/roles/${input:role}/tasks/main.yml' '${workspaceRoot}/ansible/roles/${input:role}/tasks/macosx.yml' '${workspaceRoot}/ansible/roles/${input:role}/tasks/windows.yml'",
       "windows": {
-        "command": "New-Item './ansible/roles/${input:role}/tasks' -ItemType Directory -Force && New-Item './ansible/roles/${input:role}/tasks/main.yml' -ItemType File && New-Item './ansible/roles/${input:role}/tasks/macosx.yml' -ItemType File && New-Item './ansible/roles/${input:role}/tasks/windows.yml' -ItemType File",
+        "command": "New-Item '${workspaceRoot}/ansible/roles/${input:role}/tasks' -ItemType Directory -Force && New-Item '${workspaceRoot}/ansible/roles/${input:role}/tasks/main.yml' -ItemType File && New-Item '${workspaceRoot}/ansible/roles/${input:role}/tasks/macosx.yml' -ItemType File && New-Item '${workspaceRoot}/ansible/roles/${input:role}/tasks/windows.yml' -ItemType File"
       },
       "type": "shell",
       "problemMatcher": [],
@@ -16,7 +16,7 @@
         "panel": "shared",
         "showReuseMessage": false,
         "clear": true
-      },
+      }
     }
   ],
   "inputs": [

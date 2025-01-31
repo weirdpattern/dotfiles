@@ -1,0 +1,13 @@
+---
+- name: "Download tana from https://desktop-update.tana.inc/download/dmg"
+  ansible.builtin.get_url:
+    url: https://desktop-update.tana.inc/download/dmg
+    dest: /tmp/tana.dmg
+
+- name: "Install tana on MacOSX"
+  ansible.builtin.shell: /tmp/tana.dmg
+
+- name: "Remove tana installer from /tmp/tana.dmg"
+  ansible.builtin.file:
+    path: /tmp/tana.dmg
+    state: absent

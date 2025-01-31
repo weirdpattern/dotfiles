@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local workspaces = require("config.workspaces")
+local workspaces = require("segments.workspaces")
 
 local mux = wezterm.mux
 local action = wezterm.action
@@ -15,7 +15,7 @@ module.setup = function(config)
 
   config.leader = {
     key = "Space",
-    mods = "CTRL"
+    mods = "CTRL",
   }
 
   config.keys = {
@@ -27,22 +27,26 @@ module.setup = function(config)
     { key = "End", action = action.SendString("\005") },
     { key = "LeftArrow", mods = module.SUPER, action = action.SendString("\x1bb") },
     { key = "RightArrow", mods = module.SUPER, action = action.SendString("\x1bf") },
-    { key = "t", mods = "CTRL", action = action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS" }) },
     {
       key = "p",
       mods = "LEADER",
-      action = action.ActivateKeyTable({ name = "panes", one_shot = false, timeout_milliseconds = 2000 })
+      action = action.ActivateKeyTable({ name = "panes", one_shot = false, timeout_milliseconds = 1500 }),
+    },
+    {
+      key = "t",
+      mods = "LEADER",
+      action = action.ActivateKeyTable({ name = "tabs", one_shot = false, timeout_milliseconds = 1500 }),
     },
     {
       key = "s",
       mods = "LEADER",
-      action = action.ActivateKeyTable({ name = "sessions", one_shot = true, timeout_milliseconds = 2000 })
+      action = action.ActivateKeyTable({ name = "sessions", one_shot = true, timeout_milliseconds = 1500 }),
     },
     {
       key = "w",
       mods = "LEADER",
-      action = action.ActivateKeyTable({ name = "windows", one_shot = true, timeout_milliseconds = 2000 })
-    }
+      action = action.ActivateKeyTable({ name = "windows", one_shot = true, timeout_milliseconds = 1500 }),
+    },
   }
 
   config.key_tables = {
@@ -57,7 +61,9 @@ module.setup = function(config)
       { key = "PageUp", action = action.RotatePanes("Clockwise") },
       { key = "PageDown", action = action.RotatePanes("CounterClockwise") },
       { key = "Home", action = action.PaneSelect({ mode = "SwapWithActive" }) },
-      { key = "Enter", action = wezterm.action_callback(function(window, pane)
+      {
+        key = "Enter",
+        action = wezterm.action_callback(function(window, pane)
           local dimension = pane:get_dimensions()
 
           if dimension.pixel_height > dimension.pixel_width then
@@ -65,68 +71,70 @@ module.setup = function(config)
           else
             window:perform_action(action.SplitHorizontal({ domain = "CurrentPaneDomain" }), pane)
           end
-        end)
+        end),
       },
-      { key = "v", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-      { key = "s", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+      { key = "v", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+      { key = "s", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
       { key = "<", action = action.AdjustPaneSize({ "Left", 1 }) },
       { key = "-", action = action.AdjustPaneSize({ "Down", 1 }) },
       { key = "+", action = action.AdjustPaneSize({ "Up", 1 }) },
       { key = ">", action = action.AdjustPaneSize({ "Right", 1 }) },
-      { key = '.', action = action.PromptInputLine {
-          description = 'Enter new name for tab',
-          action = wezterm.action_callback(
-            function(window, pane, line)
-              if line then
-                window:active_tab():set_title(line)
-              end
+      {
+        key = ".",
+        action = action.PromptInputLine({
+          description = "Enter new name for tab",
+          action = wezterm.action_callback(function(window, _, line)
+            if line then
+              window:active_tab():set_title(line)
             end
-          )
-        }
-      }
+          end),
+        }),
+      },
+    },
+    tabs = {
+      { key = "Escape", action = action.PopKeyTable },
+      { key = "n", action = action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS" }) },
+      { key = "Tab", action = action.ActivateTabRelative(1) },
+      { key = "Tab", mods = "CTRL", action = action.ActivateTabRelative(-1) },
     },
     sessions = {
       { key = "Escape", action = action.PopKeyTable },
       { key = "o", action = workspaces.select_project() },
-      { key = "s", action = action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
-      { key = '.', action = action.PromptInputLine {
-          description = 'Enter new name for workspace',
-          action = wezterm.action_callback(
-            function(window, pane, line)
-              if line then
-                mux.rename_workspace(
-                  mux.get_active_workspace(),
-                  line
-                )
-              end
+      { key = "s", action = action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+      {
+        key = ".",
+        action = action.PromptInputLine({
+          description = "Enter new name for workspace",
+          action = wezterm.action_callback(function(_, _, line)
+            if line then
+              mux.rename_workspace(mux.get_active_workspace(), line)
             end
-          )
-        }
-      }
+          end),
+        }),
+      },
     },
     windows = {
       { key = "Escape", action = action.PopKeyTable },
       { key = "h", action = action.Hide },
-      { key = "UpArrow", action = wezterm.action_callback(
-          function(window, pane)
-            window:maximize()
-          end
-        )
+      {
+        key = "UpArrow",
+        action = wezterm.action_callback(function(window)
+          window:maximize()
+        end),
       },
-      { key = "DownArrow", action = wezterm.action_callback(
-          function(window, pane)
-            window:restore()
-          end
-        )
-      }
-    }
+      {
+        key = "DownArrow",
+        action = wezterm.action_callback(function(window)
+          window:restore()
+        end),
+      },
+    },
   }
 
   for i = 0, 9 do
-    table.insert(config.keys, {
+    table.insert(config.key_tables.tabs, {
       key = tostring(i),
-      mods = "LEADER",
-      action = action.ActivateTab(i)
+      action = action.ActivateTab(i),
     })
   end
 end

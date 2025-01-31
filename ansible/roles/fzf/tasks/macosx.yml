@@ -19,6 +19,18 @@
     src: "{{ dotfiles }}/config/.config/zsh/registrations/fzf.zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh/registrations/fzf.zsh"
 
+- name: Install PSReadLine via PowerShell
+  ansible.builtin.shell: |
+    Install-Module PSReadLine -AcceptLicense -Confirm
+  args:
+    shell: pwsh
+
+- name: Install PSfzf via PowerShell
+  ansible.builtin.shell: |
+    Install-Module PSfzf -AcceptLicense -Confirm
+  args:
+    shell: pwsh
+
 - name: "Deploy fzf powershell aliases files"
   ansible.builtin.copy:
     src: "{{ dotfiles }}/config/.config/powershell/aliases/fzf.ps1"

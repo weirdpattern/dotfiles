@@ -8,7 +8,7 @@
   ignore_errors: true
 
 - name: Install Winget Package Manager
-  ansible.builtin.shell: |
+  ansible.windows.win_powershell: |
     $installed = Get-AppPackage -name "Microsoft.DesktopAppInstaller"
     if (-Not($installed)) {
       $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
@@ -20,11 +20,9 @@
     }
   register: install_winget_result
   changed_when: install_winget_result.stdout != 'False'
-  args:
-    executable: powershell.exe
 
 - name: Install {{ winget_package }} using Winget Package Manager
-  ansible.builtin.shell: |
+  ansible.windows.win_powershell: |
     $needed = [bool](winget list {{ winget_package }})[-1].Contains('No installed package')
     If ($needed) {
       winget install -e --id {{ winget_package }}
@@ -35,8 +33,6 @@
     } else {
       $false
     }
-  args:
-    executable: powershell.exe
   register: winget_install_result
   changed_when: winget_install_result.stdout != 'False'
   when: winget_package is defined

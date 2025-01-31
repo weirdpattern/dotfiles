@@ -3,7 +3,7 @@
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "eza-community.eza"
+    winget_package: eza-community.eza
 
 - name: "Deploy eza .config files"
   ansible.windows.win_copy:

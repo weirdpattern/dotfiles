@@ -1,13 +1,10 @@
 ---
 - name: Detect current user when in Windows Subsystem for Linux
-  ansible.builtin.shell:
-    cmd: $env:UserName
+  ansible.windows.win_powershell: $env:UserName
   register: username
   changed_when: false
   failed_when: username.rc != 0
   when: ansible_host_environment == "windows"
-  args:
-    executable: powershell.exe
 
 - name: Register current user when in Windows Subsystem for Linux
   ansible.builtin.set_fact:

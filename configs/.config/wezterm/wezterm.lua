@@ -1,15 +1,15 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-require("config.theme").setup(config)
-require("config.options").setup(config)
+require("segments.theme").setup(config)
+require("segments.options").setup(config)
 
-require("config.shell").setup(config)
-require("config.panes").setup(config)
+require("segments.shell").setup(config)
+require("segments.panes").setup(config)
 
-require("config.links").setup(config)
-require("config.mouse").setup(config)
-require("config.keybindings").setup(config)
+require("segments.links").setup(config)
+require("segments.mouse").setup(config)
+require("segments.keybindings").setup(config)
 
 local at_work,work = pcall(require,"local.work")
 if at_work then

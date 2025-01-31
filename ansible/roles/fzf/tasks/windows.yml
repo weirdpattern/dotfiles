@@ -3,7 +3,15 @@
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "junegunn.fzf"
+    winget_package: junegunn.fzf
+
+- name: Install PSReadLine via PowerShell
+  ansible.windows.win_powershell: |
+    Install-Module PSReadLine -AcceptLicense -Confirm
+
+- name: Install PSfzf via PowerShell
+  ansible.windows.win_powershell: |
+    Install-Module PSfzf -AcceptLicense -Confirm
 
 - name: "Deploy fzf powershell aliases files"
   ansible.windows.win_copy:

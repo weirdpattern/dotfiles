@@ -1,0 +1,16 @@
+---
+- name: "Install sysinternals on Windows"
+  ansible.builtin.include_role:
+    name: winget
+  vars:
+    winget_package: "{{ item }}"
+  loop:
+    - Microsoft.Sysinternals.RDCMan
+    - Microsoft.Sysinternals.Strings
+    - Microsoft.Sysinternals.Process Monitor
+    - Microsoft.Sysinternals.Process Explorer
+
+- name: "Deploy sysinternals powershell aliases files"
+  ansible.windows.win_copy:
+    src: "{{ dotfiles }}/config/.config/powershell/aliases/sysinternals.ps1"
+    dest: "{{ ansible_powershell_dir }}/aliases/sysinternals.ps1"

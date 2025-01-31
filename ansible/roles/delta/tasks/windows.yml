@@ -5,8 +5,8 @@
   vars:
     winget_package: "{{ item }}"
   loop:
-    - "jftuga.less"
-    - "dandavison.delta"
+    - jftuga.less
+    - dandavison.delta
 
 - name: "Deploy delta .config files"
   ansible.windows.win_copy:

@@ -3,7 +3,7 @@
   ansible.builtin.include_role:
     name: winget
   vars:
-    winget_package: "JesseDuffield.lazygit"
+    winget_package: JesseDuffield.lazygit
 
 - name: "Deploy lazygit .config files"
   ansible.windows.win_copy:
