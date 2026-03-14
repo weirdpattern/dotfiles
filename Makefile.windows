@@ -1,0 +1,196 @@
+############# 
+# Variables #
+#############
+
+USERDIR ?= C:/Users/$(USER)
+CONFIGDIR ?= $(USERDIR)/.config
+DOTFILESDIR ?= $(USERDIR)/.dotfiles
+
+APPLICATIONS := git \
+				powershell \
+                1password \
+                bat \
+                delta \
+                eza \
+				fselect \
+                fzf \
+                jq \
+                notion \
+                nvim \
+                powertoys \
+				raycast \
+                rio \
+                ripgrep \
+                starship \
+                sysinternals \
+				tana \
+				tdlr \
+                vscode \
+				vsenterprise \
+				yaak
+
+APP_IDS_GIT := Git.Git
+APP_IDS_POWERSHELL := Microsoft.PowerShell
+APP_IDS_1PASSWORD := AgileBits.1Password \
+					 AgileBits.1Password.CLI
+APP_IDS_BAT := sharkdp.bat
+APP_IDS_DELTA := dandavison.delta
+APP_IDS_EZA := eza-community.eza
+APP_IDS_FSELECT := lukesampson.fselect
+APP_IDS_FZF := junegunn.fzf
+APP_IDS_JQ := stedolan.jq
+APP_IDS_NOTION := Notion.Notion
+APP_IDS_NVIM := Neovim.Neovim
+APP_IDS_POWERTOYS := Microsoft.PowerToys
+APP_IDS_RAYCAST := Raycast
+APP_IDS_RIPGREP := BurntSushi.ripgrep.MSVC
+APP_IDS_RIO := raphamorim.rio
+APP_IDS_STARSHIP := Starship.Starship
+APP_IDS_SYSINTERNALS := Microsoft.Sysinternals.RDCMan \
+						Microsoft.Sysinternals.Strings \
+						"Microsoft.Sysinternals.Process Monitor" \
+						"Microsoft.Sysinternals.Process Explorer"
+APP_IDS_TDLR := tldr-pages.tlrc
+APP_IDS_VSCODE := Microsoft.VisualStudioCode
+APP_IDS_VSENTERPRISE := Microsoft.VisualStudio.Enterprise
+APP_IDS_YAAK := Yaak.app
+
+########### 
+# Targets #
+###########
+
+.PHONY: all pre-requisites install install-fonts upgrade \
+	$(addprefix configure-,$(APPLICATIONS)) \
+	$(addprefix install-,$(APPLICATIONS)) \
+	$(addprefix prepare-,$(APPLICATIONS))
+
+all: install install-fonts
+
+pre-requisites:
+	if not exist "$(CONFIGDIR)" mkdir "$(CONFIGDIR)"
+
+install: pre-requisites
+	$(MAKE) $(addprefix configure-,$(APPLICATIONS))
+
+install-fonts:
+	winget install -e --id DEVCOM.JetBrainsMonoNerdFont
+
+prepare-%:
+	@echo No preparation step for $*
+
+install-%: prepare-%
+	NAME := $(shell echo $(APPLICATIONS) | tr '[:lower:]' '[:upper:]')
+	for %%a in ($(APP_IDS_$(NAME))) do winget install -e --id %%a
+
+configure-%: install-%
+	@echo No configure step for $*
+
+# git
+
+prepare-git:
+	if not exist "$(CONFIGDIR)/git" mkdir "$(CONFIGDIR)/git"	
+
+configure-git:
+	cmd /c mklink "$(CONFIGDIR)/git/config" "$(DOTFILESDIR)/configs/git/.config/config"
+	cmd /c mklink "$(CONFIGDIR)/git/allowed_signers" "$(DOTFILESDIR)/configs/git/.config/allowed_signers"
+	cmd /c mklink "$(CONFIGDIR)/git/win-config-work" "$(DOTFILESDIR)/configs/git/.config/win-config-work"
+	cmd /c mklink "$(CONFIGDIR)/git/win-config-personal" "$(DOTFILESDIR)/configs/git/.config/win-config-personal"
+
+# powershell
+
+prepare-powershell:
+	if not exist "$(PROGRAMFILES)/PowerShell/7/aliases" mkdir "$(PROGRAMFILES)/PowerShell/7/aliases"
+	if not exist "$(PROGRAMFILES)/PowerShell/7/exports" mkdir "$(PROGRAMFILES)/PowerShell/7/exports"
+	if not exist "$(PROGRAMFILES)/PowerShell/7/registrations" mkdir "$(PROGRAMFILES)/PowerShell/7/registrations"
+
+configure-powershell:
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/profile.ps1" "$(DOTFILESDIR)/configs/powershell/.config/profile.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/navigation.ps1" "$(DOTFILESDIR)/configs/powershell/.config/aliases/navigation.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/networking.ps1" "$(DOTFILESDIR)/configs/powershell/.config/aliases/networking.ps1"	
+
+# 1password
+
+prepare-1password:
+	if not exist "$(LOCALAPPDATA)/1Password" mkdir "$(LOCALAPPDATA)/1Password"
+	if not exist "$(LOCALAPPDATA)/1Password/config" mkdir "$(LOCALAPPDATA)/1Password/config"
+	if not exist "$(LOCALAPPDATA)/1Password/config/ssh" mkdir "$(LOCALAPPDATA)/1Password/config/ssh"
+
+configure-1password:
+	cmd /c mklink "$(LOCALAPPDATA)/1Password/config/ssh/agent.toml" "$(DOTFILESDIR)/configs/1password/.config/ssh/agent.toml"
+
+# bat
+
+configure-bat:
+	cmd /c mklink /D "$(CONFIGDIR)/bat" "$(DOTFILESDIR)/configs/bat/.config"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/bat.ps1" "$(DOTFILESDIR)/configs/bat/powershell/aliases/bat.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/exports/bat.ps1" "$(DOTFILESDIR)/configs/bat/powershell/exports/bat.ps1"
+
+# delta
+
+configure-delta:
+	cmd /c mklink /D "$(CONFIGDIR)/delta" "$(DOTFILESDIR)/configs/delta/.config"
+	git config --global include.path "$(CONFIGDIR)/delta/themes"
+	git config --global core.pager "delta --paging=always"
+	git config --global interactive.diffFilter "delta --color-only"
+	git config --global merge.conflictStyle "zdiff3"
+	git config --global delta.navigate true
+	git config --global delta.side-by-side true
+	git config --global delta.hyperlinks true
+	git config --global delta.features "gruvbox"
+
+# eza
+
+configure-eza:
+	cmd /c mklink /D "$(CONFIGDIR)/eza" "$(DOTFILESDIR)/configs/eza/.config"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/eza.ps1" "$(DOTFILESDIR)/configs/eza/powershell/aliases/eza.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/exports/eza.ps1" "$(DOTFILESDIR)/configs/eza/powershell/exports/eza.ps1"
+
+# fselect
+
+configure-fselect:
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/fselect.ps1" "$(DOTFILESDIR)/configs/fselect/powershell/aliases/fselect.ps1"	
+
+# fzf
+
+configure-fzf:
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/fzf.ps1" "$(DOTFILESDIR)/configs/fzf/powershell/aliases/fzf.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/exports/fzf.ps1" "$(DOTFILESDIR)/configs/fzf/powershell/exports/fzf.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/registrations/fzf.ps1" "$(DOTFILESDIR)/configs/fzf/powershell/registrations/fzf.ps1"
+
+# jq
+
+configure-jq:
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/jq.ps1" "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1"	
+
+# nvim
+
+configure-nvim:
+	cmd /c mklink /D "$(CONFIGDIR)/nvim" "$(DOTFILESDIR)/configs/nvim/.config"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/nvim.ps1" "$(DOTFILESDIR)/configs/nvim/powershell/aliases/nvim.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/exports/nvim.ps1" "$(DOTFILESDIR)/configs/nvim/powershell/exports/nvim.ps1"
+
+# rio
+
+configure-rio:
+	cmd /c mklink /D "$(LOCALAPPDATA)/rio" "$(DOTFILESDIR)/configs/rio/.config"
+
+# starship
+
+configure-starship:
+	cmd /c mklink /D "$(CONFIGDIR)/starship" "$(DOTFILESDIR)/configs/starship/.config"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/exports/starship.ps1" "$(DOTFILESDIR)/configs/starship/powershell/exports/starship.ps1"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/registrations/starship.ps1" "$(DOTFILESDIR)/configs/starship/powershell/registrations/starship.ps1"
+
+# tana
+
+install-tana:
+	curl -fsSLO https://github.com/tanainc/tana-desktop-releases/releases/latest/download/TanaSetup.exe --output-dir "$(TEMP)"
+	$(TEMP)/TanaSetup.exe /S
+	
+# tldr
+configure-tldr:
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/tdlr.ps1" "$(DOTFILESDIR)/configs/tdlr/powershell/aliases/tdlr.ps1"
+
+# vscode
+configure-vscode:
+	git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"

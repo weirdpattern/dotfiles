@@ -1,0 +1,6 @@
+[user]
+	name = Patricio Trevino
+	email = ptrevino@houstonmethodist.org
+
+[credential "azrepos:org/houstonmethodist"]
+	username = ptrevino@houstonmethodist.org

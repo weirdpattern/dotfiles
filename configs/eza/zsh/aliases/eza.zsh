@@ -1,0 +1,5 @@
+alias ls="eza --color=always --icons=always --long --header --group-directories-first"
+alias ll="eza --color=always --icons=always --all --long --header --group-directories-first"
+alias tree="eza --color=always --icons=always --header --tree"
+alias files="eza --color=always --icons=always --no-quotes --only-files --header --oneline"
+alias directories="eza --color=always --icons=always --no-quotes --only-dirs --header --oneline"

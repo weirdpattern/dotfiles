@@ -1,0 +1,47 @@
+theme = "Gruvbox Dark"
+
+confirm-before-quit = false
+
+padding-x = 15
+padding-y = [10, 10]
+
+[renderer]
+performance = "High"
+backend = "Automatic"
+
+[editor]
+program = "nvim"
+args = []
+
+[cursor]
+shape = "underline"
+blinking = true
+
+[fonts]
+size = 14
+family = "JetBrainsMono Nerd Font Propo"
+use-drawable-chars = true
+disable-warnings-not-found = false
+
+[navigation]
+mode = "Bookmark"
+use-split = true
+color-automation = [
+  { program = "nvim", color = "#FF0000" }
+]
+
+[window]
+width = 1200
+height = 600
+opacity = 0.85
+
+[scroll]
+multiplier = 8.0
+divider = 1.0
+
+[shell]
+program = "/bin/zsh"
+args = ["--login"]
+
+[platform]
+windows.shell = { program = "pwsh", args = ["--login"] }

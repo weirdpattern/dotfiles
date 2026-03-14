@@ -1,0 +1,60 @@
+[user]
+	name = Patricio Trevino
+	email = patricio.trevino@weirdpattern.com
+
+[core]
+	editor = nvim -f
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+
+[winUpdater]
+	recentlySeenVersion = 2.25.0.windows.1
+
+[http]
+	sslVerify = true
+
+[fetch]
+	prune = true
+  
+[diff]
+	colorMoved = zebra
+
+[init]
+	defaultBranch = main
+
+[rerere]
+	enabled = true
+
+[pull]
+	ff = only
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[alias]
+  	aliases = ! git config --list | awk '/alias/{ print $1 }' | perl -pe 's/alias\\.//g' | perl -pe 's/=.+//g'
+  	branches = ! git for-each-ref --sort='-authordate' --format='%(refname)' refs/heads | sed -e 's-refs/heads/--'
+  	last = log -1 HEAD --stat
+  	smartlog = log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)<%H>%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)<%ae>%Creset%n%C(cyan)%s%n%Creset'
+  	amend = commit --amend
+  	force = push --force-with-lease
+  	undo = reset --hard
+  	rollback = reset HEAD~1 --mixed
+
+[safe]
+	directory = *
+
+[credential]
+	helper = wincred	
+
+[includeIf "gitdir/i:D:/sandbox/w/"]
+    path = ~/.config/git/win-config-work
+
+[includeIf "gitdir/i:D:/sandbox/p/"]
+    path = ~/.config/git/win-config-personal
+
+[includeIf "gitdir/i:D:/sandbox/p/"]
+    path = ~/.dotfiles
+
+[includeIf "gitdir/i:/users/weirdpattern/sandbox/"]
+    path = ~/.config/git/macosx-config-personal

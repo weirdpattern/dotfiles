@@ -1,0 +1,180 @@
+############# 
+# Variables #
+#############
+
+USERDIR ?= /Users/$(USER)
+CONFIGDIR ?= $(USERDIR)/.config
+DOTFILESDIR ?= $(USERDIR)/.dotfiles
+
+FORMULAES := git \
+			 zsh \
+             bat \
+             delta \
+             eza \
+			 fselect \
+             fzf \
+             jq \
+             nvim \
+             ripgrep \
+             starship
+                
+CASKS := 1password \
+		 notion \
+		 raycast \
+		 rio \
+		 tana \
+		 vscode \
+		 yaak
+
+APPLICATIONS := $(FORMULAES) $(CASKS)
+
+APP_IDS_GIT := git
+APP_IDS_ZSH := zsh
+APP_IDS_1PASSWORD := 1password \
+					 1password-cli
+APP_IDS_BAT := bat
+APP_IDS_DELTA := git-delta
+APP_IDS_EZA := eza
+APP_IDS_FSELECT := fselect
+APP_IDS_FZF := fzf
+APP_IDS_JQ := jq
+APP_IDS_NOTION := notion
+APP_IDS_NVIM := neovim
+APP_IDS_RAYCAST := raycast
+APP_IDS_RIPGREP := ripgrep
+APP_IDS_RIO := rio
+APP_IDS_STARSHIP := starship
+APP_IDS_VSCODE := visual-studio-code
+
+########### 
+# Targets #
+###########
+
+.PHONY: all pre-requisites install install-fonts upgrade \
+	$(addprefix configure-,$(APPLICATIONS)) \
+	$(addprefix install-,$(APPLICATIONS)) \
+	$(addprefix prepare-,$(APPLICATIONS))
+
+all: install install-fonts
+
+pre-requisites:
+	if [ ! -d "$(CONFIGDIR)" ]; then mkdir -p "$(CONFIGDIR)"; fi
+
+install: pre-requisites
+	$(MAKE) $(addprefix configure-,$(APPLICATIONS))
+
+install-fonts:
+	winget install -e --id DEVCOM.JetBrainsMonoNerdFont
+
+prepare-%:
+	@echo No preparation step for $*
+
+install-%: prepare-%
+	FORMULAE := $(shell echo $(FORMULAES) | tr '[:lower:]' '[:upper:]')
+	for %%a in ($(APP_IDS_$(FORMULAE))) do brew install %%a
+
+	CASK := $(shell echo $(CASKS) | tr '[:lower:]' '[:upper:]')
+	for %%a in ($(APP_IDS_$(CASK))) do brew install --cask %%a
+
+configure-%: install-%
+	@echo No configure step for $*
+
+# git
+
+prepare-git:
+	if [ ! -d "$(CONFIGDIR)/git" ]; then mkdir -p "$(CONFIGDIR)/git"; fi
+	rm -rf $(USERDIR)/.gitconfig > /dev/null 2>&1
+
+configure-git:
+	ln -s "$(DOTFILESDIR)/configs/git/.config/config" "$(CONFIGDIR)/git/config"
+	ln -s "$(DOTFILESDIR)/configs/git/.config/allowed_signers" "$(CONFIGDIR)/git/allowed_signers"
+	ln -s "$(DOTFILESDIR)/configs/git/.config/macosx-config-personal" "$(CONFIGDIR)/git/macosx-config-personal"
+
+# zsh
+
+prepare-zsh:
+	if [ ! -d "$(CONFIGDIR)/zsh" ]; then mkdir -p "$(CONFIGDIR)/zsh"; fi
+	if [ ! -d "$(CONFIGDIR)/zsh/aliases" ]; then mkdir -p "$(CONFIGDIR)/zsh/aliases"; fi
+	if [ ! -d "$(CONFIGDIR)/zsh/exports" ]; then mkdir -p "$(CONFIGDIR)/zsh/exports"; fi
+	if [ ! -d "$(CONFIGDIR)/zsh/registrations" ]; then mkdir -p "$(CONFIGDIR)/zsh/registrations"; fi
+	
+	echo "ZDOTDIR=$(CONFIGDIR)/zsh" > $(USERDIR)/.zshenv
+	
+	rm -rf $(USERDIR)/.zshrc > /dev/null 2>&1
+
+configure-zsh:
+	ln -s "$(DOTFILESDIR)/configs/zsh/.zshrc" "$(CONFIGDIR)/zsh/.zshrc"
+
+# 1password
+
+configure-1password:
+	ln -s "$(DOTFILESDIR)/configs/1password/.config" "$(CONFIGDIR)/1password"
+
+# bat
+
+configure-bat:
+	ln -s "$(DOTFILESDIR)/configs/bat/.config" "$(CONFIGDIR)/bat"
+ 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/aliases/bat.ps1" "$(CONFIGDIR)/zsh/aliases/bat.ps1"
+ 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/exports/bat.ps1" "$(CONFIGDIR)/zsh/exports/bat.ps1"
+
+# delta
+
+configure-delta:
+	ln -s "$(DOTFILESDIR)/configs/delta/.config" "$(CONFIGDIR)/delta"
+	git config --global include.path "$(CONFIGDIR)/delta/themes"
+	git config --global core.pager "delta --paging=always"
+	git config --global interactive.diffFilter "delta --color-only"
+	git config --global merge.conflictStyle "zdiff3"
+	git config --global delta.navigate true
+	git config --global delta.side-by-side true
+	git config --global delta.hyperlinks true
+	git config --global delta.features "gruvbox"
+
+# eza
+
+configure-eza:
+	ln -s "$(DOTFILESDIR)/configs/eza/.config" "$(CONFIGDIR)/eza"
+	ln -s "$(DOTFILESDIR)/configs/eza/powershell/aliases/eza.ps1" "$(CONFIGDIR)/zsh/aliases/eza.ps1"
+	ln -s "$(DOTFILESDIR)/configs/eza/powershell/exports/eza.ps1" "$(CONFIGDIR)/zsh/exports/eza.ps1"
+
+# fzf
+
+configure-fzf:
+	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/aliases/fzf.ps1" "$(CONFIGDIR)/zsh/aliases/fzf.ps1"
+	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/exports/fzf.ps1" "$(CONFIGDIR)/zsh/exports/fzf.ps1"
+	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/registrations/fzf.ps1" "$(CONFIGDIR)/zsh/registrations/fzf.ps1"
+
+# jq
+
+configure-jq:
+	ln -s "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1" "$(CONFIGDIR)/zsh/aliases/jq.ps1"	
+
+# nvim
+
+configure-nvim:
+	ln -s "$(DOTFILESDIR)/configs/nvim/.config" "$(CONFIGDIR)/nvim"
+	ln -s "$(DOTFILESDIR)/configs/nvim/powershell/aliases/nvim.ps1" "$(CONFIGDIR)/zsh/aliases/nvim.ps1"
+	ln -s "$(DOTFILESDIR)/configs/nvim/powershell/exports/nvim.ps1" "$(CONFIGDIR)/zsh/exports/nvim.ps1"
+
+# rio
+
+configure-rio:
+	ln -s "$(DOTFILESDIR)/configs/rio/.config" "$(CONFIGDIR)/rio"
+
+# starship
+
+configure-starship:
+	ln -s "$(DOTFILESDIR)/configs/starship/.config" "$(CONFIGDIR)/starship"
+	ln -s "$(DOTFILESDIR)/configs/starship/powershell/exports/starship.ps1" "$(CONFIGDIR)/zsh/exports/starship.ps1"
+	ln -s "$(DOTFILESDIR)/configs/starship/powershell/registrations/starship.ps1" "$(CONFIGDIR)/zsh/registrations/starship.ps1"
+
+# tana
+
+install-tana:
+	curl -L -s https://api.github.com/repos/tanainc/tana-desktop-releases/releases/latest | jq -r '.assets[] | select(.content_type == "application/x-apple-diskimage") | .browser_download_url' | xargs curl -L -s -o /tmp/Tana.dmg
+	hdiutil attach /tmp/Tana.dmg -nobrowse -quiet
+
+# vscode
+
+configure-vscode:
+	git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"	

@@ -1,0 +1,1 @@
+[Environment]::SetEnvironmentVariable("STARSHIP_CONFIG", "${env:UserProfile}/.config/starship/starship.toml");
