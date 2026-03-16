@@ -1,4 +1,4 @@
-############# 
+#############
 # Variables #
 #############
 
@@ -7,27 +7,28 @@ CONFIGDIR ?= $(USERDIR)/.config
 DOTFILESDIR ?= $(USERDIR)/.dotfiles
 
 APPLICATIONS := git \
-				powershell \
-                1password \
-                bat \
-                delta \
-                eza \
-				fselect \
-                fzf \
-                jq \
-                notion \
-                nvim \
-                powertoys \
-				raycast \
-                rio \
-                ripgrep \
-                starship \
-                sysinternals \
-				tana \
-				tdlr \
-                vscode \
-				vsenterprise \
-				yaak
+  powershell \
+  1password \
+  bat \
+  delta \
+  eza \
+  fselect \
+  fzf \
+  jq \
+  notion \
+  nvim \
+  podman \
+  powertoys \
+  raycast \
+  rio \
+  ripgrep \
+  starship \
+  sysinternals \
+  tana \
+  tdlr \
+  vscode \
+  vsenterprise \
+  yaak
 
 APP_IDS_GIT := Git.Git
 APP_IDS_POWERSHELL := Microsoft.PowerShell
@@ -41,6 +42,8 @@ APP_IDS_FZF := junegunn.fzf
 APP_IDS_JQ := stedolan.jq
 APP_IDS_NOTION := Notion.Notion
 APP_IDS_NVIM := Neovim.Neovim
+APP_IDS_PODMAN := RedHat.Podman \
+                  RedHat.Podman-Desktop
 APP_IDS_POWERTOYS := Microsoft.PowerToys
 APP_IDS_RAYCAST := Raycast
 APP_IDS_RIPGREP := BurntSushi.ripgrep.MSVC
@@ -55,7 +58,7 @@ APP_IDS_VSCODE := Microsoft.VisualStudioCode
 APP_IDS_VSENTERPRISE := Microsoft.VisualStudio.Enterprise
 APP_IDS_YAAK := Yaak.app
 
-########### 
+###########
 # Targets #
 ###########
 
@@ -66,6 +69,9 @@ APP_IDS_YAAK := Yaak.app
 
 all: install install-fonts
 
+upgrade:
+	winget upgrade --all --accept-package-agreements --accept-source-agreements
+
 pre-requisites:
 	if not exist "$(CONFIGDIR)" mkdir "$(CONFIGDIR)"
 
@@ -73,14 +79,14 @@ install: pre-requisites
 	$(MAKE) $(addprefix configure-,$(APPLICATIONS))
 
 install-fonts:
-	winget install -e --id DEVCOM.JetBrainsMonoNerdFont
+	winget install -e --id DEVCOM.JetBrainsMonoNerdFont --accept-package-agreements --accept-source-agreements
 
 prepare-%:
 	@echo No preparation step for $*
 
 install-%: prepare-%
 	NAME := $(shell echo $(APPLICATIONS) | tr '[:lower:]' '[:upper:]')
-	for %%a in ($(APP_IDS_$(NAME))) do winget install -e --id %%a
+	for %%a in ($(APP_IDS_$(NAME))) do winget install -e --id %%a --accept-package-agreements --accept-source-agreements
 
 configure-%: install-%
 	@echo No configure step for $*
@@ -88,7 +94,7 @@ configure-%: install-%
 # git
 
 prepare-git:
-	if not exist "$(CONFIGDIR)/git" mkdir "$(CONFIGDIR)/git"	
+	if not exist "$(CONFIGDIR)/git" mkdir "$(CONFIGDIR)/git"
 
 configure-git:
 	cmd /c mklink "$(CONFIGDIR)/git/config" "$(DOTFILESDIR)/configs/git/.config/config"
@@ -106,7 +112,7 @@ prepare-powershell:
 configure-powershell:
 	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/profile.ps1" "$(DOTFILESDIR)/configs/powershell/.config/profile.ps1"
 	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/navigation.ps1" "$(DOTFILESDIR)/configs/powershell/.config/aliases/navigation.ps1"
-	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/networking.ps1" "$(DOTFILESDIR)/configs/powershell/.config/aliases/networking.ps1"	
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/networking.ps1" "$(DOTFILESDIR)/configs/powershell/.config/aliases/networking.ps1"
 
 # 1password
 
@@ -148,7 +154,7 @@ configure-eza:
 # fselect
 
 configure-fselect:
-	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/fselect.ps1" "$(DOTFILESDIR)/configs/fselect/powershell/aliases/fselect.ps1"	
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/fselect.ps1" "$(DOTFILESDIR)/configs/fselect/powershell/aliases/fselect.ps1"
 
 # fzf
 
@@ -160,7 +166,7 @@ configure-fzf:
 # jq
 
 configure-jq:
-	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/jq.ps1" "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1"	
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/jq.ps1" "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1"
 
 # nvim
 
@@ -186,11 +192,13 @@ configure-starship:
 install-tana:
 	curl -fsSLO https://github.com/tanainc/tana-desktop-releases/releases/latest/download/TanaSetup.exe --output-dir "$(TEMP)"
 	$(TEMP)/TanaSetup.exe /S
-	
+
 # tldr
+
 configure-tldr:
 	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/tdlr.ps1" "$(DOTFILESDIR)/configs/tdlr/powershell/aliases/tdlr.ps1"
 
 # vscode
+
 configure-vscode:
 	git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"

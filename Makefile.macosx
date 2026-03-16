@@ -1,4 +1,4 @@
-############# 
+#############
 # Variables #
 #############
 
@@ -7,24 +7,26 @@ CONFIGDIR ?= $(USERDIR)/.config
 DOTFILESDIR ?= $(USERDIR)/.dotfiles
 
 FORMULAES := git \
-			 zsh \
-             bat \
-             delta \
-             eza \
-			 fselect \
-             fzf \
-             jq \
-             nvim \
-             ripgrep \
-             starship
-                
+  zsh \
+  bat \
+  delta \
+  eza \
+  fselect \
+  fzf \
+  jq \
+  nvim \
+  podman \
+  ripgrep \
+  starship
+
 CASKS := 1password \
-		 notion \
-		 raycast \
-		 rio \
-		 tana \
-		 vscode \
-		 yaak
+  notion \
+  podman_desktop \
+  raycast \
+  rio \
+  tana \
+  vscode \
+  yaak
 
 APPLICATIONS := $(FORMULAES) $(CASKS)
 
@@ -40,13 +42,16 @@ APP_IDS_FZF := fzf
 APP_IDS_JQ := jq
 APP_IDS_NOTION := notion
 APP_IDS_NVIM := neovim
+APP_IDS_PODMAN := podman
+APP_IDS_PODMAN_DESKTOP := podman-desktop
 APP_IDS_RAYCAST := raycast
 APP_IDS_RIPGREP := ripgrep
 APP_IDS_RIO := rio
 APP_IDS_STARSHIP := starship
 APP_IDS_VSCODE := visual-studio-code
+APP_IDS_YAAK := yaak
 
-########### 
+###########
 # Targets #
 ###########
 
@@ -64,17 +69,17 @@ install: pre-requisites
 	$(MAKE) $(addprefix configure-,$(APPLICATIONS))
 
 install-fonts:
-	winget install -e --id DEVCOM.JetBrainsMonoNerdFont
+	yes | brew install --cask font-jetbrains-mono-nerd-font
 
 prepare-%:
 	@echo No preparation step for $*
 
 install-%: prepare-%
 	FORMULAE := $(shell echo $(FORMULAES) | tr '[:lower:]' '[:upper:]')
-	for %%a in ($(APP_IDS_$(FORMULAE))) do brew install %%a
+	for %%a in ($(APP_IDS_$(FORMULAE))) do yes | brew install %%a
 
 	CASK := $(shell echo $(CASKS) | tr '[:lower:]' '[:upper:]')
-	for %%a in ($(APP_IDS_$(CASK))) do brew install --cask %%a
+	for %%a in ($(APP_IDS_$(CASK))) do yes | brew install --cask %%a
 
 configure-%: install-%
 	@echo No configure step for $*
@@ -97,9 +102,9 @@ prepare-zsh:
 	if [ ! -d "$(CONFIGDIR)/zsh/aliases" ]; then mkdir -p "$(CONFIGDIR)/zsh/aliases"; fi
 	if [ ! -d "$(CONFIGDIR)/zsh/exports" ]; then mkdir -p "$(CONFIGDIR)/zsh/exports"; fi
 	if [ ! -d "$(CONFIGDIR)/zsh/registrations" ]; then mkdir -p "$(CONFIGDIR)/zsh/registrations"; fi
-	
+
 	echo "ZDOTDIR=$(CONFIGDIR)/zsh" > $(USERDIR)/.zshenv
-	
+
 	rm -rf $(USERDIR)/.zshrc > /dev/null 2>&1
 
 configure-zsh:
@@ -147,7 +152,7 @@ configure-fzf:
 # jq
 
 configure-jq:
-	ln -s "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1" "$(CONFIGDIR)/zsh/aliases/jq.ps1"	
+	ln -s "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1" "$(CONFIGDIR)/zsh/aliases/jq.ps1"
 
 # nvim
 
@@ -177,4 +182,4 @@ install-tana:
 # vscode
 
 configure-vscode:
-	git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"	
+	git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"
