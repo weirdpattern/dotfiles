@@ -3,6 +3,12 @@
     email = patricio.trevino@weirdpattern.com
     signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHe3i5al7YM5iqAD6WsiQd/9KgY6h7tWsYU6JQhgRqjSAYvVwK+hzKjTPR1494tYpUL9hsrM1m/pqb1E3dgT+NaITCz4Ami9qzX/jAONaddbE7KMehAbEJIxZsO1qtCKLOT/z32RhVYEy+e+ayy7+vEC8CtFw1psjcudsGeMhUGP537YcZJEMh+twaVOho2oaKxcdpj+wO3YL945VQ3KqOVrwynlFE9mfMrzmQYkPDbUSshCckMHNMmZHYfWMblnC4FQ4fcnrbqza9DNR6fQEkyLV+VkHcDmf2RD1xUIjCF89jssnkCcdsFSa7HgKKQJoY87q4cRsT7xaBcdr39JS4lzSGT+YgSdQZjn+PkGCqbNDckzEF3OWGYLLGQ/S/5Db8EQ9KqL0XhK9j3njkP+7G8HCHp3Y99yRI/1/cCfLjLBUbUqR4YgoM4BAcsxYhhebtqwZa7DxNNm4BN9Z/Qk2tJ6WEh1E6nXmh91NecukyRjBNOQkgT9sSxAvKrFwSTA5LNENOQSqlBvhinhKp2zNlql6RHqXzysbktV3vHUPSfVh45/898WO/eTm2KqVv3pv1vjLhApEMMLVnRijFFy4qIA6//c2zPEXZ/q0Zsn6H91/EvVfYMu5/esLxc+8ju3VfspgW9v1OZ6Z242lH/2Eyyijag7/k2VatvMH+8psLJw==
 
+[credential]
+	helper = wincred
+
+[winUpdater]
+	recentlySeenVersion = 2.25.0.windows.1
+
 [gpg]
     format = ssh
 
@@ -13,3 +19,6 @@
 [commit]
     gpgsign = true
 
+[core]
+	editor = nvim -f
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe

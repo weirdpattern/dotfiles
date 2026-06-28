@@ -2,5 +2,15 @@
 	name = Patricio Trevino
 	email = ptrevino@houstonmethodist.org
 
+[credential]
+	helper = wincred
+
+[winUpdater]
+	recentlySeenVersion = 2.25.0.windows.1
+
 [credential "azrepos:org/houstonmethodist"]
 	username = ptrevino@houstonmethodist.org
+
+[core]
+	editor = nvim -f
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe

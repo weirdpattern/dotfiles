@@ -119,8 +119,8 @@ configure-1password:
 
 configure-bat:
 	ln -s "$(DOTFILESDIR)/configs/bat/.config" "$(CONFIGDIR)/bat"
- 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/aliases/bat.ps1" "$(CONFIGDIR)/zsh/aliases/bat.ps1"
- 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/exports/bat.ps1" "$(CONFIGDIR)/zsh/exports/bat.ps1"
+ 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/aliases/bat.sh" "$(CONFIGDIR)/zsh/aliases/bat.sh"
+ 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/exports/bat.sh" "$(CONFIGDIR)/zsh/exports/bat.sh"
 
 # delta
 
@@ -139,27 +139,32 @@ configure-delta:
 
 configure-eza:
 	ln -s "$(DOTFILESDIR)/configs/eza/.config" "$(CONFIGDIR)/eza"
-	ln -s "$(DOTFILESDIR)/configs/eza/powershell/aliases/eza.ps1" "$(CONFIGDIR)/zsh/aliases/eza.ps1"
-	ln -s "$(DOTFILESDIR)/configs/eza/powershell/exports/eza.ps1" "$(CONFIGDIR)/zsh/exports/eza.ps1"
+	ln -s "$(DOTFILESDIR)/configs/eza/zsh/aliases/eza.sh" "$(CONFIGDIR)/zsh/aliases/eza.sh"
+	ln -s "$(DOTFILESDIR)/configs/eza/zsh/exports/eza.sh" "$(CONFIGDIR)/zsh/exports/eza.sh"
+
+# fselect
+
+configure-fselect:
+  ln -s "$(DOTFILESDIR)/configs/fzf/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
 
 # fzf
 
 configure-fzf:
-	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/aliases/fzf.ps1" "$(CONFIGDIR)/zsh/aliases/fzf.ps1"
-	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/exports/fzf.ps1" "$(CONFIGDIR)/zsh/exports/fzf.ps1"
-	ln -s "$(DOTFILESDIR)/configs/fzf/powershell/registrations/fzf.ps1" "$(CONFIGDIR)/zsh/registrations/fzf.ps1"
+	ln -s "$(DOTFILESDIR)/configs/fzf/zsh/aliases/fzf.sh" "$(CONFIGDIR)/zsh/aliases/fzf.sh"
+	ln -s "$(DOTFILESDIR)/configs/fzf/zsh/exports/fzf.sh" "$(CONFIGDIR)/zsh/exports/fzf.sh"
+	ln -s "$(DOTFILESDIR)/configs/fzf/zsh/registrations/fzf.sh" "$(CONFIGDIR)/zsh/registrations/fzf.sh"
 
 # jq
 
 configure-jq:
-	ln -s "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1" "$(CONFIGDIR)/zsh/aliases/jq.ps1"
+	ln -s "$(DOTFILESDIR)/configs/jq/zsh/aliases/jq.sh" "$(CONFIGDIR)/zsh/aliases/jq.sh"
 
 # nvim
 
 configure-nvim:
 	ln -s "$(DOTFILESDIR)/configs/nvim/.config" "$(CONFIGDIR)/nvim"
-	ln -s "$(DOTFILESDIR)/configs/nvim/powershell/aliases/nvim.ps1" "$(CONFIGDIR)/zsh/aliases/nvim.ps1"
-	ln -s "$(DOTFILESDIR)/configs/nvim/powershell/exports/nvim.ps1" "$(CONFIGDIR)/zsh/exports/nvim.ps1"
+	ln -s "$(DOTFILESDIR)/configs/nvim/zsh/aliases/nvim.sh" "$(CONFIGDIR)/zsh/aliases/nvim.sh"
+	ln -s "$(DOTFILESDIR)/configs/nvim/zsh/exports/nvim.sh" "$(CONFIGDIR)/zsh/exports/nvim.sh"
 
 # rio
 
@@ -170,14 +175,18 @@ configure-rio:
 
 configure-starship:
 	ln -s "$(DOTFILESDIR)/configs/starship/.config" "$(CONFIGDIR)/starship"
-	ln -s "$(DOTFILESDIR)/configs/starship/powershell/exports/starship.ps1" "$(CONFIGDIR)/zsh/exports/starship.ps1"
-	ln -s "$(DOTFILESDIR)/configs/starship/powershell/registrations/starship.ps1" "$(CONFIGDIR)/zsh/registrations/starship.ps1"
+	ln -s "$(DOTFILESDIR)/configs/starship/zsh/registrations/starship.sh" "$(CONFIGDIR)/zsh/registrations/starship.sh"
 
 # tana
 
 install-tana:
 	curl -L -s https://api.github.com/repos/tanainc/tana-desktop-releases/releases/latest | jq -r '.assets[] | select(.content_type == "application/x-apple-diskimage") | .browser_download_url' | xargs curl -L -s -o /tmp/Tana.dmg
 	hdiutil attach /tmp/Tana.dmg -nobrowse -quiet
+
+# tldr
+
+configure-tldr:
+  ln -s "$(DOTFILESDIR)/configs/tldr/zsh/aliases/tldr.sh" "$(CONFIGDIR)/zsh/aliases/tldr.sh"
 
 # vscode
 

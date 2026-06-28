@@ -2,19 +2,12 @@
 	name = Patricio Trevino
 	email = patricio.trevino@weirdpattern.com
 
-[core]
-	editor = nvim -f
-	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
-
-[winUpdater]
-	recentlySeenVersion = 2.25.0.windows.1
-
 [http]
 	sslVerify = true
 
 [fetch]
 	prune = true
-  
+
 [diff]
 	colorMoved = zebra
 
@@ -44,17 +37,14 @@
 [safe]
 	directory = *
 
-[credential]
-	helper = wincred	
-
 [includeIf "gitdir/i:D:/sandbox/w/"]
-    path = ~/.config/git/win-config-work
+  path = ~/.config/git/win-config-work
 
 [includeIf "gitdir/i:D:/sandbox/p/"]
-    path = ~/.config/git/win-config-personal
+  path = ~/.config/git/win-config-personal
 
 [includeIf "gitdir/i:D:/sandbox/p/"]
-    path = ~/.dotfiles
+  path = ~/.dotfiles
 
 [includeIf "gitdir/i:/users/weirdpattern/sandbox/"]
-    path = ~/.config/git/macosx-config-personal
+  path = ~/.config/git/macosx-config-personal
