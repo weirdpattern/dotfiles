@@ -67,8 +67,7 @@ ln -s "$DOTFILES_DIR/configs/git/.config/config" "$HOME/.config/git/config"
 ln -s "$DOTFILES_DIR/configs/jq/zsh/aliases/jq.sh" "$HOME/.config/zsh/aliases/jq.sh"
 
 # Copy starship files to .config
-ln -s "$DOTFILES_DIR/configs/starship/.config" "$HOME/.config/starship"
-ln -s "$DOTFILES_DIR/configs/starship/zsh/exports/starship.sh" "$HOME/.config/zsh/exports/starship.sh"
+ln -s "$DOTFILES_DIR/configs/starship/.config/starship.toml" "$HOME/.config/starship.toml"
 ln -s "$DOTFILES_DIR/configs/starship/zsh/registrations/starship.sh" "$HOME/.config/zsh/registrations/starship.sh"
 
 # Copy tldr files to .config
