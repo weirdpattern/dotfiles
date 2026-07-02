@@ -31,8 +31,6 @@ mkdir -p "$HOME/.config/zsh/aliases"
 mkdir -p "$HOME/.config/zsh/exports"
 mkdir -p "$HOME/.config/zsh/registrations"
 
-echo "export ZDOTDIR=$HOME/.config/zsh" > "$HOME/.zshenv"
-
 # Copy bat files to .config
 ln -s "$DOTFILES_DIR/configs/bat/.config" "$HOME/.config/bat"
 ln -s "$DOTFILES_DIR/configs/bat/zsh/aliases/bat.sh" "$HOME/.config/zsh/aliases/bat.sh"
@@ -76,7 +74,7 @@ ln -s "$DOTFILES_DIR/configs/starship/zsh/registrations/starship.sh" "$HOME/.con
 ln -s "$DOTFILES_DIR/configs/tldr/zsh/aliases/tldr.sh" "$HOME/.config/zsh/aliases/tldr.sh"
 
 # Copy zsh files to .config
-ln -s "$DOTFILES_DIR/configs/zsh/.config/.zshrc" "$HOME/.config/zsh/.zshrc"
+ln -s "$DOTFILES_DIR/configs/zsh/.config/.zshrc" "$HOME/.zshrc"
 
 # Configure vscode
 git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"
