@@ -35,8 +35,8 @@ echo "ZDOTDIR=$HOME/.config/zsh" > "$HOME/.zshenv"
 
 # Copy bat files to .config
 ln -s "$DOTFILES_DIR/configs/bat/.config" "$HOME/.config/bat"
-ln -s "$DOTFILES_DIR/configs/bat/zsh/aliases/bat.ps1" "$HOME/.config/zsh/aliases/bat.ps1"
-ln -s "$DOTFILES_DIR/configs/bat/zsh/exports/bat.ps1" "$HOME/.config/zsh/exports/bat.ps1"
+ln -s "$DOTFILES_DIR/configs/bat/zsh/aliases/bat.sh" "$HOME/.config/zsh/aliases/bat.sh"
+ln -s "$DOTFILES_DIR/configs/bat/zsh/exports/bat.sh" "$HOME/.config/zsh/exports/bat.sh"
 
 # Copy delta files to .config
 ln -s "$DOTFILES_DIR/configs/delta/.config" "$HOME/.config/delta"
@@ -51,8 +51,8 @@ git config --global delta.features "gruvbox"
 
 # Copy eza files to .config
 ln -s "$DOTFILES_DIR/configs/eza/.config" "$HOME/.config/eza"
-ln -s "$DOTFILES_DIR/configs/eza/zsh/aliases/eza.ps1" "$HOME/.config/zsh/aliases/eza.ps1"
-ln -s "$DOTFILES_DIR/configs/eza/zsh/exports/eza.ps1" "$HOME/.config/zsh/exports/eza.ps1"
+ln -s "$DOTFILES_DIR/configs/eza/zsh/aliases/eza.sh" "$HOME/.config/zsh/aliases/eza.sh"
+ln -s "$DOTFILES_DIR/configs/eza/zsh/exports/eza.sh" "$HOME/.config/zsh/exports/eza.sh"
 
 # Copy fselect files to .config
 ln -s "$DOTFILES_DIR/configs/fzf/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
