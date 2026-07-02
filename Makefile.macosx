@@ -103,7 +103,7 @@ prepare-zsh:
 	if [ ! -d "$(CONFIGDIR)/zsh/exports" ]; then mkdir -p "$(CONFIGDIR)/zsh/exports"; fi
 	if [ ! -d "$(CONFIGDIR)/zsh/registrations" ]; then mkdir -p "$(CONFIGDIR)/zsh/registrations"; fi
 
-	echo "ZDOTDIR=$(CONFIGDIR)/zsh" > $(USERDIR)/.zshenv
+	echo "export ZDOTDIR=$(CONFIGDIR)/zsh" > $(USERDIR)/.zshenv
 
 	rm -rf $(USERDIR)/.zshrc > /dev/null 2>&1
 
