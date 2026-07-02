@@ -76,7 +76,7 @@ ln -s "$DOTFILES_DIR/configs/starship/zsh/registrations/starship.sh" "$HOME/.con
 ln -s "$DOTFILES_DIR/configs/tldr/zsh/aliases/tldr.sh" "$HOME/.config/zsh/aliases/tldr.sh"
 
 # Copy zsh files to .config
-ln -s "$DOTFILES_DIR/configs/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
+ln -s "$DOTFILES_DIR/configs/zsh/.config/.zshrc" "$HOME/.config/zsh/.zshrc"
 
 # Configure vscode
 git config --global delta.hyperlinks-file-link-format "vscode://file/{path}:{line}"
