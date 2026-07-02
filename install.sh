@@ -55,7 +55,7 @@ ln -s "$DOTFILES_DIR/configs/eza/zsh/aliases/eza.sh" "$HOME/.config/zsh/aliases/
 ln -s "$DOTFILES_DIR/configs/eza/zsh/exports/eza.sh" "$HOME/.config/zsh/exports/eza.sh"
 
 # Copy fselect files to .config
-ln -s "$DOTFILES_DIR/configs/fselect/zsh/aliases/fselect.sh" "$(HOME)/zsh/aliases/fselect.sh"
+ln -s "$DOTFILES_DIR/configs/fselect/zsh/aliases/fselect.sh" "$HOME/.config/zsh/aliases/fselect.sh"
 
 # Copy fzf files to .config
 ln -s "$DOTFILES_DIR/configs/fzf/zsh/aliases/fzf.sh" "$HOME/.config/zsh/aliases/fzf.sh"
