@@ -145,7 +145,7 @@ configure-eza:
 # fselect
 
 configure-fselect:
-  ln -s "$(DOTFILESDIR)/configs/fzf/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
+  ln -s "$(DOTFILESDIR)/configs/fselect/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
 
 # fzf
 
