@@ -31,7 +31,7 @@ mkdir -p "$HOME/.config/zsh/aliases"
 mkdir -p "$HOME/.config/zsh/exports"
 mkdir -p "$HOME/.config/zsh/registrations"
 
-echo "ZDOTDIR=$HOME/.config/zsh" > "$HOME/.zshenv"
+echo "export ZDOTDIR=$HOME/.config/zsh" > "$HOME/.zshenv"
 
 # Copy bat files to .config
 ln -s "$DOTFILES_DIR/configs/bat/.config" "$HOME/.config/bat"
