@@ -1,11 +1,11 @@
-for aliases in ~/.config/zsh/aliases/*.sh(N-@,N-.); do
-  source "$aliases";
+for files in ~/.config/zsh/aliases/*.sh(N-@,N-.); do
+  source "$files";
 done
 
-for exports in ~/.config/zsh/exports/*.sh(N-@,N-.); do
-  source "$exports";
+for files in ~/.config/zsh/exports/*.sh(N-@,N-.); do
+  source "$files";
 done
 
-for registrations in ~/.config/zsh/registrations/*.sh(N-@,N-.); do
-  source "$registrations";
+for files in ~/.config/zsh/registrations/*.sh(N-@,N-.); do
+  source "$files";
 done
