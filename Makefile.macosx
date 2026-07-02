@@ -172,8 +172,7 @@ configure-rio:
 # starship
 
 configure-starship:
-	ln -s "$(DOTFILESDIR)/configs/starship/.config" "$(CONFIGDIR)/starship"
-	ln -s "$(DOTFILESDIR)/configs/starship/zsh/registrations/starship.sh" "$(CONFIGDIR)/zsh/registrations/starship.sh"
+	ln -s "$(DOTFILESDIR)/configs/starship/.config/starship.toml" "$(CONFIGDIR)/starship.toml"
 
 # tana
 
