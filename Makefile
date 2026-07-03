@@ -1,4 +1,4 @@
-################ 
+################
 # OS Detection #
 ################
 
@@ -19,7 +19,7 @@ endif
 
 OS_MAKEFILE := Makefile.$(PLATFORM)
 
-############# 
+#############
 # Variables #
 #############
 
@@ -33,7 +33,7 @@ GIT_SSH_SIGNERS ?= "op://Private/github/signers"
 GIT_SSH_CONFIGS_NAME ?= "id_github"
 GIT_SSH_CONFIGS_PATH ?= "op://Private/github ssh"
 
-########### 
+###########
 # Targets #
 ###########
 

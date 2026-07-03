@@ -32,8 +32,7 @@ APPLICATIONS := $(FORMULAES) $(CASKS)
 
 APP_IDS_GIT := git
 APP_IDS_ZSH := zsh
-APP_IDS_1PASSWORD := 1password \
-					 1password-cli
+APP_IDS_1PASSWORD := 1password 1password-cli
 APP_IDS_BAT := bat
 APP_IDS_DELTA := git-delta
 APP_IDS_EZA := eza
@@ -66,7 +65,8 @@ pre-requisites:
 	if [ ! -d "$(CONFIGDIR)" ]; then mkdir -p "$(CONFIGDIR)"; fi
 
 install: pre-requisites
-	$(MAKE) $(addprefix configure-,$(APPLICATIONS))
+	$(MAKE) -f $(firstword $(MAKEFILE_LIST)) $(addprefix prepare-,$(APPLICATIONS))
+	$(MAKE) -f $(firstword $(MAKEFILE_LIST)) $(addprefix configure-,$(APPLICATIONS))
 
 install-fonts:
 	yes | brew install --cask font-jetbrains-mono-nerd-font
@@ -75,11 +75,13 @@ prepare-%:
 	@echo No preparation step for $*
 
 install-%: prepare-%
-	FORMULAE := $(shell echo $(FORMULAES) | tr '[:lower:]' '[:upper:]')
-	for %%a in ($(APP_IDS_$(FORMULAE))) do yes | brew install %%a
-
-	CASK := $(shell echo $(CASKS) | tr '[:lower:]' '[:upper:]')
-	for %%a in ($(APP_IDS_$(CASK))) do yes | brew install --cask %%a
+	@if echo " $(FORMULAES) " | grep -q " $* "; then \
+		for app_id in $(APP_IDS_$(shell echo $* | tr '[:lower:]-' '[:upper:]_')); do yes | brew install $$app_id; done; \
+	elif echo " $(CASKS) " | grep -q " $* "; then \
+		for app_id in $(APP_IDS_$(shell echo $* | tr '[:lower:]-' '[:upper:]_')); do yes | brew install --cask $$app_id; done; \
+	else \
+		echo "Unknown application: $*"; exit 1; \
+	fi
 
 configure-%: install-%
 	@echo No configure step for $*
@@ -117,8 +119,8 @@ configure-1password:
 
 configure-bat:
 	ln -s "$(DOTFILESDIR)/configs/bat/.config" "$(CONFIGDIR)/bat"
- 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/aliases/bat.sh" "$(CONFIGDIR)/zsh/aliases/bat.sh"
- 	ln -s "$(DOTFILESDIR)/configs/bat/zsh/exports/bat.sh" "$(CONFIGDIR)/zsh/exports/bat.sh"
+	ln -s "$(DOTFILESDIR)/configs/bat/zsh/aliases/bat.sh" "$(CONFIGDIR)/zsh/aliases/bat.sh"
+	ln -s "$(DOTFILESDIR)/configs/bat/zsh/exports/bat.sh" "$(CONFIGDIR)/zsh/exports/bat.sh"
 
 # delta
 
@@ -143,7 +145,7 @@ configure-eza:
 # fselect
 
 configure-fselect:
-  ln -s "$(DOTFILESDIR)/configs/fselect/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
+	ln -s "$(DOTFILESDIR)/configs/fselect/zsh/aliases/fselect.sh" "$(CONFIGDIR)/zsh/aliases/fselect.sh"
 
 # fzf
 
@@ -173,7 +175,7 @@ configure-rio:
 
 configure-starship:
 	ln -s "$(DOTFILESDIR)/configs/starship/.config/starship.toml" "$(CONFIGDIR)/starship.toml"
-  ln -s "$(DOTFILESDIR)/configs/starship/zsh/registrations/starship.sh" "$(CONFIGDIR)/zsh/registartions/starship.sh"
+	ln -s "$(DOTFILESDIR)/configs/starship/zsh/registrations/starship.sh" "$(CONFIGDIR)/zsh/registrations/starship.sh"
 
 # tana
 
@@ -184,7 +186,7 @@ install-tana:
 # tldr
 
 configure-tldr:
-  ln -s "$(DOTFILESDIR)/configs/tldr/zsh/aliases/tldr.sh" "$(CONFIGDIR)/zsh/aliases/tldr.sh"
+	ln -s "$(DOTFILESDIR)/configs/tldr/zsh/aliases/tldr.sh" "$(CONFIGDIR)/zsh/aliases/tldr.sh"
 
 # vscode
 
