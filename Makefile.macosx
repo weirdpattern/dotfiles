@@ -108,7 +108,7 @@ prepare-zsh:
 	rm -rf $(USERDIR)/.zshrc > /dev/null 2>&1
 
 configure-zsh:
-	ln -s "$(DOTFILESDIR)/configs/zsh/.zshrc" "$(USERDIR)/.zshrc"
+	ln -s "$(DOTFILESDIR)/configs/zsh/.config/.zshrc" "$(USERDIR)/.zshrc"
 
 # 1password
 
