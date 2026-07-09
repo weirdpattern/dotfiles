@@ -1,0 +1,21 @@
+theme = "gruvbox"
+
+[editor]
+color-modes = true
+line-number = "relative"
+
+[editor.file-picker]
+hidden = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "bar"
+select = "bar"
+
+[editor.statusline]
+left = ["mode", "spacer", "spacer", "version-control"]
+center = ["file-base-name", "file-modification-indicator"]
+right = ["diagnostics", "position", "file-line-ending"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "VISUAL"

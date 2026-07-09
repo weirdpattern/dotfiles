@@ -14,6 +14,7 @@ FORMULAES := git \
   fselect \
   fzf \
   jq \
+  helix \
   nvim \
   podman \
   ripgrep \
@@ -40,6 +41,7 @@ APP_IDS_FSELECT := fselect
 APP_IDS_FZF := fzf
 APP_IDS_JQ := jq
 APP_IDS_NOTION := notion
+APP_IDS_HELIX := hx
 APP_IDS_NVIM := neovim
 APP_IDS_PODMAN := podman
 APP_IDS_PODMAN_DESKTOP := podman-desktop
@@ -158,6 +160,12 @@ configure-fzf:
 
 configure-jq:
 	ln -s "$(DOTFILESDIR)/configs/jq/zsh/aliases/jq.sh" "$(CONFIGDIR)/zsh/aliases/jq.sh"
+
+# helix
+
+configure-helix:
+	ln -s "$(DOTFILESDIR)/configs/helix/.config" "$(CONFIGDIR)/helix"
+	ln -s "$(DOTFILESDIR)/configs/helix/zsh/aliases/helix.sh" "$(CONFIGDIR)/zsh/aliases/helix.sh"
 
 # nvim
 

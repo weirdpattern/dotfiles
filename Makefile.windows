@@ -16,6 +16,7 @@ APPLICATIONS := git \
   fzf \
   jq \
   notion \
+  helix \
   nvim \
   podman \
   powertoys \
@@ -42,6 +43,7 @@ APP_IDS_FZF := junegunn.fzf
 APP_IDS_JQ := stedolan.jq
 APP_IDS_NOTION := Notion.Notion
 APP_IDS_NVIM := Neovim.Neovim
+APP_IDS_HELIX := helix.helix
 APP_IDS_PODMAN := RedHat.Podman \
                   RedHat.Podman-Desktop
 APP_IDS_POWERTOYS := Microsoft.PowerToys
@@ -167,6 +169,12 @@ configure-fzf:
 
 configure-jq:
 	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/jq.ps1" "$(DOTFILESDIR)/configs/jq/powershell/aliases/jq.ps1"
+
+# helix
+
+configure-helix:
+	cmd /c mklink /D "$(CONFIGDIR)/helix" "$(DOTFILESDIR)/configs/helix/.config"
+	cmd /c mklink "$(PROGRAMFILES)/PowerShell/7/aliases/helix.ps1" "$(DOTFILESDIR)/configs/helix/powershell/aliases/helix.ps1"
 
 # nvim
 
