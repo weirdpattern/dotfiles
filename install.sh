@@ -19,17 +19,18 @@ DOTFILES_DIR=$(dirname "$(realpath "$0")")
 rm -f "$HOME/.aliases" > /dev/null 2>&1
 rm -f "$HOME/.zshrc" > /dev/null 2>&1
 rm -f "$HOME/.config/" > /dev/null 2>&1
-rm -rf "$PLUGINS_DIR" > /dev/null 2>&1
 rm -rf "$HOME/.gitconfig" > /dev/null 2>&1
 rm -rf "$HOME/.config/zsh" > /dev/null 2>&1
+rm -rf "$PLUGINS_DIR" > /dev/null 2>&1
 
 # Creates root directories if they don't exist
 mkdir -p "$HOME/.config"
-mkdir -p "$PLUGINS_DIR"
+mkdir -p "$HOME/.config/git"
 mkdir -p "$HOME/.config/zsh"
 mkdir -p "$HOME/.config/zsh/aliases"
 mkdir -p "$HOME/.config/zsh/exports"
 mkdir -p "$HOME/.config/zsh/registrations"
+mkdir -p "$PLUGINS_DIR"
 
 # Copy bat files to .config
 ln -s "$DOTFILES_DIR/configs/bat/.config" "$HOME/.config/bat"
