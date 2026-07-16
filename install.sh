@@ -74,6 +74,9 @@ ln -s "$DOTFILES_DIR/configs/starship/zsh/registrations/starship.sh" "$HOME/.con
 # Copy tldr files to .config
 ln -s "$DOTFILES_DIR/configs/tldr/zsh/aliases/tldr.sh" "$HOME/.config/zsh/aliases/tldr.sh"
 
+# Copy mise files to .config
+ln -s "$DOTFILES_DIR/configs/mise/zsh/registrations/mise.sh" "$HOME/.config/zsh/registrations/mise.sh"
+
 # Copy helix files to .config
 ln -s "$DOTFILES_DIR/configs/helix/.config" "$HOME/.config/helix"
 ln -s "$DOTFILES_DIR/configs/helix/zsh/aliases/helix.sh" "$HOME/.config/zsh/aliases/helix.sh"

@@ -15,6 +15,7 @@ FORMULAES := git \
   fzf \
   jq \
   helix \
+  mise \
   nvim \
   podman \
   ripgrep \
@@ -40,8 +41,9 @@ APP_IDS_EZA := eza
 APP_IDS_FSELECT := fselect
 APP_IDS_FZF := fzf
 APP_IDS_JQ := jq
-APP_IDS_NOTION := notion
 APP_IDS_HELIX := hx
+APP_IDS_MISE := mise
+APP_IDS_NOTION := notion
 APP_IDS_NVIM := neovim
 APP_IDS_PODMAN := podman
 APP_IDS_PODMAN_DESKTOP := podman-desktop
@@ -166,6 +168,11 @@ configure-jq:
 configure-helix:
 	ln -s "$(DOTFILESDIR)/configs/helix/.config" "$(CONFIGDIR)/helix"
 	ln -s "$(DOTFILESDIR)/configs/helix/zsh/aliases/helix.sh" "$(CONFIGDIR)/zsh/aliases/helix.sh"
+
+# mise
+
+configure-mise:
+	ln -s "$(DOTFILESDIR)/configs/mise/zsh/registrations/mise.sh" "$(CONFIGDIR)/zsh/registrations/mise.sh"
 
 # nvim
 
